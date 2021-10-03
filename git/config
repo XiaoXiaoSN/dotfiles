@@ -1,0 +1,19 @@
+[core]
+	ignorecase = false
+[alias]
+	co = checkout
+	chekcout = checkout
+	log1 = log --oneline -n 10
+	logg = log --oneline --graph
+	cm = commit -m
+	cmamend = !git add $1 && git commit --amend --no-edit
+[user]
+	email = xiao.xiao@tenoz.tw
+	name = XiaoXiaoSN
+[init]
+	defaultBranch = main
+
+# https://gugod.org/2020/09/github-pr-as-git-refs/
+[remote "origin"]
+    fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+
