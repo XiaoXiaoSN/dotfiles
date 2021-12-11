@@ -17,3 +17,7 @@
 ### Python ###
 __pycache__/
 *.pyc
+
+### Nix Ecosystem ###
+.direnv
+

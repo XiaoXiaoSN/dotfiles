@@ -11,3 +11,7 @@ autocmd BufNewFile,BufRead Justfile,justfile setf make
 " Vue {{{
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
+
+" TypeScript {{{
+autocmd FileType ts setlocal ts=2 sts=2 sw=2 expandtab
+" }}}

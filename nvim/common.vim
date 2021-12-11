@@ -14,7 +14,7 @@ set fileencodings=utf-8,cp950
 " General {{{
 set hidden                   " Hide buffers when abandoned instead of unload
 set fileformats=unix,dos,mac " Use Unix as the standard file type
-set clipboard+=unnamedplus
+set clipboard+=unnamedplus   " Specify to automatically use the system clipboard for copy and paste
 set mouse=a
 
 set endofline                " Write for the last line in the file
