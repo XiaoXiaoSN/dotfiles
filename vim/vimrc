@@ -1,0 +1,292 @@
+" 好文推推：https://learnku.com/articles/24924
+
+"==============================================================================
+" vim 內置配置
+"==============================================================================
+
+" 設置 vimrc 修改保存後立刻生效，不用在重新打開
+" 建議配置完成後將這個關閉，否則配置多了之後會很卡
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+" 關閉兼容模式
+set nocompatible
+
+set nu " 設置行號
+set cursorline "突出顯示當前行
+set showmatch " 顯示括號匹配
+
+" tab 縮進
+set tabstop=4 " 設置Tab長度為4空格
+set shiftwidth=4 " 設置自動縮進長度為4空格
+set autoindent " 繼承前一行的縮進方式，適用於多行註釋
+
+" 定義快捷鍵的前綴，即<Leader>
+let mapleader=","
+
+" ==== 系統剪切板複製粘貼 ====
+" v 模式下複製內容到系統剪切板
+vmap <Leader>c "+yy
+" n 模式下複製一行到系統剪切板
+nmap <Leader>c "+yy
+" n 模式下粘貼系統剪切板的內容
+nmap <Leader>v "+p
+
+" 開啟實時搜索
+set incsearch
+" 搜索時大小寫不敏感
+set ignorecase
+syntax enable
+syntax on                    " 開啟文件類型偵測
+filetype plugin indent on    " 啟用自動補全
+
+" 退出插入模式指定類型的文件自動保存
+au InsertLeave *.go,*.sh,*.php,*.rs write
+
+"==============================================================================
+" 插件配置
+"==============================================================================
+
+" 插件開始的位置
+call plug#begin('~/.vim/plugged')
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+" 可以快速對齊的插件
+Plug 'junegunn/vim-easy-align'
+
+" 用來提供一個導航目錄的側邊欄
+Plug 'scrooloose/nerdtree'
+
+" 可以使 nerdtree Tab 標籤的名稱更友好些
+Plug 'jistr/vim-nerdtree-tabs'
+
+" 可以在導航目錄中看到 git 版本信息
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" 支援更多 git 的功能
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'shumphrey/fugitive-gitlab.vim'
+
+" 可以在文檔中顯示 git 信息
+Plug 'airblade/vim-gitgutter'
+
+" 查看當前代碼文件中的變量和函數列表的插件，
+" 可以切換和跳轉到代碼中對應的變量和函數的位置
+" 大綱式導航, Go 需要 https://github.com/jstemmer/gotags 支持
+Plug 'majutsushi/tagbar'
+
+" 自動補全括號的插件，包括小括號，中括號，以及花括號
+Plug 'jiangmiao/auto-pairs'
+
+" Vim狀態欄插件，包括顯示行號，列號，文件類型，文件名，以及Git狀態
+Plug 'vim-airline/vim-airline'
+
+" 代碼自動完成，安裝完插件還需要額外配置才可以使用
+Plug 'Valloric/YouCompleteMe'
+
+" 下面兩個插件要配合使用，可以自動生成代碼塊
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" 配色方案
+Plug 'fatih/molokai'
+
+" go 主要插件
+Plug 'fatih/vim-go', { 'tag': '*' }
+
+" markdown 插件
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+
+" 模糊搜尋
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf.vim'
+
+" 多行編輯
+Plug 'mg979/vim-visual-multi'
+
+" 搜尋
+Plug 'mileszs/ack.vim'
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" Support Rust
+Plug 'rust-lang/rust.vim'
+
+" move cursor fast!
+Plug 'easymotion/vim-easymotion'
+
+Plug 'ErichDonGubler/vim-sublime-monokai'
+
+" 插件結束的位置，插件全部放在此行上面
+call plug#end()
+
+
+"==============================================================================
+" 主題配色
+"==============================================================================
+
+" let g:rehash256 = 1
+" let g:molokai_original = 1
+" colorscheme monokai
+colorscheme sublimemonokai
+
+"==============================================================================
+" vim-go 插件
+"==============================================================================
+let g:go_fmt_command = "goimports" " 格式化將默認的 gofmt 替換
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+
+let g:go_version_warning = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_generate_tags = 1
+
+let g:go_highlight_format_strings = 1
+let g:go_highlight_function_arguments = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_variable_declarations = 1
+
+let g:godef_split=2
+
+
+"==============================================================================
+" NERDTree 插件
+"==============================================================================
+
+" 打開和關閉NERDTree快捷鍵
+map <F10> :NERDTreeToggle<CR>
+" 顯示行號
+let NERDTreeShowLineNumbers=1
+" 打開文件時是否顯示目錄
+let NERDTreeAutoCenter=1
+" 是否顯示隱藏文件
+let NERDTreeShowHidden=1
+" 設置寬度
+" let NERDTreeWinSize=31
+" 忽略一下文件的顯示
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swp', '.git']
+" 打開 vim 文件及顯示書籤列表
+let NERDTreeShowBookmarks=2
+
+" 在終端啟動vim時，共享NERDTree (1: 共用)
+let g:nerdtree_tabs_open_on_console_startup=1
+
+
+"==============================================================================
+"  majutsushi/tagbar 插件
+"==============================================================================
+
+" majutsushi/tagbar 插件打開關閉快捷鍵
+nmap <F9> :TagbarToggle<CR>
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+
+"==============================================================================
+"  nerdtree-git-plugin 插件
+"==============================================================================
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
+let g:NERDTreeGitStatusShowIgnored = 1
+
+"==============================================================================
+"  nerdtree-git-plugin 插件
+"==============================================================================
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+nnoremap <leader>fl :Lines
+nnoremap <leader>fbl :BLines
+nnoremap <leader>ff :Files
+
+
+"==============================================================================
+"  Valloric/YouCompleteMe 插件
+"==============================================================================
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<space>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+
+" 待確認其可行性
+" https://zhuanlan.zhihu.com/p/158986188
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"==============================================================================
+"  支援更多 git
+"==============================================================================
+" GBrower gitlab
+let g:fugitive_gitlab_domains = ['https://gitlab.silkrode.com.tw']
+let g:gitlab_api_keys = {'gitlab.silkrode.com.tw': '********'}
+
+
+"==============================================================================
+"  其他插件配置
+"==============================================================================
+
+" markdwon 的快捷鍵
+map <silent> <F5> <Plug>MarkdownPreview
+map <silent> <F6> <Plug>StopMarkdownPreview
+
+" tab 標籤頁切換快捷鍵
+:nn <Leader>1 1gt
+:nn <Leader>2 2gt
+:nn <Leader>3 3gt
+:nn <Leader>4 4gt
+:nn <Leader>5 5gt
+:nn <Leader>6 6gt
+:nn <Leader>7 7gt
+:nn <Leader>8 8gt
+:nn <Leader>9 8gt
+:nn <Leader>0 :tablast<CR>
+
