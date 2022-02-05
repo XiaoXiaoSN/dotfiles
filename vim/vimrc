@@ -1,3 +1,4 @@
+" new line
 " 好文推推：https://learnku.com/articles/24924
 
 "==============================================================================
@@ -12,12 +13,15 @@
 set nocompatible
 
 set nu " 設置行號
-set cursorline "突出顯示當前行
+set cursorline " 突出顯示當前行
 set showmatch " 顯示括號匹配
+set hlsearch " HighLight 所有匹配搜尋
+
+set mouse=n " 開啟 Normal Mode 部分的滑鼠功能
 
 " tab 縮進
-set tabstop=4 " 設置Tab長度為4空格
-set shiftwidth=4 " 設置自動縮進長度為4空格
+set tabstop=4 " 設置 Tab 長度為 4 空格
+set shiftwidth=4 " 設置自動縮進長度為 4 空格
 set autoindent " 繼承前一行的縮進方式，適用於多行註釋
 
 " 定義快捷鍵的前綴，即<Leader>
@@ -49,6 +53,15 @@ au InsertLeave *.go,*.sh,*.php,*.rs write
 " 插件開始的位置
 call plug#begin('~/.vim/plugged')
 
+" Quick edit
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+" Plug 'tomtom/tcomment_vim'
+
+" Better whitespace
+Plug 'ntpeters/vim-better-whitespace'
+
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 " 可以快速對齊的插件
 Plug 'junegunn/vim-easy-align'
@@ -78,7 +91,7 @@ Plug 'majutsushi/tagbar'
 " 自動補全括號的插件，包括小括號，中括號，以及花括號
 Plug 'jiangmiao/auto-pairs'
 
-" Vim狀態欄插件，包括顯示行號，列號，文件類型，文件名，以及Git狀態
+" Vim狀態欄插件，包括顯示行號，列號，文件類型，文件名，以及 Git 狀態
 Plug 'vim-airline/vim-airline'
 
 " 代碼自動完成，安裝完插件還需要額外配置才可以使用
@@ -112,10 +125,12 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " Support Rust
 Plug 'rust-lang/rust.vim'
 
-" move cursor fast!
+" Move cursor fast!
 Plug 'easymotion/vim-easymotion'
 
-Plug 'ErichDonGubler/vim-sublime-monokai'
+" Themes
+Plug 'XiaoXiaoSN/vim-sublime-monokai'
+" Plug 'dracula/vim', { 'as': 'dracula'  }
 
 " 插件結束的位置，插件全部放在此行上面
 call plug#end()
@@ -125,10 +140,8 @@ call plug#end()
 " 主題配色
 "==============================================================================
 
-" let g:rehash256 = 1
-" let g:molokai_original = 1
-" colorscheme monokai
 colorscheme sublimemonokai
+" colorscheme dracula
 
 "==============================================================================
 " vim-go 插件
@@ -159,7 +172,7 @@ let g:godef_split=2
 " NERDTree 插件
 "==============================================================================
 
-" 打開和關閉NERDTree快捷鍵
+" 打開和關閉 NERDTree 快捷鍵
 map <F10> :NERDTreeToggle<CR>
 " 顯示行號
 let NERDTreeShowLineNumbers=1
@@ -174,7 +187,7 @@ let NERDTreeIgnore=['\.pyc', '\~$', '\.swp', '.git']
 " 打開 vim 文件及顯示書籤列表
 let NERDTreeShowBookmarks=2
 
-" 在終端啟動vim時，共享NERDTree (1: 共用)
+" 在終端啟動 vim 時，共享 NERDTree (1: 共用)
 let g:nerdtree_tabs_open_on_console_startup=1
 
 
@@ -289,4 +302,21 @@ map <silent> <F6> <Plug>StopMarkdownPreview
 :nn <Leader>8 8gt
 :nn <Leader>9 8gt
 :nn <Leader>0 :tablast<CR>
+
+
+" adds to statusline
+set laststatus=2
+set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}
+
+" a little more informative version of the above
+nmap <Leader>gn :call <SID>SynStack()<CR>
+
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 

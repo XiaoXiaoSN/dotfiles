@@ -8,6 +8,7 @@ ln -s $(pwd)/nvim $HOME/.config/nvim
 
 # Vim
 ln -s $(pwd)/vim/vimrc $HOME/.vimrc
+./vim/install.sh
 ```
 
 ```shell
