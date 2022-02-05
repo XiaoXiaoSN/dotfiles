@@ -9,7 +9,7 @@ endif
 " User Interface {{{
 " Color scheme
 Plug 'joshdick/onedark.vim'
-Plug 'ErichDonGubler/vim-sublime-monokai'
+Plug 'XiaoXiaoSN/vim-sublime-monokai'
 
 " Status
 Plug 'vim-airline/vim-airline'
@@ -56,6 +56,7 @@ Plug 'tomtom/tcomment_vim'
 
 " Git {{{
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 " }}}
 

@@ -40,7 +40,8 @@ syntax on
 
 set laststatus=2        " Show status line
 set wrap
-set colorcolumn=80      " Highlight the 80th character limit
+" set colorcolumn=80      " Highlight the 80th character limit
+set colorcolumn=
 set scrolloff=5         " Keep at least 5 lines above/below
 set showcmd             " Show command in status line
 set cursorline          " Show cursorline
