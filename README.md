@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+### Editor
+
 ```shell
 # Neovim
 ln -s $(pwd)/nvim $HOME/.config/nvim
@@ -11,6 +13,8 @@ ln -s $(pwd)/vim/vimrc $HOME/.vimrc
 ./vim/install.sh
 ```
 
+### Useful tools
+
 ```shell
 # Git
 ln -s $(pwd)/git $HOME/.config/git
@@ -19,7 +23,17 @@ ln -s $(pwd)/git $HOME/.config/git
 ## ~/.tmux.conf       Default tmux configuration file.
 ## /etc/tmux.conf     System-wide configuration file.
 ln -s $(pwd)/tmux/tmux.conf $HOME/.tmux.conf
+```
 
+### Terminal emulator
+
+```shell
 # Alacritty
 ln -s $(pwd)/alacritty $HOME/.config/alacritty
+```
+
+### Initalize macOS
+
+```shell
+./macos/init.sh
 ```
