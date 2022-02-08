@@ -37,3 +37,20 @@ ln -s $(pwd)/alacritty $HOME/.config/alacritty
 ```shell
 ./macos/init.sh
 ```
+
+### Setup Nix
+
+#### Nix
+
+```
+ln -s $(pwd)/nix ~/.config/nix
+```
+
+#### Home Manager
+
+Need to run `git add` after update
+
+```shell
+ln -s $(pwd)/nixpkgs $HOME/.config/nixpkgs
+home-manager switch
+```
