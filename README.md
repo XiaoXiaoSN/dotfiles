@@ -7,10 +7,11 @@
 ```shell
 # Neovim
 ln -s $(pwd)/nvim $HOME/.config/nvim
+./nvim/setup.sh
 
 # Vim
 ln -s $(pwd)/vim/vimrc $HOME/.vimrc
-./vim/install.sh
+./vim/setup.sh
 ```
 
 ### Useful tools
@@ -32,7 +33,7 @@ ln -s $(pwd)/tmux/tmux.conf $HOME/.tmux.conf
 ln -s $(pwd)/alacritty $HOME/.config/alacritty
 ```
 
-### Initalize macOS
+### Initialize macOS
 
 ```shell
 ./macos/init.sh

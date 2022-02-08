@@ -13,4 +13,3 @@ if [ ! -f $VIMPLUG_PATH ]; then
 fi
 
 vim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qa
-
