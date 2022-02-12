@@ -14,6 +14,22 @@ ln -s $(pwd)/vim/vimrc $HOME/.vimrc
 ./vim/setup.sh
 ```
 
+### Terminal emulator
+
+```shell
+# Alacritty
+ln -s $(pwd)/alacritty $HOME/.config/alacritty
+```
+
+### Shell
+
+#### zsh
+
+```shell
+ln -s $(pwd)/zsh/zshrc $HOME/.zshrc
+ln -s $(pwd)/zsh/zsh_config $HOME/.config/zsh
+```
+
 ### Useful tools
 
 ```shell
@@ -24,13 +40,6 @@ ln -s $(pwd)/git $HOME/.config/git
 ## ~/.tmux.conf       Default tmux configuration file.
 ## /etc/tmux.conf     System-wide configuration file.
 ln -s $(pwd)/tmux/tmux.conf $HOME/.tmux.conf
-```
-
-### Terminal emulator
-
-```shell
-# Alacritty
-ln -s $(pwd)/alacritty $HOME/.config/alacritty
 ```
 
 ### Initialize macOS

@@ -1,0 +1,46 @@
+export EDITOR="nvim"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_BIN_HOME="$HOME/.local/bin"
+
+export ZSH_CONFIG="$XDG_CONFIG_HOME/zsh"
+export ZSH_CACHE="$XDG_CACHE_HOME/zsh"
+export ZSH_COMPDUMP="$ZSH_CACHE/zcompdump-$ZSH_VERSION"
+
+export ZSH_DEFAULT_PROMPT="default"
+
+# create zsh cache if not exist
+mkdir -p $ZSH_CACHE
+
+# prepare zsh configurations
+typeset -U config_files
+config_files=(
+    # config
+    "$ZSH_CONFIG/config.d/bindkey.zsh"
+    "$ZSH_CONFIG/config.d/default.zsh"
+    "$ZSH_CONFIG/config.d/direnv.zsh"
+    "$ZSH_CONFIG/config.d/fzf.zsh"
+
+    # aliases
+    $(ls -1 -d "$ZSH_CONFIG/aliases.d/"*.zsh)
+
+    # functions
+    $(ls -1 -d "$ZSH_CONFIG/functions.d/"*.sh)
+    $(ls -1 -d "$ZSH_CONFIG/functions.d/"*.zsh)
+
+    # prompt
+    "$ZSH_CONFIG/prompt.d/default.zsh"
+)
+
+# load the configuration files
+for config_file in $config_files; do
+  source $config_file
+done
+
+unset config_files
+
+
+
+
