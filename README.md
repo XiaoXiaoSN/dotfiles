@@ -40,6 +40,7 @@ ln -s $(pwd)/git $HOME/.config/git
 ## ~/.tmux.conf       Default tmux configuration file.
 ## /etc/tmux.conf     System-wide configuration file.
 ln -s $(pwd)/tmux/tmux.conf $HOME/.tmux.conf
+tmux source-file $HOME/.tmux.conf
 ```
 
 ### Initialize macOS
