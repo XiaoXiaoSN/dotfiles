@@ -1,8 +1,6 @@
 # macOS Install
 
-There is a shorten domain for quick arrival:
-https://macos.10oz.tw
-
+## macOS setting
 ### Install useful staff
 
 1. Install [Homebrew](https://docs.brew.sh/)
@@ -47,12 +45,19 @@ https://macos.10oz.tw
    git clone https://github.com/xiaoxiaosn/dotfiles
    ```
 
-### Install Fonts
+## Setup iTerm2
+https://stackoverflow.com/a/23356086/6695274
 
-    ```bash
-    brew tap homebrew/cask-fonts
-    brew install font-hack
-    ```
+1. iTerm2 > Preferences > General > Preferences
+2. click `Load preferences from a custom folder or URL:`
+    and set the value to `$(pwd)/macos/iterm2`
+
+## Install Fonts
+
+```bash
+brew tap homebrew/cask-fonts
+brew install font-hack
+```
 
 ## Ref
 
