@@ -4,13 +4,12 @@ export LANG=en_US.UTF-8
 source $HOME/.config/fish/aliases.fish
 
 # Golnag configurations (TODO: move to conf.d)
-set -x GOPATH $HOME/gocode
+set -x GOPATH (go env GOPATH)
 set -x GOBIN $GOPATH/bin
-set -x GOROOT /usr/local/opt/go/libexec
+set -x GO111MODULE on
 set PATH $GOPATH/bin $GOROOT/bin $PATH
-export GO111MODULE=on
 
-# Rust configurations
+# Rust configurations (TODO: move to conf.d)
 set PATH $HOME/.cargo/bin $PATH
 
 # Terraform configurations

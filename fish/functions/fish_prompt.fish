@@ -1,6 +1,4 @@
 # fish theme: goddy
-# https://github.com/oh-my-fish/theme-godfather
-
 
 function _git_branch_name
   echo (command git symbolic-ref HEAD 2> /dev/null | sed -e 's|^refs/heads/||')
@@ -31,7 +29,7 @@ function fish_prompt
 
   set -l cwd $cyan(basename (prompt_pwd))
 
-  # output theprompt, left to right:
+  # output the prompt, left to right:
   # display 'user@host:'
   echo -n -s $green (whoami) $dark_green @ $green (hostname|cut -d . -f 1) ": "
 
@@ -53,4 +51,4 @@ function fish_prompt
   # terminate with a nice prompt char:
   echo -n -s ' » ' $normal
 
-end 
+end

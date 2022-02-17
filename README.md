@@ -23,6 +23,12 @@ ln -s $(pwd)/alacritty $HOME/.config/alacritty
 
 ### Shell
 
+#### fish
+```
+ln -s $(pwd)/fish $HOME/.config/fish
+fish -c "fisher update"
+```
+
 #### zsh
 
 ```shell
@@ -65,3 +71,6 @@ Need to run `git add` after update
 ln -s $(pwd)/nixpkgs $HOME/.config/nixpkgs
 home-manager switch
 ```
+
+## Editor Guide
+

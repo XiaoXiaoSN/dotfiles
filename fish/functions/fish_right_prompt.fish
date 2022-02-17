@@ -1,6 +1,4 @@
 # fish theme: godfather
-# https://github.com/oh-my-fish/theme-godfather
-
 
 function fish_right_prompt
   set -l last_status $status
