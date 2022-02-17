@@ -1,5 +1,7 @@
 [core]
 	ignorecase = false
+[pull]
+	rebase = false
 [alias]
 	co = checkout
 	chekcout = checkout
