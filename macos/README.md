@@ -61,5 +61,5 @@ brew install font-hack
 
 ## Ref
 
-[awsome macOS setting](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
-[Moskys Preferences in macOS](https://paper.dropbox.com/doc/Moskys-Preferences-in-macOS--Bbfa5TyUBQ2SscGRgh6Q0KZeAg-dG5SIszlLEGT5DkFQv7yu)`
+[awesome macOS setting](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
+[Mosky Preferences in macOS](https://paper.dropbox.com/doc/Moskys-Preferences-in-macOS--Bbfa5TyUBQ2SscGRgh6Q0KZeAg-dG5SIszlLEGT5DkFQv7yu)`
