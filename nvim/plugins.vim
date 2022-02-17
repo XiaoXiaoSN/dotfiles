@@ -80,9 +80,6 @@ Plug 'ararslan/llvm.vim'
 " TOML
 Plug 'cespare/vim-toml'
 
-" i3 configuration
-" Plug 'PotatoesMaster/i3-vim-syntax'
-
 " fish
 Plug 'dag/vim-fish'
 
@@ -131,9 +128,6 @@ Plug 'elzr/vim-json', {'for': 'json'}
 " JavaScript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 
-" CoffeScript
-Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
-
 " TypeScript
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
@@ -148,9 +142,6 @@ Plug 'udalov/kotlin-vim', {'for': 'kotlin'}
 
 " Java
 Plug 'uiiaoo/java-syntax.vim', {'for': 'java'}
-
-" VIM rego
-Plug 'tsandall/vim-rego'
 
 " Auto close tag
 Plug 'alvan/vim-closetag'
@@ -176,9 +167,6 @@ Plug 'tomlion/vim-solidity', {'for': 'solidity'}
 
 " HCL
 Plug 'jvirtanen/vim-hcl'
-
-" Mustache/Handlebarsj
-Plug 'mustache/vim-mustache-handlebars', {'for': 'mustache'}
 
 " LaTeX
 " Plug 'lervag/vimtex', {'for': 'tex'}
