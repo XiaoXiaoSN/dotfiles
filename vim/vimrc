@@ -55,8 +55,8 @@ call plug#begin('~/.vim/plugged')
 " Quick edit
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
-" Plug 'tomtom/tcomment_vim'
+" Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 
 " Better whitespace
 Plug 'ntpeters/vim-better-whitespace'
@@ -94,7 +94,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 
 " 代碼自動完成，安裝完插件還需要額外配置才可以使用
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 
 " 下面兩個插件要配合使用，可以自動生成代碼塊
 Plug 'SirVer/ultisnips'
@@ -244,6 +244,11 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 
 let g:NERDTreeGitStatusShowIgnored = 1
 
+noremap <silent> <C-b> :NERDTreeToggle<CR>
+noremap <silent> <M-b> :NERDTreeToggle<CR>
+noremap <silent> <leader>nf :NERDTreeFind<CR>
+noremap <silent> <leader>xx :NERDTreeFind<CR>
+
 "==============================================================================
 "  nerdtree-git-plugin 插件
 "==============================================================================
@@ -259,20 +264,20 @@ nnoremap <leader>ff :Files
 "  Valloric/YouCompleteMe 插件
 "==============================================================================
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<space>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-
-" 待確認其可行性
-" https://zhuanlan.zhihu.com/p/158986188
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"" make YCM compatible with UltiSnips (using supertab)
+"let g:ycm_key_list_select_completion = ['<C-n>', '<space>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:SuperTabDefaultCompletionType = '<C-n>'
+"
+"" better key bindings for UltiSnipsExpandTrigger
+"let g:UltiSnipsExpandTrigger = "<tab>"
+"let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+"
+"
+"" 待確認其可行性
+"" https://zhuanlan.zhihu.com/p/158986188
+"nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "==============================================================================
 "  支援更多 git

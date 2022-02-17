@@ -52,6 +52,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
 Plug 'tomtom/tcomment_vim'
+" Plug 'tpope/vim-commentary'
 " }}}
 
 " Git {{{
@@ -108,10 +109,6 @@ Plug 'Yggdroot/indentLine'
 " vim-easygrep {{{
 Plug 'dkprice/vim-easygrep'
 " }}}
-
-" vim-commentary {{{
-Plug 'tpope/vim-commentary'
-" }}}"
 
 " Language {{{
 

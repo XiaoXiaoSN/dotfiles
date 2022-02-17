@@ -150,6 +150,7 @@ autocmd PluginConfig VimEnter * call NERDTree_open()
 autocmd PluginConfig BufEnter * silent! NERDTreeMirror
 
 noremap <silent> <C-b> :NERDTreeToggle<CR>
+noremap <silent> <M-b> :NERDTreeToggle<CR>
 noremap <silent> <leader>nf :NERDTreeFind<CR>
 noremap <silent> <leader>xx :NERDTreeFind<CR>
 " }}}
