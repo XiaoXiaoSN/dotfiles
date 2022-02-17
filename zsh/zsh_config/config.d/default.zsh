@@ -12,3 +12,6 @@ fi
 
 # no Beep on error in ZLE.
 setopt NO_BEEP
+
+# allowing the `#` sign comments in interactive zsh commands
+setopt interactive_comments

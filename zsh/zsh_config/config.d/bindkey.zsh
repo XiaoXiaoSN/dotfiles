@@ -10,6 +10,7 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^?' backward-delete-char
 
-# TODO:
-# https://github.com/LukeSmithxyz/voidrice/blob/master/.config/zsh/.zshrc
+# setup bindkey emacs to allow cursor use C-p, C-n, C-a, C-e to move
+# https://stackoverflow.com/a/43087047
+bindkey -e
 
