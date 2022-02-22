@@ -29,6 +29,25 @@
 
         configuration.imports = [ ./home.nix ];
       };
+
+      "arios@OUTSIDE" = home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-linux";
+        homeDirectory = "/home/arios";
+        username = "arios";
+
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          # inherit system;
+          config = {
+            allowUnfree = true;
+          };
+        };
+
+        configuration.imports = [
+          ./home.nix
+          ./users/outside.nix
+        ];
+      };
     };
   };
 }
