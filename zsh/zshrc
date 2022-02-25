@@ -21,6 +21,7 @@ config_files=(
     "$ZSH_CONFIG/config.d/default.zsh"
     "$ZSH_CONFIG/config.d/direnv.zsh"
     "$ZSH_CONFIG/config.d/fzf.zsh"
+    "$ZSH_CONFIG/config.d/kube.zsh"
 
     # aliases
     $(ls -1 -d "$ZSH_CONFIG/aliases.d/"*.zsh)
