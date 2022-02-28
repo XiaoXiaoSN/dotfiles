@@ -14,38 +14,38 @@ brew upgrade
 # Install necessary casks (GUI Applications)
 echo "🟢 Install necessary casks (GUI Applications)"
 brew install --cask \
-	1password \
-	brave-browser \
-	iterm2
+  1password \
+  brave-browser \
+  iterm2
 
 # Install necessary packages binaries
 echo "🟢 Install necessary packages binaries"
 brew install \
-	fish \
-	htop \
-	neovim \
-	tmux
+  fish \
+  htop \
+  neovim \
+  tmux
 
 # Install other important GUI Applications
 echo "🟢 Install other important GUI Applications"
 brew install --cask \
-	docker \
+  docker \
   go \
-	google-chrome \
-	itsycal \
-	notion \
-	slack \
-	openvpn-connect \ # or tunnelblick
-	visual-studio-code
+  google-chrome \
+  itsycal \
+  notion \
+  slack \
+  openvpn-connect \ # or tunnelblick
+  visual-studio-code
 
 # Install other useful binaries.
 echo "🟢 Install other useful binaries"
 brew install \
   awscli \
-	kind \
-	kubectx \
+  kind \
+  kubectx \
   gnupg \
-	ngrok/ngrok/ngrok \
+  ngrok/ngrok/ngrok \
   nmap \
   tree \
   ripgrep

@@ -12,9 +12,6 @@ indent_size = 2
 [*.{fish}]
 indent_size = 4
 
-[git/config]
-indent_style = tab
-
 [macos/iterm2/*]
 charset = unset
 end_of_line = unset
@@ -23,5 +20,5 @@ trim_trailing_whitespace = unset
 indent_style = unset
 indent_size = unset
 
-[Makefile]
+[{.gitmodules,git/config,Makefile}]
 indent_style = tab
