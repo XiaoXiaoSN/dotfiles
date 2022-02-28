@@ -5,45 +5,45 @@
 
 1. Install [Homebrew](https://docs.brew.sh/)
 
-   ```bash
-   # Install Homebrew
-   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  ```bash
+  # Install Homebrew
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-   # Turn off analytics Thttps://docs.brew.sh/Analytics
-   brew analytics off
-   ```
+  # Turn off analytics Thttps://docs.brew.sh/Analytics
+  brew analytics off
+  ```
 
 2. Install necessary casks (GUI Application)
 
-   ```bash
-   brew install --cask \
-   	1password \
-   	brave-browser \
-   	iterm2
-   ```
+  ```bash
+  brew install --cask \
+    1password \
+    brave-browser \
+    iterm2
+  ```
 
 3. Install other important applications
 
-   ```bash
-   brew install --cask \
-   	discord \
-   	google-chrome \
-   	itsycal \
-   	notion \
-   	postman \
-   	slack \
-   	telegram \
-   	visual-studio-code
-   ```
+  ```bash
+  brew install --cask \
+    discord \
+    google-chrome \
+    itsycal \
+    notion \
+    postman \
+    slack \
+    telegram \
+    visual-studio-code
+  ```
 
 4. Download XiaoXiao dotfiles to setup environment
 
-   ```bash
-   mkdir -p $HOME/projects
-   cd $HOME/projects
+  ```bash
+  mkdir -p $HOME/projects
+  cd $HOME/projects
 
-   git clone https://github.com/xiaoxiaosn/dotfiles
-   ```
+  git clone https://github.com/xiaoxiaosn/dotfiles
+  ```
 
 ## Setup iTerm2
 https://stackoverflow.com/a/23356086/6695274

@@ -16,24 +16,21 @@ mkdir -p $ZSH_CACHE
 # prepare zsh configurations
 typeset -U config_files
 config_files=(
-    # config
-    "$ZSH_CONFIG/config.d/bindkey.zsh"
-    "$ZSH_CONFIG/config.d/default.zsh"
-    "$ZSH_CONFIG/config.d/direnv.zsh"
-    "$ZSH_CONFIG/config.d/fzf.zsh"
-    "$ZSH_CONFIG/config.d/kube.zsh"
+  # from bash script source
+  $([ -d "${HOME}/.bin" ] && ls -1 -d "${HOME}/.bin/"*.sh)
 
-    # aliases
-    $(ls -1 -d "$ZSH_CONFIG/aliases.d/"*.zsh)
+  # config
+  $(ls -1 -d "$ZSH_CONFIG/config.d/"*.zsh)
 
-    # functions
-    $(ls -1 -d "$ZSH_CONFIG/functions.d/"*.sh)
-    $(ls -1 -d "$ZSH_CONFIG/functions.d/"*.zsh)
+  # aliases
+  $(ls -1 -d "$ZSH_CONFIG/aliases.d/"*.zsh)
 
-    # prompt
-    "$ZSH_CONFIG/prompt.d/$ZSH_DEFAULT_PROMPT.zsh"
+  # functions
+  $(ls -1 -d "$ZSH_CONFIG/functions.d/"*.zsh)
+
+  # prompt
+  "$ZSH_CONFIG/prompt.d/$ZSH_DEFAULT_PROMPT.zsh"
 )
-
 # load the configuration files
 for config_file in $config_files; do
   source $config_file

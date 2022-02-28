@@ -30,10 +30,15 @@ fish -c "fisher update"
 ```
 
 #### zsh
-
 ```shell
 ln -sh $(pwd)/zsh/zshrc $HOME/.zshrc
 ln -sh $(pwd)/zsh/zsh_config $HOME/.config/zsh
+```
+
+#### util scripts
+We make util scripts available in the fish/zsh shell setting.
+```
+ln -sh $(pwd)/bin $HOME/.bin
 ```
 
 ### Useful tools
@@ -72,5 +77,11 @@ ln -sh $(pwd)/nixpkgs $HOME/.config/nixpkgs
 home-manager switch
 ```
 
-## Editor Guide
+## Writer Guide
+### Lint & Format
+The repository use [EditorConfig](https://editorconfig.org/) and [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker) to help me consistent coding styles :)
 
+run below command to check format
+```
+editorconfig-checker
+```

@@ -31,6 +31,9 @@ cnoreabbrev Q q
 cnoreabbrev Qall qall
 " }}}
 
+" this will reselect and re-yank any text that is pasted in visual mode.
+xnoremap p pgvy
+
 " Grep program {{{
 if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading
@@ -45,6 +48,10 @@ endif
 " }}}
 
 " Quick buffer jumper {{{
+nnoremap <Leader>j :bprevious<CR>
+nnoremap <Leader>h :bprevious<CR>
+nnoremap <Leader>k :bnext<CR>
+nnoremap <Leader>l :bnext<CR>
 nnoremap <Leader>0 :blast<CR>
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -56,3 +63,4 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 " }}}
+

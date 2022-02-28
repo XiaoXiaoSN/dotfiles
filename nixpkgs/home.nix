@@ -3,8 +3,11 @@
 with pkgs;
 {
   home.packages = [
+    # useful tools
+    bat
     direnv
     fd
+    ripgrep # rg, fast grepper
   ];
 
   home.file = {

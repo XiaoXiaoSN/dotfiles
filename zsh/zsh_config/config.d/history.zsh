@@ -23,4 +23,3 @@ export HISTORY_IGNORE="(ls|cd|pwd|exit|cd|mv|rm|now)"
 # setopt SHARE_HISTORY
 #
 # history_all() { history -E 1}
-

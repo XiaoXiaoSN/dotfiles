@@ -13,4 +13,3 @@ bindkey '^?' backward-delete-char
 # setup bindkey emacs to allow cursor use C-p, C-n, C-a, C-e to move
 # https://stackoverflow.com/a/43087047
 bindkey -e
-

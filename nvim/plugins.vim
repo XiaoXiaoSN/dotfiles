@@ -50,6 +50,7 @@ Plug 'editorconfig/editorconfig-vim'
 " Quick edit {{{
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
 
 Plug 'tomtom/tcomment_vim'
 " Plug 'tpope/vim-commentary'

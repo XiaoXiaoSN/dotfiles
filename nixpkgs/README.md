@@ -1,6 +1,6 @@
 ## Install Nix
 https://nixos.org/download.html
- 
+
 ## Install HomeManager Standalone
 https://nix-community.github.io/home-manager/index.html#sec-install-standalone
 
@@ -12,3 +12,6 @@ nix-channel --update
 
 nix-env -iA nixpkgs.home-manager
 ```
+
+## Ref
+https://nixos.wiki/wiki/Nix_Expression_Language

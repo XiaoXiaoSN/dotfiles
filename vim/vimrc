@@ -26,6 +26,9 @@ set autoindent " 繼承前一行的縮進方式，適用於多行註釋
 " 定義快捷鍵的前綴，即<Leader>
 let mapleader=","
 
+" 貼上後重新複製剪貼板的內容
+xnoremap p pgvy
+
 " ==== 系統剪切板複製粘貼 ====
 " v 模式下複製內容到系統剪切板
 vmap <Leader>c "+yy
@@ -55,8 +58,12 @@ call plug#begin('~/.vim/plugged')
 " Quick edit
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
 " Plug 'tpope/vim-commentary'
 Plug 'tomtom/tcomment_vim'
+
+" EditorConfig
+Plug 'editorconfig/editorconfig-vim'
 
 " Better whitespace
 Plug 'ntpeters/vim-better-whitespace'
@@ -141,6 +148,14 @@ call plug#end()
 
 colorscheme sublimemonokai
 " colorscheme dracula
+
+"==============================================================================
+" EditorConfig setting
+"==============================================================================
+" To ensure that this plugin works well with Tim Pope's fugitive,
+" use the following patterns array:
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 
 "==============================================================================
 " vim-go 插件
@@ -323,4 +338,13 @@ function! <SID>SynStack()
 endfunc
 
 map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+
+" add some command for chnaging case of tpope/vim-abolish
+command! Snake call feedkeys("crs")
+command! Pascal call feedkeys("crm")
+command! Camel call feedkeys("crc")
+command! Upper call feedkeys("cru")
+command! Kebab call feedkeys("cr-")
+command! DotCase call feedkeys("cr.")
+command! SpaceCase call feedkeys("cr<space>")
 

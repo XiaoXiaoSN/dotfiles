@@ -78,6 +78,12 @@ let g:neoformat_rego_opa = {
 " }}}
 
 " fzf {{{
+" To ensure that this plugin works well with Tim Pope's fugitive,
+" use the following patterns array:
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+" }}}
+
+" fzf {{{
 " This is the default extra key bindings
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
@@ -233,3 +239,14 @@ let g:vim_json_syntax_conceal = 0
 " vim-visual-multi {{{
 let g:VM_mouse_mappings = 1
 " }}}
+
+" tpope/vim-abolish {{{
+command! Snake call feedkeys("crs")
+command! Pascal call feedkeys("crm")
+command! Camel call feedkeys("crc")
+command! Upper call feedkeys("cru")
+command! Kebab call feedkeys("cr-")
+command! DotCase call feedkeys("cr.")
+command! SpaceCase call feedkeys("cr<space>")
+" }}}
+

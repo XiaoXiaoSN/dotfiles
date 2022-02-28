@@ -3,6 +3,7 @@
 [pull]
 	rebase = false
 [alias]
+	b = branch
 	co = checkout
 	chekcout = checkout
 	log1 = log --oneline -n 10
@@ -17,5 +18,4 @@
 
 # https://gugod.org/2020/09/github-pr-as-git-refs/
 [remote "origin"]
-    fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
-
+	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
