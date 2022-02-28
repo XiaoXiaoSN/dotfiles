@@ -36,4 +36,9 @@ for config_file in $config_files; do
   source $config_file
 done
 
+# Apply `zsh-autosuggestions` if it installed
+if [ -f "$ZSH_CONFIG/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+  source $ZSH_CONFIG/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
 unset config_files

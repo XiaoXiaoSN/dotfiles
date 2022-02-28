@@ -31,6 +31,9 @@ fish -c "fisher update"
 
 #### zsh
 ```shell
+# Install zsh auto-suggestions by git submodule
+git submodule update --init
+
 ln -sh $(pwd)/zsh/zshrc $HOME/.zshrc
 ln -sh $(pwd)/zsh/zsh_config $HOME/.config/zsh
 ```
