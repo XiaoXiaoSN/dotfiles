@@ -1,5 +1,5 @@
 # Ignore Editor Config for copied code
-[z.sh]
+[setup/z.sh]
 charset = unset
 end_of_line = unset
 insert_final_newline = unset

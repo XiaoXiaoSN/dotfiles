@@ -8,5 +8,8 @@
 
 # Begone, silly errors! Lazy copy + paste forever!! ETCETERA!!!!
 
-echo '=== Quit pasting in commands from the internet, you lazy bum. ==='
+echo '⚠️  Quit pasting in commands from the internet, you lazy bum. ⚠️'
 "$@"
+
+# NOTE: Unfortunately, `$` sign is a keep word in fish. We need to use `\$`,
+# but it's lost its meaning. QQ

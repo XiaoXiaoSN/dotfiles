@@ -16,8 +16,8 @@ mkdir -p $ZSH_CACHE
 # prepare zsh configurations
 typeset -U config_files
 config_files=(
-  # from bash script source
-  $([ -d "${HOME}/.bin" ] && ls -1 -d "${HOME}/.bin/"*.sh)
+  # setup form bash script source
+  $([ -d "${HOME}/.bin/setup" ] && ls -1 -d "${HOME}/.bin/setup/"*.sh)
 
   # config
   $(ls -1 -d "$ZSH_CONFIG/config.d/"*.zsh)

@@ -1,4 +1,4 @@
-# Fish
+# Fish Shell
 
 ## Notes
 
