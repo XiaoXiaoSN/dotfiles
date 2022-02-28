@@ -1,0 +1,13 @@
+name: check formant
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  editor-config:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: snow-actions/eclint@v1.0.1
+      with:
+        args: 'check'
