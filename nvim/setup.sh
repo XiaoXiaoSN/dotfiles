@@ -18,3 +18,4 @@ if [ ! -f $VIMPLUG_PATH ]; then
 fi
 
 nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qa
+# nvim +GoInstallBinaries

@@ -33,7 +33,6 @@ set number
 
 " Appearance {{{
 colorscheme onedark
-" colorscheme sublimemonokai
 set t_Co=256
 
 syntax on

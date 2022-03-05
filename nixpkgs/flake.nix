@@ -28,7 +28,10 @@
           };
         };
 
-        configuration.imports = [ ./home.nix ];
+        configuration.imports = [
+          ./home.nix
+          ./users/mac-m1-pro.nix
+        ];
       };
 
       "arios@OUTSIDE" = home-manager.lib.homeManagerConfiguration {

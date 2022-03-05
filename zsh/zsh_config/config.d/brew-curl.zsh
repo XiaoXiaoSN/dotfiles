@@ -5,6 +5,6 @@
 CURL_PATH=/opt/homebrew/opt/curl/bin
 if [ -d "$CURL_PATH" ]; then
     # set and export to sub-processes (make it inherited by child processes)
-    path+=($CURL_PATH)
+    path=($CURL_PATH $path)
     export PATH
 fi

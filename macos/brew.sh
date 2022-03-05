@@ -32,8 +32,10 @@ brew install --cask \
   docker \
   go \
   google-chrome \
+  lens \
   itsycal \
   notion \
+  nvm \
   slack \
   openvpn-connect \ # or tunnelblick
   visual-studio-code
@@ -42,6 +44,7 @@ brew install --cask \
 echo "🟢 Install other useful binaries"
 brew install \
   awscli \
+  jq \
   kind \
   kubectx \
   gnupg \
