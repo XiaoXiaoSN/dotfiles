@@ -1,0 +1,1 @@
+/home/arios/.fzf/shell/key-bindings.fish

@@ -4,6 +4,8 @@ with pkgs;
 {
   home.packages = [
     hack-font
+
+    lolcat
   ];
 
   home.file = {
