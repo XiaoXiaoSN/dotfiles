@@ -9,9 +9,6 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
-[*.fish]
-indent_size = 4
-
 [macos/iterm2/*]
 charset = unset
 end_of_line = unset
