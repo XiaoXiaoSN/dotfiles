@@ -82,7 +82,7 @@ home-manager switch
 
 ## Writer Guide
 ### Lint & Format
-The repository use [EditorConfig](https://editorconfig.org/) and [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker) to help me consistent coding styles :)
+The repository use [EditorConfig](https://editorconfig.org/) and [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker) to help me keep the consistent coding styles :)
 
 run below command to check format
 ```
