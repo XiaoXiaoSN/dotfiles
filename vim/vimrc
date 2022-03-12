@@ -18,6 +18,23 @@ set hlsearch " HighLight 所有匹配搜尋
 
 set mouse=n " 開啟 Normal Mode 部分的滑鼠功能
 
+" Specify to automatically use the system clipboard for copy and paste
+" You should check do your vim suports clipbord feature by
+" ':echo has('clipboard')'
+" see more on https://vi.stackexchange.com/a/96
+set clipboard+=unnamedplus
+
+" WSL yank support
+if filereadable("/mnt/c/Windows/System32/clip.exe")
+	let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+	if executable(s:clip)
+		augroup WSLYank
+			autocmd!
+			autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+		augroup END
+	endif
+endif
+
 " tab 縮進
 set tabstop=4 " 設置 Tab 長度為 4 空格
 set shiftwidth=4 " 設置自動縮進長度為 4 空格
