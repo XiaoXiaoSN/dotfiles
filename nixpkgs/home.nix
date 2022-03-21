@@ -6,8 +6,12 @@ with pkgs;
     # useful tools
     bat
     direnv
+    exa
     fd
-    ripgrep # rg, fast grepper
+    ranger # ra: filemanager for the console
+    ripgrep # rg: fast grepper
+    watch
+    wget
   ];
 
   home.file = {
