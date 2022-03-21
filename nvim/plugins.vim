@@ -9,7 +9,9 @@ endif
 " User Interface {{{
 " Color scheme
 Plug 'joshdick/onedark.vim'
-Plug 'XiaoXiaoSN/vim-sublime-monokai'
+Plug 'nlknguyen/papercolor-theme'
+" Plug 'XiaoXiaoSN/vim-sublime-monokai'
+
 
 " Status
 Plug 'vim-airline/vim-airline'
@@ -28,6 +30,7 @@ Plug 'liuchengxu/vista.vim'
 
 " Language Server Protocol {{{
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
 
 " Autocompletion framework for built-in LSP
 Plug 'nvim-lua/completion-nvim'

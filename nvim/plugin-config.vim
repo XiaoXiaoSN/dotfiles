@@ -5,6 +5,7 @@ augroup PluginConfig
 augroup END
 
 " Language Server Protocol {{{
+lua require('setup')
 lua require('lsp')
 autocmd BufEnter * lua require'completion'.on_attach()
 " }}}
@@ -127,6 +128,7 @@ command! -bang -nargs=* Rg
 
 " Keep Binding for fzf
 nnoremap <leader>fl :Rg<CR>
+" nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
 " }}}

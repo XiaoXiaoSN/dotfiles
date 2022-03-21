@@ -32,7 +32,9 @@ set number
 " }}}
 
 " Appearance {{{
-colorscheme onedark
+" colorscheme onedark
+" colorscheme sublimemonokai
+colorscheme papercolor
 set t_Co=256
 
 syntax on
