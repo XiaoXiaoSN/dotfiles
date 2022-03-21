@@ -287,9 +287,9 @@ noremap <silent> <leader>xx :NERDTreeFind<CR>
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
-nnoremap <leader>fl :Lines
-nnoremap <leader>fbl :BLines
-nnoremap <leader>ff :Files
+nnoremap <leader>fl :Lines<CR>
+nnoremap <leader>fbl :BLines<CR>
+nnoremap <leader>ff :Files<CR>
 
 
 "==============================================================================
