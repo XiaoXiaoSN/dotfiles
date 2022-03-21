@@ -44,6 +44,8 @@ brew install --cask \
 echo "🟢 Install other useful binaries"
 brew install \
   awscli \
+  helm \
+  iproute2mac \
   jq \
   kind \
   kubectx \
