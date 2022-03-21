@@ -1,7 +1,13 @@
-alias l="ls --color=auto"
-alias ls="ls --color=auto"
-alias ll="ls -l"
-alias la="ls -al"
+# default ls is untouched, except coloring
+if type exa >/dev/null 2>&1; then
+  alias ls='exa --classify --sort name'
+  alias la='exa -la --classify --sort name'
+  alias l='ls'
+else
+  alias ls='ls --color=auto'
+  alias la='ls -lA --time-style=long-iso'
+  alias l='ls --color=auto'
+fi
 
 alias grep="grep --color"
 
@@ -17,3 +23,5 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias cls='clear' # Good 'ol Clear Screen command
 
 alias now='date "+%Y-%m-%d %H:%M:%S %z"'
+
+alias ra=ranger

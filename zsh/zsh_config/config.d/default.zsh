@@ -1,3 +1,9 @@
+# binding `bin` folder if it exist
+if [ -d "${HOME}/.bin" ]; then
+  path+=(${HOME}/.bin)
+  export PATH
+fi
+
 # set default editor
 if type nvim >/dev/null 2>&1; then
   export EDITOR='nvim'
