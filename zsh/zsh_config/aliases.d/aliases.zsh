@@ -9,8 +9,6 @@ else
   alias l='ls --color=auto'
 fi
 
-alias grep="grep --color"
-
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..=' cd ..'
 alias ...=' cd ..; cd ..; pwd; ls'
@@ -20,8 +18,16 @@ alias cd...='...'
 alias cd....='....'
 alias ~="cd ~" # `cd` is probably faster to type though
 
+alias rmrf="rf -rf"
+
+alias grep="grep --color"
+
 alias cls='clear' # Good 'ol Clear Screen command
 
 alias now='date "+%Y-%m-%d %H:%M:%S %z"'
 
 alias ra=ranger
+
+# Enable aliases to be sudo’ed
+# http://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
+alias sudo='sudo '

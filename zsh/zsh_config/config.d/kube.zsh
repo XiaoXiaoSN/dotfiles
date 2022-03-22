@@ -3,12 +3,15 @@ if type "kubectl" >/dev/null 2>&1; then
   autoload -Uz compinit
   compinit
 
-  # Prepare auto complete
-  source <(kubectl completion zsh)
+  _sukka_lazyload_completion_kubectl() {
+    # Prepare auto complete
+    source <(kubectl completion zsh)
 
-  # If you have an alias for kubectl, you can extend shell completion to work with that alias
-  compdef __start_kubectl k
-  compdef __start_kubectl kc
+    # If you have an alias for kubectl, you can extend shell completion to work with that alias
+    compdef __start_kubectl k
+    compdef __start_kubectl kc
+  }
+  sukka_lazyload_add_completion kubectl
 
   function set-kubeconfig {
     # Sets the KUBECONFIG environment variable to a dynamic concatentation of everything

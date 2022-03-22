@@ -6,7 +6,7 @@ zc() {
 }
 
 zv() {
-    z -e $argv[1]
+  z -e $argv[1]
   if [ $status -eq 0 ]; then
     vim $(z -e $argv[1])
   fi
