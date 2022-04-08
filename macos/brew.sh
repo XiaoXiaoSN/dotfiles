@@ -32,6 +32,7 @@ brew install --cask \
   docker \
   go \
   google-chrome \
+  google-cloud-sdk \ # for gcloud CLI
   lens \
   itsycal \
   notion \
@@ -52,8 +53,16 @@ brew install \
   gnupg \
   ngrok/ngrok/ngrok \
   nmap \
+  mtr \
+  protobuf \
   tree \
   ripgrep
+
+# Install some optional funny tools
+echo "🟢 Install other useful binaries"
+brew install --cask \
+  cheatsheet
+  fig
 
 # Install more recent versions of some macOS tools.
 echo "🟢 Install more recent versions of some macOS tools"
