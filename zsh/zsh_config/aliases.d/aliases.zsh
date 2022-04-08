@@ -1,10 +1,12 @@
 # default ls is untouched, except coloring
 if type exa >/dev/null 2>&1; then
   alias ls='exa --classify --sort name'
+  alias ll='exa -l --classify --sort name'
   alias la='exa -la --classify --sort name'
   alias l='ls'
 else
   alias ls='ls --color=auto'
+  alias ll='ls -l --time-style=long-iso'
   alias la='ls -lA --time-style=long-iso'
   alias l='ls --color=auto'
 fi

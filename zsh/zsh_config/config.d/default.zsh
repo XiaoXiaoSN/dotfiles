@@ -16,6 +16,10 @@ elif type vi >/dev/null 2>&1; then
   export EDITOR='vi'
 fi
 
+# setup for gpg
+# https://stackoverflow.com/a/42265848/6695274
+export GPG_TTY=$(tty)
+
 # no Beep on error in ZLE.
 setopt NO_BEEP
 
