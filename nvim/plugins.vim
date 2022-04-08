@@ -40,6 +40,9 @@ Plug 'steelsojka/completion-buffers'
 " Enhance build-in LSP UI
 " Plug 'glepnir/lspsaga.nvim'
 
+" GitHub Copilot is an AI pair programmer
+Plug 'github/copilot.vim'
+
 " NERDtree
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
