@@ -20,7 +20,7 @@ alias cd...='...'
 alias cd....='....'
 alias ~="cd ~" # `cd` is probably faster to type though
 
-alias rmrf="rf -rf"
+alias rmrf="rm -rf"
 
 alias grep="grep --color"
 
