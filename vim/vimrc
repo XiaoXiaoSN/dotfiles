@@ -22,7 +22,7 @@ set mouse=n " 開啟 Normal Mode 部分的滑鼠功能
 " You should check do your vim suports clipbord feature by
 " ':echo has('clipboard')'
 " see more on https://vi.stackexchange.com/a/96
-set clipboard+=unnamedplus
+set clipboard=unnamed
 
 " WSL yank support
 if filereadable("/mnt/c/Windows/System32/clip.exe")
