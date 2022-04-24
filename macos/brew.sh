@@ -59,10 +59,12 @@ brew install \
   ripgrep
 
 # Install some optional funny tools
-echo "🟢 Install other useful binaries"
+echo "🟢 Install other useful Applications"
 brew install --cask \
-  cheatsheet
-  fig
+  # unsafe app: https://github.com/qishibo/AnotherRedisDesktopManager/issues/820#issuecomment-1069757505
+  another-redis-desktop-manager
+  # cheatsheet \
+  # fig
 
 # Install more recent versions of some macOS tools.
 echo "🟢 Install more recent versions of some macOS tools"
@@ -70,8 +72,8 @@ brew install curl
 
 # Install font tools.
 echo "🟢 Install font tools"
-brew tap homebrew/cask-fonts
-brew install font-hack
+brew tap xiaoxiaosn/xiaoxiao
+brew install font-noto-nerd
 
 # Remove outdated versions from the cellar.
 echo "🟢 Remove outdated versions from the cellar"
