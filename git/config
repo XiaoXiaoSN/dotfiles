@@ -28,4 +28,4 @@
 	program = gpg # On linux maybe gpg2
 
 [commit]
-  gpgsign = false
+	gpgsign = false
