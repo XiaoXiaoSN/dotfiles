@@ -36,7 +36,6 @@ brew install --cask \
   lens \
   itsycal \
   notion \
-  nvm \
   slack \
   openvpn-connect \ # or tunnelblick
   visual-studio-code
@@ -53,6 +52,7 @@ brew install \
   gnupg \
   ngrok/ngrok/ngrok \
   nmap \
+  nvm \
   mtr \
   protobuf \
   tree \
@@ -62,7 +62,10 @@ brew install \
 echo "🟢 Install other useful Applications"
 brew install --cask \
   # unsafe app: https://github.com/qishibo/AnotherRedisDesktopManager/issues/820#issuecomment-1069757505
-  another-redis-desktop-manager
+  another-redis-desktop-manager \
+  discord \
+  postman \
+  telegram
   # cheatsheet \
   # fig
 

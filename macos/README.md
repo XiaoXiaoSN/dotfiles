@@ -5,45 +5,25 @@
 
 1. Install [Homebrew](https://docs.brew.sh/)
 
-  ```bash
-  # Install Homebrew
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```bash
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  # Turn off analytics Thttps://docs.brew.sh/Analytics
-  brew analytics off
-  ```
+# Turn off analytics Thttps://docs.brew.sh/Analytics
+brew analytics off
+```
 
-2. Install necessary casks (GUI Application)
+2. Run `init.sh` to setup your macOS enviroment
 
-  ```bash
-  brew install --cask \
-    1password \
-    brave-browser \
-    iterm2
-  ```
+There is a optional line that clean all apps on Dock
+```bash
+# Wipe all (default) app icons from the Dock
+# This is only really useful when setting up a new Mac, or if you don’t use
+# the Dock to launch apps.
+defaults write com.apple.dock persistent-apps -array
+```
 
-3. Install other important applications
-
-  ```bash
-  brew install --cask \
-    discord \
-    google-chrome \
-    itsycal \
-    notion \
-    postman \
-    slack \
-    telegram \
-    visual-studio-code
-  ```
-
-4. Download XiaoXiao dotfiles to setup environment
-
-  ```bash
-  mkdir -p $HOME/projects
-  cd $HOME/projects
-
-  git clone https://github.com/xiaoxiaosn/dotfiles
-  ```
+3. Check `brew.sh` to select what you want to install
 
 ## Setup iTerm2
 https://stackoverflow.com/a/23356086/6695274
@@ -55,8 +35,8 @@ https://stackoverflow.com/a/23356086/6695274
 ## Install Fonts
 
 ```bash
-brew tap homebrew/cask-fonts
-brew install font-hack
+brew tap xiaoxiaosn/xiaoxiao
+brew install font-noto-nerd
 ```
 
 ## Ref
