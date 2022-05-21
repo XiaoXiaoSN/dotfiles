@@ -1,5 +1,6 @@
 # Fig pre block. Keep at the top of this file.
-if type direnv 2>&1 >>/dev/null; then
-  export PATH="${PATH}:${HOME}/.local/bin"
-  eval "$(fig init zsh pre)"
+FIGIO_PATH="$HOME/.fig/shell"
+
+if [ -d "$FIGIO_PATH" ]; then
+  . "$FIGIO_PATH/zshrc.pre.zsh"
 fi
