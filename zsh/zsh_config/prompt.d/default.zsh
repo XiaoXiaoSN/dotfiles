@@ -138,4 +138,3 @@ function eraseSecondLine () {
   #echo; # this would keep the second line
 }
 add-zsh-hook preexec eraseSecondLine
-

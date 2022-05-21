@@ -43,5 +43,5 @@ if [ -f "$ZSH_CONFIG/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
   source $ZSH_CONFIG/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-# iterm2 intergration
+# iTerm2 integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

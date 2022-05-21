@@ -93,4 +93,3 @@ function precmd_prompt_setup () {
   fi
 }
 add-zsh-hook precmd precmd_prompt_setup
-

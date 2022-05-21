@@ -8,8 +8,10 @@ local on_attach = function(client, buf)
 
   -- Mappings.
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(buf, ...) end
+
   local function buf_set_option(...) vim.api.nvim_buf_set_option(buf, ...) end
-  local opts = { noremap=true, silent=true }
+
+  local opts = { noremap = true, silent = true }
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -63,45 +65,45 @@ vim.g.completion_auto_change_source = 1
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-  }
+  virtual_text = true,
+  signs = true,
+  update_in_insert = true,
+}
 )
 
 lspconfig.rust_analyzer.setup {
-    cmd = { "rustup", "run", "--install", "nightly", "rust-analyzer" },
-    on_attach = on_attach,
-    settings = {
-        ["rust-analyzer"] = {
-            cargo = {
-                loadOutDirsFromCheck = true,
-            },
-            procMacro = {
-                enable = true,
-            }
-        };
+  cmd = { "rustup", "run", "--install", "nightly", "rust-analyzer" },
+  on_attach = on_attach,
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        loadOutDirsFromCheck = true,
+      },
+      procMacro = {
+        enable = true,
+      }
     };
+  };
 }
 
 lspconfig.clangd.setup { on_attach = on_attach }
 lspconfig.gopls.setup { on_attach = on_attach }
 
 lspconfig.tsserver.setup {
-    cmd = { "typescript-language-server", "--stdio" },
-    on_attach = on_attach,
-    filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx"
-    },
-    init_options = {
-      hostInfo = "neovim"
-    },
-    root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+  cmd = { "typescript-language-server", "--stdio" },
+  on_attach = on_attach,
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx"
+  },
+  init_options = {
+    hostInfo = "neovim"
+  },
+  root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
 }
 
 lspconfig.vimls.setup { on_attach = on_attach }
@@ -112,14 +114,14 @@ lspconfig.yamlls.setup { on_attach = on_attach }
 lspconfig.html.setup { on_attach = on_attach }
 lspconfig.cssls.setup { on_attach = on_attach }
 lspconfig.jsonls.setup {
-    commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
-    },
-    on_attach = on_attach,
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+      end
+    }
+  },
+  on_attach = on_attach,
 }
 
 lspconfig.bashls.setup { on_attach = on_attach }

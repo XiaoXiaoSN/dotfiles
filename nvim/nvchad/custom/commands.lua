@@ -2,9 +2,9 @@ local user_cmd = vim.api.nvim_create_user_command
 
 -- Power from tpope/vim-abolish
 local change_case = function(keys)
-    return function()
-        vim.call('feedkeys', keys)
-    end
+  return function()
+    vim.call('feedkeys', keys)
+  end
 end
 
 user_cmd("Snake", change_case "crs", {})
