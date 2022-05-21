@@ -10,22 +10,30 @@ if [ -d "$NVM_INSTALL_PATH" ]; then
 
   # You should create NVM's working directory if it doesn't exist:
   if [ ! -d "$NVM_DIR" ]; then
-    echo "NVM_DIR: $NVM_DIR not exist. create it now"
+    echo "🛠  NVM_DIR: $NVM_DIR not exist. create it now"
     mkdir -p $NVM_DIR
   fi
 
-  _sukka_lazyload_command_nvm() {
-    # This loads nvm
-    # Note: You can add --no-use to the end of the above script (...nvm.sh --no-use)
-    # to postpone using nvm until you manually use it.
-    [ -s "$NVM_INSTALL_PATH/nvm.sh" ] && \. "$NVM_INSTALL_PATH/nvm.sh"
-  }
+  # This loads nvm
+  # Note: You can add --no-use to the end of the above script (...nvm.sh --no-use)
+  # to postpone using nvm until you manually use it.
+  [ -s "$NVM_INSTALL_PATH/nvm.sh" ] && \. "$NVM_INSTALL_PATH/nvm.sh" --no-use
 
-  _sukka_lazyload_completion_nvm() {
-    # This loads nvm bash_completion
-    [ -s "$NVM_INSTALL_PATH/etc/bash_completion.d/nvm" ] && \. "$NVM_INSTALL_PATH/etc/bash_completion.d/nvm"
-  }
+  # This loads nvm bash_completion
+  [ -s "$NVM_INSTALL_PATH/etc/bash_completion.d/nvm" ] && \. "$NVM_INSTALL_PATH/etc/bash_completion.d/nvm"
 
-  sukka_lazyload_add_command nvm yarn npm node
-  sukka_lazyload_add_completion nvm
+  # _sukka_lazyload_command_nvm() {
+  #   # This loads nvm
+  #   # Note: You can add --no-use to the end of the above script (...nvm.sh --no-use)
+  #   # to postpone using nvm until you manually use it.
+  #   [ -s "$NVM_INSTALL_PATH/nvm.sh" ] && \. "$NVM_INSTALL_PATH/nvm.sh"
+  # }
+  #
+  # _sukka_lazyload_completion_nvm() {
+  #   # This loads nvm bash_completion
+  #   [ -s "$NVM_INSTALL_PATH/etc/bash_completion.d/nvm" ] && \. "$NVM_INSTALL_PATH/etc/bash_completion.d/nvm"
+  # }
+  #
+  # sukka_lazyload_add_command nvm yarn npm node
+  # sukka_lazyload_add_completion nvm
 fi
