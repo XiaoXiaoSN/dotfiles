@@ -2,15 +2,15 @@
 # Editor
 ##############################
 
-.PHONY: neovim neovim.nvchad vim
+.PHONY: neovim neovim.NvChad vim
 
 neovim:
 	ln -sh $(CURDIR)/nvim/original $(HOME)/.config/nvim
 	$(HOME)/.config/nvim/setup.sh
 
-neovim.nvchad:
+neovim.NvChad:
 	git clone https://github.com/NvChad/NvChad $(HOME)/.config/nvim --depth 1
-	ln -sh $(CURDIR)/nvim/nvchad/custom $(HOME)/.config/nvim/custom
+	ln -sh $(CURDIR)/nvim/nvchad/custom $(HOME)/.config/nvim/lua/custom
 	nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 vim:
@@ -40,7 +40,7 @@ zsh:
 # Useful tools
 ##############################
 
-.PHONY git tmux util-scripts
+.PHONY: git tmux util-scripts
 
 git:
 	ln -sh $(CURDIR)/git $(HOME)/.config/git
