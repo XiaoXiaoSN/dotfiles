@@ -33,8 +33,10 @@ set number
 
 " Appearance {{{
 " colorscheme onedark
-" colorscheme sublimemonokai
-colorscheme papercolor
+" colorscheme papercolor
+"  let g:vscode_style = "dark"
+" colorscheme vscode
+colorscheme catppuccin
 set t_Co=256
 
 syntax on

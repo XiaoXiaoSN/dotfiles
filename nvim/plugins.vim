@@ -9,9 +9,10 @@ endif
 " User Interface {{{
 " Color scheme
 Plug 'joshdick/onedark.vim'
-Plug 'nlknguyen/papercolor-theme'
+" Plug 'nlknguyen/papercolor-theme'
+" Plug 'Mofiqul/vscode.nvim'
 " Plug 'XiaoXiaoSN/vim-sublime-monokai'
-
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 
 " Status
 Plug 'vim-airline/vim-airline'
@@ -100,6 +101,7 @@ Plug 'tmux-plugins/vim-tmux'
 
 " Code formatter {{{
 Plug 'sbdchd/neoformat'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 " }}}
 
 " move your cursor fast {{{

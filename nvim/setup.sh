@@ -19,3 +19,4 @@ fi
 
 nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qa
 # nvim +GoInstallBinaries
+# rustup +nightly component add rust-analyzer-preview
