@@ -49,6 +49,7 @@ brew install \
   jq \
   kind \
   kubectx \
+  kustomize \
   gnupg \
   ngrok/ngrok/ngrok \
   nmap \
@@ -56,7 +57,8 @@ brew install \
   mtr \
   protobuf \
   tree \
-  ripgrep
+  ripgrep \
+  yq
 
 # Install some optional funny tools
 echo "🟢 Install other useful Applications"
@@ -65,7 +67,8 @@ brew install --cask \
   another-redis-desktop-manager \
   discord \
   postman \
-  telegram
+  telegram \
+  wireshark
   # cheatsheet \
   # fig
 
