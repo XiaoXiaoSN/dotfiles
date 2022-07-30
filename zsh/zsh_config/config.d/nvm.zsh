@@ -17,7 +17,7 @@ if [ -d "$NVM_INSTALL_PATH" ]; then
   # This loads nvm
   # Note: You can add --no-use to the end of the above script (...nvm.sh --no-use)
   # to postpone using nvm until you manually use it.
-  [ -s "$NVM_INSTALL_PATH/nvm.sh" ] && \. "$NVM_INSTALL_PATH/nvm.sh" --no-use
+  [ -s "$NVM_INSTALL_PATH/nvm.sh" ] && \. "$NVM_INSTALL_PATH/nvm.sh" # --no-use
 
   # This loads nvm bash_completion
   [ -s "$NVM_INSTALL_PATH/etc/bash_completion.d/nvm" ] && \. "$NVM_INSTALL_PATH/etc/bash_completion.d/nvm"

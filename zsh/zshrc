@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -7,7 +9,11 @@ export ZSH_CONFIG="$XDG_CONFIG_HOME/zsh"
 export ZSH_CACHE="$XDG_CACHE_HOME/zsh"
 export ZSH_COMPDUMP="$ZSH_CACHE/zcompdump-$ZSH_VERSION"
 
-export ZSH_DEFAULT_PROMPT="godfather"
+if [[ -z "${ZSH_DEFAULT_PROMPT}" ]]; then
+  ZSH_DEFAULT_PROMPT="godfather"
+else
+# https://twitter.com/minatoaqua/status/1529308438307540992
+export THEME_GODFATHER_PROMPT_SIGN="^ ̳ . ̫ . ̳ ^ ฅ "
 export THEME_GODFATHER_PROMPT_RETURN_CODE_LEFT=1
 
 # create zsh cache if not exist
@@ -45,3 +51,9 @@ fi
 
 # iTerm2 integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# TMP
+export PATH="/Library/Java/JavaVirtualMachines/jdk-18.0.1.1.jdk/Contents/Home/bin:$PATH"
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
