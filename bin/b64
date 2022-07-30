@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+case "$1" in
+    '-d' | '--decode')
+        echo "${@:2}" | base64 -d
+        exit 0
+    ;;
+    '-e' | '-D' | '--encode')
+        echo "${@:2}" | base64
+        exit 0
+    ;;
+esac
+
+echo "$@" | base64
+exit 0
+

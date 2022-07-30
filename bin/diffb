@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# This simply script run diff on bat tool
+if ! command -v bat &> /dev/null; then
+    echo "Command bat could not be found"
+    exit 127
+fi
+
+if [ "$#" -ne 2 ]; then
+    echo "Please enter two files"
+    exit 1
+fi
+
+diff -ur $1 $2 | bat -l diff
+
