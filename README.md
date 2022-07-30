@@ -1,4 +1,5 @@
 # dotfiles
+![lint](https://github.com/XiaoXiaoSN/dotfiles/actions/workflows/lint.yaml/badge.svg)
 
 ## Getting Started
 
