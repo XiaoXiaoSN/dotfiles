@@ -6,7 +6,7 @@ local override = require "custom.plugins.override"
 local userPlugins = require "custom.plugins"
 
 -- make sure you maintain the structure of `core/default_config.lua` here,
--- example of changing theme:
+
 M.ui = {
   theme = "monekai",
   -- theme = "onedark",
@@ -19,6 +19,10 @@ M.plugins = {
     lspconfig = {
       setup_lspconf = "custom.plugins.lspconfig",
     },
+    statusline = {
+      -- default/round/slant/block/arrow
+      separator_style = "slant",
+    },
   },
 
   override = {
@@ -29,9 +33,7 @@ M.plugins = {
     ["akinsho/bufferline.nvim"] = override.bufferline,
   },
 
-  remove = {
-    -- "folke/which-key.nvim",
-  },
+  remove = {},
 
   user = userPlugins,
 }

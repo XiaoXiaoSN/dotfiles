@@ -1,4 +1,4 @@
-execute 'autocmd! BufwritePost '.expand('<sfile>:p').' source %'
+execute 'autocmd! BufWritePost '.expand('<sfile>:p').' source %'
 
 " Set leader key
 let mapleader=","

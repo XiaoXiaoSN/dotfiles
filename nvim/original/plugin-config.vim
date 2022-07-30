@@ -15,9 +15,6 @@ autocmd BufEnter * lua require'completion'.on_attach()
 " note that must keep noinsert in completeopt, the others is optional
 set completeopt=noinsert,menuone,noselect
 
-" note that must keep noinsert in completeopt, the others is optional
-set completeopt=noinsert,menuone,noselect
-
 " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
 " found' messages
 set shortmess+=c
@@ -160,7 +157,7 @@ autocmd PluginConfig BufEnter * silent! NERDTreeMirror
 noremap <silent> <C-b> :NERDTreeToggle<CR>
 noremap <silent> <M-b> :NERDTreeToggle<CR>
 noremap <silent> <leader>nf :NERDTreeFind<CR>
-noremap <silent> <leader>xx :NERDTreeFind<CR>
+noremap <silent> <leader>e :NERDTreeFind<CR>
 " }}}
 
 " Airline {{{
