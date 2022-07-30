@@ -9,12 +9,12 @@ export ZSH_CONFIG="$XDG_CONFIG_HOME/zsh"
 export ZSH_CACHE="$XDG_CACHE_HOME/zsh"
 export ZSH_COMPDUMP="$ZSH_CACHE/zcompdump-$ZSH_VERSION"
 
-if [[ -z "${ZSH_DEFAULT_PROMPT}" ]]; then
-  ZSH_DEFAULT_PROMPT="godfather"
-else
+if [[ ! $ZSH_DEFAULT_PROMPT ]]; then
+  local ZSH_DEFAULT_PROMPT="godfather"
+fi
 # https://twitter.com/minatoaqua/status/1529308438307540992
-export THEME_GODFATHER_PROMPT_SIGN="^ ̳ . ̫ . ̳ ^ ฅ "
-export THEME_GODFATHER_PROMPT_RETURN_CODE_LEFT=1
+local THEME_GODFATHER_PROMPT_SIGN="^ ̳ . ̫ . ̳ ^ ฅ "
+local THEME_GODFATHER_PROMPT_RETURN_CODE_LEFT=1
 
 # create zsh cache if not exist
 mkdir -p $ZSH_CACHE
