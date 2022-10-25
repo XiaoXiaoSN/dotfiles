@@ -28,8 +28,6 @@ alias cls='clear' # Good 'ol Clear Screen command
 
 alias now='date "+%Y-%m-%d %H:%M:%S %z"'
 
-alias ra=ranger
-
 # Enable aliases to be sudo’ed
 # http://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
 alias sudo='sudo '
