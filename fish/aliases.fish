@@ -7,7 +7,7 @@ alias now='date "+%Y-%m-%d %H:%M:%S %z"'
 if type -q kubectl
   alias kc=kubectl
   alias kx=kubectx
-  kubectl completion fish | source
+  alias kn=kubens
 end
 
 # for terraform
@@ -22,3 +22,5 @@ if type -q nvim
   alias vim=nvim
 end
 
+# for custom function
+alias sht=cht
