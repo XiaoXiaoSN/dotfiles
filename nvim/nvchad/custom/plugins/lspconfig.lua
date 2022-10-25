@@ -5,6 +5,7 @@ M.setup_lsp = function(attach, capabilities)
 
   local servers = {
     "gopls",
+    -- "golangci-lint-langserver",
     "tsserver",
     "rust_analyzer",
     "html",
