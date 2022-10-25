@@ -25,8 +25,10 @@ vim:
 .PHONY: fish zsh
 
 fish:
+	# fish install note: https://gist.github.com/gagarine/cf3f65f9be6aa0e105b184376f765262
 	ln -sh $(CURDIR)/fish $(HOME)/.config/fish
 	fish -c "fisher update"
+	fish_update_completions
 
 zsh:
 	# Install zsh auto-suggestions by git submodule
