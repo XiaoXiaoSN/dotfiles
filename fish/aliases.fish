@@ -1,7 +1,19 @@
-alias l=ls
 alias cls=clear
 
 alias now='date "+%Y-%m-%d %H:%M:%S %z"'
+
+# default ls is untouched, except coloring
+if type -q exa
+  alias ls='exa --classify --sort name'
+  alias ll='exa -l --classify --sort name'
+  alias la='exa -la --classify --sort name'
+  alias l='ls'
+else
+  alias ls='ls --color=auto'
+  alias ll='ls -l --time-style=long-iso'
+  alias la='ls -lA --time-style=long-iso'
+  alias l='ls --color=auto'
+end
 
 # for K8s
 if type -q kubectl
