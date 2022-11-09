@@ -12,3 +12,8 @@ end
 # run `set_color --print-colors` to get default colors
 set fish_color_command brcyan
 set fish_color_error '#ff6c6b'
+
+# initial the Starship prompt
+if type -q starship
+  starship init fish | source
+end
