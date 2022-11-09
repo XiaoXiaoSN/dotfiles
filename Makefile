@@ -22,7 +22,7 @@ vim:
 # Shell
 ##############################
 
-.PHONY: fish zsh
+.PHONY: fish zsh starship
 
 fish:
 	# fish install note: https://gist.github.com/gagarine/cf3f65f9be6aa0e105b184376f765262
@@ -36,6 +36,9 @@ zsh:
 
 	ln -sh $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 	ln -sh $(CURDIR)/zsh/zsh_config $(HOME)/.config/zsh
+
+starship:
+	ln -sh $(CURDIR)/starship/starship.toml $(HOME)/.config/starship.toml
 
 
 ##############################
@@ -87,6 +90,6 @@ nix:
 	ln -sh $(CURDIR)/nix ~/.config/nix
 
 nix.home-manager:
-	# Need to run git add after update
+	# Need to run `git add` after updating configs
 	ln -sh $(CURDIR)/nixpkgs $(HOME)/.config/nixpkgs
 	home-manager switch

@@ -1,0 +1,35 @@
+# NOTE:
+# use `starship print-config` to get current config with default settings
+
+# ref: https://starship.rs/config/#prompt
+# schema: https://starship.rs/config-schema.json
+format = """
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$cmd_duration\
+$character\
+"""
+right_format = '$status$time'
+add_newline = false
+
+[character]
+success_symbol = "[❯](white bold)"
+
+[git_branch]
+format = "[\\[$branch(:$remote_branch)\\]]($style) "
+style = "bold green"
+
+[time]
+disabled = false
+format = "[\\[$time\\]]($style)"
+style = "gray"
+
+[status]
+disabled = false
+style = "red"
+symbol = ""
+pipestatus = false
+
+
