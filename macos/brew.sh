@@ -44,20 +44,22 @@ brew install --cask \
 echo "🟢 Install other useful binaries"
 brew install \
   awscli \
+  git-delta \
+  gnupg \
   helm \
   iproute2mac \
   jq \
   kind \
   kubectx \
   kustomize \
-  gnupg \
+  mtr \
   ngrok/ngrok/ngrok \
   nmap \
   nvm \
-  mtr \
   protobuf \
-  tree \
   ripgrep \
+  starship \
+  tree \
   yq
 
 # Install some optional funny tools
@@ -69,12 +71,12 @@ brew install --cask \
   postman \
   telegram \
   wireshark
-  # cheatsheet \
-  # fig
 
 # Install more recent versions of some macOS tools.
 echo "🟢 Install more recent versions of some macOS tools"
-brew install curl
+brew install \
+  curl \
+  git
 
 # Install font tools.
 echo "🟢 Install font tools"
