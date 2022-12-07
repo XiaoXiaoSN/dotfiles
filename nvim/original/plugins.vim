@@ -31,7 +31,8 @@ Plug 'liuchengxu/vista.vim'
 
 " Language Server Protocol {{{
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 
 " Autocompletion framework for built-in LSP
 Plug 'nvim-lua/completion-nvim'

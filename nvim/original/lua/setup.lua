@@ -1,7 +1,18 @@
--- https://github.com/williamboman/nvim-lsp-installer/wiki/Advanced-Configuration#automatically-install-lsp-servers
+require("mason").setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗",
+    },
+  },
+})
 
-local lsp_installer = require "nvim-lsp-installer"
 
+local lsp_installer = require "mason-lspconfig"
+
+-- mason-lspconfig uses the `lspconfig` server names in the APIs it exposes - not `mason.nvim` package names
+-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 -- Include the servers you want to have installed by default below
 local servers = {
   "gopls",
@@ -20,11 +31,6 @@ local servers = {
 }
 
 -- Start to install LanguageServers
-for _, name in pairs(servers) do
-  local server_is_found, server = lsp_installer.get_server(name)
-  if server_is_found and not server:is_installed() then
-    print("Installing " .. name)
-    server:install()
-  end
-end
-
+lsp_installer.setup({
+  ensure_installed = servers,
+})
