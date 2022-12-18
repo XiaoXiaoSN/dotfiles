@@ -47,6 +47,7 @@ brew install \
   git-delta \
   gnupg \
   helm \
+  httpie \
   iproute2mac \
   jq \
   kind \
