@@ -5,6 +5,9 @@
 .PHONY: neovim neovim.NvChad vim
 
 neovim:
+	ln -sh $(CURDIR)/nvim/current $(HOME)/.config/nvim
+
+neovim.original:
 	ln -sh $(CURDIR)/nvim/original $(HOME)/.config/nvim
 	$(HOME)/.config/nvim/setup.sh
 
