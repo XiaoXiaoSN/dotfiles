@@ -1,6 +1,7 @@
 alias cls=clear
 
 alias now='date "+%Y-%m-%d %H:%M:%S %z"'
+alias uuid=uuidgen
 
 # default ls is untouched, except coloring
 if type -q exa
