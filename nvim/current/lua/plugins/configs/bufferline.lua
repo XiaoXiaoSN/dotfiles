@@ -62,25 +62,25 @@ bufferline.setup(options)
 local vim = vim
 
 -- cycle through buffers
-vim.api.nvim_set_keymap("n", "<leader>k", "<cmd> BufferLineCycleNext <CR>", { silent = true }) -- cycle next buffer
-vim.api.nvim_set_keymap("n", "<leader>l", "<cmd> BufferLineCycleNext <CR>", { silent = true }) -- cycle next buffer
-vim.api.nvim_set_keymap("n", "<leader>j", "<cmd> BufferLineCyclePrev <CR>", { silent = true }) -- cycle prev buffer
-vim.api.nvim_set_keymap("n", "<leader>h", "<cmd> BufferLineCyclePrev <CR>", { silent = true }) -- cycle prev buffer
+vim.keymap.set('n', '<leader>k', '<cmd> BufferLineCycleNext <CR>') -- cycle next buffer
+vim.keymap.set('n', '<leader>l', '<cmd> BufferLineCycleNext <CR>') -- cycle next buffer
+vim.keymap.set('n', '<leader>j', '<cmd> BufferLineCyclePrev <CR>') -- cycle prev buffer
+vim.keymap.set('n', '<leader>h', '<cmd> BufferLineCyclePrev <CR>') -- cycle prev buffer
 
 -- Quick buffer jumper
 -- https://github.com/akinsho/bufferline.nvim#bufferlinegotobuffer
-vim.api.nvim_set_keymap("n", "<leader>1", "<cmd> BufferLineGoToBuffer 1<CR>", { silent = true }) -- quick jump to buffer 1
-vim.api.nvim_set_keymap("n", "<leader>2", "<cmd> BufferLineGoToBuffer 2<CR>", { silent = true }) -- quick jump to buffer 2
-vim.api.nvim_set_keymap("n", "<leader>3", "<cmd> BufferLineGoToBuffer 3<CR>", { silent = true }) -- quick jump to buffer 3
-vim.api.nvim_set_keymap("n", "<leader>4", "<cmd> BufferLineGoToBuffer 4<CR>", { silent = true }) -- quick jump to buffer 4
-vim.api.nvim_set_keymap("n", "<leader>5", "<cmd> BufferLineGoToBuffer 5<CR>", { silent = true }) -- quick jump to buffer 5
-vim.api.nvim_set_keymap("n", "<leader>6", "<cmd> BufferLineGoToBuffer 6<CR>", { silent = true }) -- quick jump to buffer 6
-vim.api.nvim_set_keymap("n", "<leader>7", "<cmd> BufferLineGoToBuffer 7<CR>", { silent = true }) -- quick jump to buffer 7
-vim.api.nvim_set_keymap("n", "<leader>8", "<cmd> BufferLineGoToBuffer 8<CR>", { silent = true }) -- quick jump to buffer 8
-vim.api.nvim_set_keymap("n", "<leader>9", "<cmd> BufferLineGoToBuffer 9<CR>", { silent = true }) -- quick jump to buffer 9
+vim.keymap.set('n', '<leader>1', '<cmd> BufferLineGoToBuffer 1<CR>') -- quick jump to buffer 1
+vim.keymap.set('n', '<leader>2', '<cmd> BufferLineGoToBuffer 2<CR>') -- quick jump to buffer 2
+vim.keymap.set('n', '<leader>3', '<cmd> BufferLineGoToBuffer 3<CR>') -- quick jump to buffer 3
+vim.keymap.set('n', '<leader>4', '<cmd> BufferLineGoToBuffer 4<CR>') -- quick jump to buffer 4
+vim.keymap.set('n', '<leader>5', '<cmd> BufferLineGoToBuffer 5<CR>') -- quick jump to buffer 5
+vim.keymap.set('n', '<leader>6', '<cmd> BufferLineGoToBuffer 6<CR>') -- quick jump to buffer 6
+vim.keymap.set('n', '<leader>7', '<cmd> BufferLineGoToBuffer 7<CR>') -- quick jump to buffer 7
+vim.keymap.set('n', '<leader>8', '<cmd> BufferLineGoToBuffer 8<CR>') -- quick jump to buffer 8
+vim.keymap.set('n', '<leader>9', '<cmd> BufferLineGoToBuffer 9<CR>') -- quick jump to buffer 9
 
 -- Buffer pick
-vim.api.nvim_set_keymap("n", "gb", "<cmd> BufferLinePick<CR>", { silent = true }) -- quick jump to picked buffer
+vim.keymap.set('n', 'gb', '<cmd> BufferLinePick<CR>') -- quick jump to picked buffer
 
 -- Close buffer
-vim.api.nvim_set_keymap("n", "<leader>x", "<cmd> Bd<CR>", { silent = true }) -- delete current buffer
+vim.keymap.set('n', '<leader>x', '<cmd> Bd<CR>') -- delete current buffer

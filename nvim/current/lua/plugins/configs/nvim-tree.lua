@@ -97,8 +97,7 @@ nvimtree.setup(options)
 ----------------------------------------
 local vim = vim
 
-vim.api.nvim_set_keymap("", "<C-b>", "<cmd>NvimTreeToggle<CR>", { silent = true })
-vim.api.nvim_set_keymap("", "<M-b>", "<cmd>NvimTreeToggle<CR>", { silent = true })
-vim.api.nvim_set_keymap("", "<leader>e", "<cmd>NvimTreeToggle<CR>", { silent = true })
-vim.api.nvim_set_keymap("", "zz", "<cmd>NvimTreeFocus<CR>", { silent = true })
-
+vim.keymap.set('', '<C-b>', '<cmd>NvimTreeToggle<CR>')
+vim.keymap.set('', '<M-b>', '<cmd>NvimTreeToggle<CR>')
+vim.keymap.set('', '<leader>e', '<cmd>NvimTreeToggle<CR>')
+vim.keymap.set('', 'zz', '<cmd>NvimTreeFocus<CR>')

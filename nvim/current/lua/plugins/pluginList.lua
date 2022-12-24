@@ -52,13 +52,22 @@ local plugins = function(use)
 
   -- Finder
   use {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.0',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require 'plugins.configs.telescope'
+    end,
+  }
+  use 'nvim-telescope/telescope-media-files.nvim'
+
+  use {
     'nvim-treesitter/nvim-treesitter',
     run = ":TSUpdate",
     config = function()
       require 'plugins.configs.nvim-treesitter'
     end,
   }
-  use 'nvim-telescope/telescope-media-files.nvim'
 
   -- Move your cursor fast
   use { 'easymotion/vim-easymotion' }

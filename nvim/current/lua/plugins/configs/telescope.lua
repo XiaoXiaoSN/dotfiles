@@ -5,8 +5,6 @@ end
 
 vim.g.theme_switcher_loaded = true
 
-require("base46").load_highlight "telescope"
-
 local options = {
   defaults = {
     vimgrep_arguments = {
@@ -62,7 +60,6 @@ local options = {
 }
 
 -- check for any override
-options = require("core.utils").load_override(options, "nvim-telescope/telescope.nvim")
 telescope.setup(options)
 
 -- load extensions
@@ -71,3 +68,16 @@ pcall(function()
     telescope.load_extension(ext)
   end
 end)
+
+
+----------------------------------------
+-- Key Mappings
+----------------------------------------
+local vim = vim
+local builtin = require('telescope.builtin')
+
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fl', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
