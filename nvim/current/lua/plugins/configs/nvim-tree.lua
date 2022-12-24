@@ -95,4 +95,10 @@ nvimtree.setup(options)
 ----------------------------------------
 -- Key Mappings
 ----------------------------------------
-vim.api.nvim_set_keymap("", "<cmd>", "<cmd>NvimTreeToggle<CR>", { silent = true })
+local vim = vim
+
+vim.api.nvim_set_keymap("", "<C-b>", "<cmd>NvimTreeToggle<CR>", { silent = true })
+vim.api.nvim_set_keymap("", "<M-b>", "<cmd>NvimTreeToggle<CR>", { silent = true })
+vim.api.nvim_set_keymap("", "<leader>e", "<cmd>NvimTreeToggle<CR>", { silent = true })
+vim.api.nvim_set_keymap("", "zz", "<cmd>NvimTreeFocus<CR>", { silent = true })
+

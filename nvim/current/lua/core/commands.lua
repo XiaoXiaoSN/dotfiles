@@ -17,6 +17,7 @@ user_cmd("DotCase", change_case "cr.", {})
 user_cmd("SpaceCase", change_case "cr<space>", {})
 
 -- close buffer + hide terminal buffer (alias of <leader>x)
+-- https://superuser.com/a/370121
 user_cmd("Bd", function()
-  -- TODO:
+  vim.cmd [[bprevious | split | bnext | bdelete]]
 end, {})
