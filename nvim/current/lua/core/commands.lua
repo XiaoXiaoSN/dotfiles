@@ -17,6 +17,6 @@ user_cmd("DotCase", change_case "cr.", {})
 user_cmd("SpaceCase", change_case "cr<space>", {})
 
 -- close buffer + hide terminal buffer (alias of <leader>x)
-user_cmd("Bd", function ()
+user_cmd("Bd", function()
   -- TODO:
 end, {})

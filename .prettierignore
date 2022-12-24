@@ -1,0 +1,7 @@
+**/.git
+**/node_modules
+
+# Ignore home-manager build result
+nixpkgs/result
+
+zsh/zsh_config/zsh-autosuggestions

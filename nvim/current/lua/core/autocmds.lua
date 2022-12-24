@@ -10,23 +10,23 @@ vim.cmd [[
 -- format while saving
 autocmd("BufWritePre", {
   pattern = {
-      "*.rs",
-      "*.c",
-      "*.cpp",
-      "*.cxx",
-      "*.java",
-      "*.go",
-      "*.lua",
-      "*.py",
-      "*.ts",
-      "*.js",
-      "*.css",
-      "*.html",
-      "*.htm",
-      "*.json",
-      "*.vim",
+    "*.rs",
+    "*.c",
+    "*.cpp",
+    "*.cxx",
+    "*.java",
+    "*.go",
+    "*.lua",
+    "*.py",
+    "*.ts",
+    "*.js",
+    "*.css",
+    "*.html",
+    "*.htm",
+    "*.json",
+    "*.vim",
   },
   callback = function()
-      vim.lsp.buf.formatting_sync(nil, 1000)
+    vim.lsp.buf.formatting_sync(nil, 1000)
   end,
 })

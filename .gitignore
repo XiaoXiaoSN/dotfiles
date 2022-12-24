@@ -1,4 +1,9 @@
+node_modules
+
 # fish
 fish/fish_history
 fish/fishd.*
 fish/fish_variables
+
+# nixpkgs: ignore home-manager build result
+nixpkgs/result

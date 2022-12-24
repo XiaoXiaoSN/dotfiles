@@ -14,7 +14,7 @@ dc66931 (HEAD -> main, origin/main, origin/HEAD) avoid flooding mason.nvim binar
 ## Key mapping nots
 - close buffer + hide terminal buffer
 
-| Mode | ShortCut    | Description |
-| ---- | ----------- | ----------- |
-| n    | <leader>x   | close buffer + hide terminal buffer |
-| n    | gb          | buffer pick, quick go to buffer |
+| Mode | ShortCut  | Description                         |
+| ---- | --------- | ----------------------------------- |
+| n    | <leader>x | close buffer + hide terminal buffer |
+| n    | gb        | buffer pick, quick go to buffer     |

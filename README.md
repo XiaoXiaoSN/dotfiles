@@ -40,3 +40,15 @@ run below command to check format
 ```
 editorconfig-checker
 ```
+
+Also, we have [Prettier](https://prettier.io/) to further ensure the code format of the project.
+
+run below command to check format
+```
+npx prettier --check .
+```
+
+or use `--write` to directly re-write it
+```
+npx prettier --write .
+```

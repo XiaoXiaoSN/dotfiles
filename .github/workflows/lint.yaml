@@ -2,11 +2,11 @@ name: check formant
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   editor-config:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: editorconfig-checker/action-editorconfig-checker@v1
+      - uses: actions/checkout@v2
+      - uses: editorconfig-checker/action-editorconfig-checker@v1

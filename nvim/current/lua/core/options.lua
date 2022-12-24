@@ -18,7 +18,7 @@ vim.opt.clipboard = "unnamedplus" -- Specify to automatically use the system cli
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
-vim.opt.tabstop = 4     -- The width of a TAB is set to 4
+vim.opt.tabstop = 4 -- The width of a TAB is set to 4
 vim.opt.softtabstop = 4 -- Indents will have a width of 4
 
 vim.opt.fillchars = { eob = " " }

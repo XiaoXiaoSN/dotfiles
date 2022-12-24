@@ -10,7 +10,7 @@ local diagnostics = null_ls.builtins.diagnostics
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/completion
 -- local completion = null_ls.builtins.completion
 
-null_ls.setup {
+null_ls.setup({
   debug = false,
   sources = {
     formatting.black.with { extra_args = { "--fast" } }, -- python
@@ -24,7 +24,7 @@ null_ls.setup {
     diagnostics.eslint,
     diagnostics.shellcheck,
   },
-}
+})
 
 local unwrap = {
   method = null_ls.methods.DIAGNOSTICS,
@@ -44,7 +44,7 @@ local unwrap = {
             col = col,
             end_col = end_col,
             source = "unwrap",
-            message = "hey " .. os.getenv("USER") .. ", don't forget to handle this" ,
+            message = "hey " .. os.getenv("USER") .. ", don't forget to handle this",
             severity = 2,
           })
         end
