@@ -7,9 +7,9 @@
 First at all. The `<leader>` key is `,` and it is set in `core.global`.
 
 <details>
-<summary>📁 File Explorer ([nvim-tree](https://github.com/nvim-tree/nvim-tree.lua))</summary>
-
-### 📁 File Explorer ([nvim-tree](https://github.com/nvim-tree/nvim-tree.lua))
+<summary>
+  <h4>📁 File Explorer (nvim-tree)</h4>
+</summary>
 
 | Mode | ShortCut    | Description                    |
 | ---- | ----------- | ------------------------------ |
@@ -46,7 +46,10 @@ Commonly used mappings in nvim-tree
 
 </details>
 
-### Buffer ([buferline](https://github.com/akinsho/bufferline.nvim))
+<details>
+<summary>
+  <h4>📚 Buffer (buferline)</h4>
+</summary>
 
 | Mode | ShortCut    | Description                                         |
 | ---- | ----------- | --------------------------------------------------- |
@@ -59,6 +62,8 @@ Commonly used mappings in nvim-tree
 | n    | `<leader>9` | quick jump to buffer 9                              |
 | n    | `gb`        | quick jump to picked buffer                         |
 | n    | `<leader>x` | delete current buffer                               |
+
+</details>
 
 ## Language Servers
 
