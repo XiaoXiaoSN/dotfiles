@@ -1,5 +1,6 @@
 [core]
 	ignorecase = false
+	pager = delta
 
 [pull]
 	rebase = false
@@ -21,11 +22,30 @@
 	defaultBranch = main
 
 # https://gugod.org/2020/09/github-pr-as-git-refs/
-[remote "origin"]
-	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+# [remote "origin"]
+# 	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 
 [gpg]
 	program = gpg # On linux maybe gpg2
 
 [commit]
 	gpgsign = false
+
+# https://github.com/dandavison/delta
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+
+[interactive]
+	diffFilter = delta --color-only
+[add.interactive]
+	useBuiltin = false # required for git 2.37.0
+
+[diff]
+	line-numbers = true
+	decorations = true
+	colorMoved = default
+	side-by-side = true
+	# delta --list-syntax-themes
+	syntax-theme = GitHub
+
