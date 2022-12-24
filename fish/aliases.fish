@@ -2,6 +2,7 @@ alias cls=clear
 
 alias now='date "+%Y-%m-%d %H:%M:%S %z"'
 alias uuid=uuidgen
+alias uuid-zero='echo -n 00000000-0000-0000-0000-000000000000'
 
 # default ls is untouched, except coloring
 if type -q exa
