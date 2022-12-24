@@ -33,3 +33,4 @@ alias now='date "+%Y-%m-%d %H:%M:%S %z"'
 alias sudo='sudo '
 
 alias uuid=uuidgen
+alias uuid-zero='echo -n 00000000-0000-0000-0000-000000000000'
