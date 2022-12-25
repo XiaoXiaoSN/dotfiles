@@ -5,10 +5,10 @@ local vim = vim
 ------------------------------
 
 -- Custom mapping <leader> (see `:h mapleader` for more info)
-vim.g.mapleader = ","
+vim.g.mapleader = ','
 
 -- Use English as main language
 vim.cmd [[language en_US.UTF-8]]
 
 -- colorscheme
-vim.cmd.colorscheme "catppuccin-macchiato"
+vim.cmd.colorscheme 'catppuccin-macchiato'

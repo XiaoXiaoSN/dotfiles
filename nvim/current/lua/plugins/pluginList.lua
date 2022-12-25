@@ -28,16 +28,16 @@ local plugins = function(use)
     end,
   }
   -- Buffer management
-  use({
-    "akinsho/bufferline.nvim",
-    tags = "v3.*",
-    requires = "nvim-tree/nvim-web-devicons",
+  use {
+    'akinsho/bufferline.nvim',
+    tags = 'v3.*',
+    requires = 'nvim-tree/nvim-web-devicons',
     config = function()
       require 'plugins.configs.bufferline'
     end,
-  })
+  }
+  -- Status line
   use {
-    -- Status line
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true },
     config = function()
@@ -63,19 +63,27 @@ local plugins = function(use)
 
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ":TSUpdate",
+    run = ':TSUpdate',
     config = function()
       require 'plugins.configs.nvim-treesitter'
     end,
   }
 
   -- Move your cursor fast
-  use { 'easymotion/vim-easymotion' }
+  use 'easymotion/vim-easymotion'
 
   -- Git support
-  use "tpope/vim-fugitive"
-  use "airblade/vim-gitgutter"
+  use 'tpope/vim-fugitive'
+  use 'airblade/vim-gitgutter'
   use 'lewis6991/gitsigns.nvim'
+
+  -- Comment
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require 'plugins.configs.comment'
+    end
+  }
 
   -- Helpful editor support
   use 'tpope/vim-surround'
@@ -84,12 +92,17 @@ local plugins = function(use)
   use {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
-      require("indent_blankline").setup {
+      require('indent_blankline').setup {
         show_end_of_line = true,
       }
     end,
   }
-  use 'windwp/nvim-autopairs'
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup {}
+    end
+  }
 
 
   ----------------------------------------
@@ -99,25 +112,32 @@ local plugins = function(use)
   use {
     'williamboman/mason.nvim',
     config = function()
-      require "plugins.configs.mason"
+      require 'plugins.configs.mason'
     end,
   }
   use {
     'neovim/nvim-lspconfig',
     config = function()
-      require "plugins.configs.nvim-lspconfig"
+      require 'plugins.configs.nvim-lspconfig'
     end,
   }
-  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'jose-elias-alvarez/null-ls.nvim' -- TODO
 
   -- Go language
   use {
     'fatih/vim-go',
     { run = ':GoUpdateBinaries' }
   }
+
   -- Rust
   use 'rust-lang/rust.vim'
   use 'simrat39/rust-tools.nvim'
+  use 'mattn/webapi-vim' -- for RustPlay command
+
+  -- JavaScript & TypeScript
+  use 'pangloss/vim-javascript'
+  use 'leafgarland/typescript-vim'
+  use 'MaxMEllon/vim-jsx-pretty'
 
   ----------------------------------------
   -- Completion

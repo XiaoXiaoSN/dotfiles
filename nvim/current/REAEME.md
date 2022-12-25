@@ -2,9 +2,30 @@
 
 [Neovim](https://github.com/neovim/neovim) is a Vim-fork focused on extensibility and usability.
 
+### Getting Started
+
+```bash
+# Link the config to `$HOME/.config/nvim`
+ln -sh ./nvim/current $HOME/.config/nvim
+
+# Install plugins and langue servers
+vim +PackerSync +MasonInstallAll
+```
+
 ## Key Mappings
 
 First at all. The `<leader>` key is `,` and it is set in `core.global`.
+
+<details>
+<summary> <b>🐾 Common</b> </summary>
+
+| Mode | ShortCut    | Description          |
+| :--: | ----------- | -------------------- |
+|  n   | `<leader>/` | comment current line |
+|  x   | `<leader>/` | comment select lines |
+|  n   | `<C-s>`     | write file           |
+
+</details>
 
 <details>
 <summary> <b>📁 File Explorer (nvim-tree)</b> </summary>
@@ -64,12 +85,39 @@ Commonly used mappings in nvim-tree
 <details>
 <summary> <b>🔍 Finder (Telescope)</b> </summary>
 
-| Mode | ShortCut     | Description    |
-| :--: | ------------ | -------------- |
-|  n   | `<leader>ff` | find files     |
-|  n   | `<leader>fg` | live grep      |
-|  n   | `<leader>fb` | find buffers   |
-|  n   | `<leader>fh` | find help tags |
+| Mode | ShortCut     | Description       |
+| :--: | ------------ | ----------------- |
+|  n   | `<leader>ff` | find files        |
+|  n   | `<leader>fl` | find files        |
+|  n   | `<leader>fg` | live grep         |
+|  n   | `<leader>fb` | find buffers      |
+|  n   | `<leader>fh` | find help tags    |
+|  n   | `<leader>tk` | show key mappings |
+|  n   | `<leader>cm` | show git commits  |
+|  n   | `<leader>gs` | show git status   |
+
+</details>
+
+<details>
+<summary> <b>🛠 Language Servers (nvim-lspconfig)</b> </summary>
+
+| Mode | ShortCut    | Description       |
+| :--: | ----------- | ----------------- |
+|  n   | `gD`        | go declaration    |
+|  n   | `gd`        | go definition     |
+|  n   | `gh`        | show hover hint   |
+|  n   | `K`         | show hover hint   |
+|  n   | `gi`        | go implementation |
+|  n   | `gr`        | go references     |
+|  n   | `<space>rn` | rename symbol     |
+|  n   | `F2`        | rename symbol     |
+|  n   | `<space>ca` | code action       |
+|  n   | `<space>f`  | run format async  |
+
+| Mode | ShortCut    | Description           |
+| :--: | ----------- | --------------------- |
+|  n   | `<space>e`  | open float diagnostic |
+|  n   | `<leader>f` | open float diagnostic |
 
 </details>
 

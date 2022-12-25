@@ -1,12 +1,12 @@
 local vim = vim
 
 -- reference: https://github.com/neovim/nvim-lspconfig
-local present, lspconfig = pcall(require, "lspconfig")
+local present, lspconfig = pcall(require, 'lspconfig')
 if not present then
   return
 end
 -- https://github.com/hrsh7th/cmp-nvim-lsp
-local present2, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+local present2, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if not present2 then
   return
 end
@@ -15,11 +15,12 @@ end
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<leader>f', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
   signs = true,
@@ -29,10 +30,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- completion
 vim.g.completion_chain_complete_list = {
   default = {
-    { complete_items = { "lsp" } },
-    { complete_items = { "buffers" } },
-    { mode = { "<c-p>" } },
-    { mode = { "<c-n>" } },
+    { complete_items = { 'lsp' } },
+    { complete_items = { 'buffers' } },
+    { mode = { '<C-p>' } },
+    { mode = { '<C-n>' } },
   },
 }
 vim.g.completion_auto_change_source = 1
@@ -42,7 +43,7 @@ vim.g.completion_auto_change_source = 1
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
+  -- Enable completion triggered by <C-x><C-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
@@ -50,6 +51,7 @@ local on_attach = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
@@ -85,28 +87,28 @@ lspconfig.tsserver.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
-  cmd = { "typescript-language-server", "--stdio" },
+  cmd = { 'typescript-language-server', '--stdio' },
   filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx"
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx'
   },
   init_options = {
-    hostInfo = "neovim"
+    hostInfo = 'neovim'
   },
-  root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+  root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
 }
 
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
-  cmd = { "rustup", "run", "--install", "nightly", "rust-analyzer" },
+  cmd = { 'rustup', 'run', '--install', 'nightly', 'rust-analyzer' },
   settings = {
-    ["rust-analyzer"] = {
+    ['rust-analyzer'] = {
       cargo = {
         loadOutDirsFromCheck = true
       },

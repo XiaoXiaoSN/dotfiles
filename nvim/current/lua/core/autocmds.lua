@@ -8,25 +8,29 @@ vim.cmd [[
 ]]
 
 -- format while saving
-autocmd("BufWritePre", {
+autocmd('BufWritePre', {
   pattern = {
-    "*.rs",
-    "*.c",
-    "*.cpp",
-    "*.cxx",
-    "*.java",
-    "*.go",
-    "*.lua",
-    "*.py",
-    "*.ts",
-    "*.js",
-    "*.css",
-    "*.html",
-    "*.htm",
-    "*.json",
-    "*.vim",
+    '*.rs',
+    '*.c',
+    '*.cpp',
+    '*.cxx',
+    '*.java',
+    '*.go',
+    '*.lua',
+    '*.py',
+    '*.ts',
+    '*.js',
+    '*.css',
+    '*.html',
+    '*.htm',
+    '*.json',
+    '*.vim',
   },
   callback = function()
-    vim.lsp.buf.formatting_sync(nil, 1000)
+    -- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format()
+    vim.lsp.buf.format({
+      timeout_ms = 1000,
+      async = true,
+    })
   end,
 })

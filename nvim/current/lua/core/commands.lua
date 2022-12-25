@@ -8,16 +8,16 @@ local change_case = function(keys)
   end
 end
 
-user_cmd("Snake", change_case "crs", {})
-user_cmd("Pascal", change_case "crm", {})
-user_cmd("Camel", change_case "crc", {})
-user_cmd("Upper", change_case "cru", {})
-user_cmd("Kebab", change_case "cr-", {})
-user_cmd("DotCase", change_case "cr.", {})
-user_cmd("SpaceCase", change_case "cr<space>", {})
+user_cmd('Snake', change_case 'crs', { desc = 'change to snake_case' })
+user_cmd('Pascal', change_case 'crm', { desc = 'change to PascalCase' })
+user_cmd('Camel', change_case 'crc', { desc = 'change to camelCase' })
+user_cmd('Upper', change_case 'cru', { desc = 'change to UPPER CASE'})
+user_cmd('Kebab', change_case 'cr-', { desc = 'change to kebab-case' })
+user_cmd('DotCase', change_case 'cr.', { desc = 'change to dot.case' })
+user_cmd('SpaceCase', change_case 'cr<space>', { desc = 'change to space case'})
 
 -- close buffer + hide terminal buffer (alias of <leader>x)
 -- https://superuser.com/a/370121
-user_cmd("Bd", function()
+user_cmd('Bd', function()
   vim.cmd [[bprevious | split | bnext | bdelete]]
 end, {})
