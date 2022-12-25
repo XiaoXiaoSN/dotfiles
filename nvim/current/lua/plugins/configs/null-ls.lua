@@ -10,21 +10,34 @@ local diagnostics = null_ls.builtins.diagnostics
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/completion
 -- local completion = null_ls.builtins.completion
 
-null_ls.setup({
-  debug = false,
-  sources = {
-    formatting.black.with { extra_args = { '--fast' } }, -- python
-    formatting.deno_fmt,
-    formatting.goimports,
-    formatting.prettier,
-    formatting.rustfmt,
-    formatting.stylua,
-    formatting.shfmt,
-    diagnostics.codespell,
-    diagnostics.eslint,
-    diagnostics.shellcheck,
-  },
-})
+local sources = {
+  -- Common
+  formatting.prettier,
+  diagnostics.codespell,
+
+  -- Go
+  formatting.goimports,
+
+  -- Rust
+  formatting.rustfmt,
+
+  -- JavaScript
+  formatting.deno_fmt,
+  diagnostics.eslint,
+
+  -- Lua
+  formatting.stylua,
+
+  -- Shell
+  formatting.shfmt,
+  diagnostics.shellcheck.with { diagnostics_format = '#{m} [#{c}]' },
+
+  -- cpp
+  formatting.clang_format,
+
+  -- Python
+  formatting.black.with { extra_args = { '--fast' } },
+}
 
 local unwrap = {
   method = null_ls.methods.DIAGNOSTICS,
@@ -54,4 +67,8 @@ local unwrap = {
   },
 }
 
+null_ls.setup({
+  debug = false,
+  sources = sources,
+})
 null_ls.register(unwrap)

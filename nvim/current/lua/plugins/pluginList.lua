@@ -121,7 +121,12 @@ local plugins = function(use)
       require 'plugins.configs.nvim-lspconfig'
     end,
   }
-  use 'jose-elias-alvarez/null-ls.nvim' -- TODO
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require 'plugins.configs.null-ls'
+    end,
+  }
 
   -- Go language
   use {
