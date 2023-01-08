@@ -1,4 +1,5 @@
 set -x LANG en_US.UTF-8
+set -x EDITOR nvim
 
 # Aliases
 source $HOME/.config/fish/aliases.fish
