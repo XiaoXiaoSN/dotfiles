@@ -1,3 +1,5 @@
+local vim = vim
+
 local present, bufferline = pcall(require, 'bufferline')
 if not present then
   return
@@ -59,7 +61,6 @@ bufferline.setup(options)
 ----------------------------------------
 -- Key Mappings
 ----------------------------------------
-local vim = vim
 
 -- cycle through buffers
 vim.keymap.set('n', '<leader>k', '<cmd> BufferLineCycleNext <CR>') -- cycle next buffer

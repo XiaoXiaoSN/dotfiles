@@ -5,11 +5,11 @@
 ### Getting Started
 
 ```bash
-# Link the config to `$HOME/.config/nvim`
+# Link the config to `$HOME/.config/nvim` (or just copy it!)
 ln -sh ./nvim/current $HOME/.config/nvim
 
 # Install plugins and langue servers
-vim +PackerSync +MasonInstallAll
+nvim +PackerSync +MasonInstallAll
 ```
 
 ## Key Mappings
@@ -88,7 +88,7 @@ Commonly used mappings in nvim-tree
 | Mode | ShortCut     | Description       |
 | :--: | ------------ | ----------------- |
 |  n   | `<leader>ff` | find files        |
-|  n   | `<leader>fl` | find files        |
+|  n   | `<leader>fl` | find line         |
 |  n   | `<leader>fg` | live grep         |
 |  n   | `<leader>fb` | find buffers      |
 |  n   | `<leader>fh` | find help tags    |
@@ -123,10 +123,16 @@ Commonly used mappings in nvim-tree
 
 ## Language Servers
 
+### Installation
 Rust
 
 ```
 rustup +nightly component add rust-analyzer-preview
+```
+
+Go
+```
+go install golang.org/x/tools/gopls@latest
 ```
 
 TypeScript

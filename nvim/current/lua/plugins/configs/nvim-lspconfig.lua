@@ -77,10 +77,26 @@ local lsp_flags = {
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
+-- Setup servers
+-- reference: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
+local util = require('lspconfig/util')
+
+-- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#custom-configuration
 lspconfig.gopls.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
+  cmd = { 'gopls', 'serve' },
+  filetypes = { 'go', 'gomod' },
+  root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+    },
+  },
 }
 
 lspconfig.tsserver.setup {

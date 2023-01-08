@@ -11,10 +11,10 @@ neovim.original:
 	ln -sh $(CURDIR)/nvim/original $(HOME)/.config/nvim
 	$(HOME)/.config/nvim/setup.sh
 
-neovim.NvChad:
-	git clone https://github.com/NvChad/NvChad $(HOME)/.config/nvim --depth 1
-	ln -sh $(CURDIR)/nvim/nvchad/custom $(HOME)/.config/nvim/lua/custom
-	nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+# neovim.NvChad:
+# 	git clone https://github.com/NvChad/NvChad $(HOME)/.config/nvim --depth 1
+# 	ln -sh $(CURDIR)/nvim/nvchad/custom $(HOME)/.config/nvim/lua/custom
+# 	nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 vim:
 	ln -sh $(CURDIR)/vim/vimrc $(HOME)/.vimrc

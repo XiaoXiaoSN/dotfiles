@@ -1,3 +1,5 @@
+local vim = vim
+
 local plugins = function(use)
   -- Improve startup time for Neovim
   -- It is recommended to put impatient.nvim before any other plugins
@@ -37,6 +39,7 @@ local plugins = function(use)
     end,
   }
   -- Status line
+  use 'arkav/lualine-lsp-progress'
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true },
@@ -131,7 +134,11 @@ local plugins = function(use)
   -- Go language
   use {
     'fatih/vim-go',
-    { run = ':GoUpdateBinaries' }
+    { run = ':GoUpdateBinaries' },
+    config = function ()
+      vim.g.go_def_mode = 'gopls'
+      vim.g.go_info_mode = 'gopls'
+    end
   }
 
   -- Rust
