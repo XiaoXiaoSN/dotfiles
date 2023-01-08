@@ -47,7 +47,7 @@ if [ -f "$ZSH_CONFIG/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
   source $ZSH_CONFIG/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-# Run local setting (Do not need to use git managment)
+# Run local setting (Do not need to use git management)
 if [ -f "$HOME/zsh-profile.zsh" ]; then
   source "$HOME/zsh-profile.zsh"
 fi
