@@ -356,6 +356,12 @@ endfunc
 
 map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
+" navigate within insert mode
+imap <silent> <C-h> <Left>
+imap <silent> <C-l> <Right>
+imap <silent> <C-j> <Down>
+imap <silent> <C-k> <Up>
+
 " add some command for chnaging case of tpope/vim-abolish
 command! Snake call feedkeys("crs")
 command! Pascal call feedkeys("crm")
@@ -365,3 +371,16 @@ command! Kebab call feedkeys("cr-")
 command! DotCase call feedkeys("cr.")
 command! SpaceCase call feedkeys("cr<space>")
 
+" Abbreviations {{{
+"" no one is really happy until you have this shortcuts
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
+" }}}
