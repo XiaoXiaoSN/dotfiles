@@ -9,10 +9,10 @@ local options = {
   filters = {
     dotfiles = false, -- show hidden files
     custom = {
-      '.DS_Store',
-      '.direnv',
-      '.git',
-      '.idea',
+      '^.DS_Store$',
+      '^.direnv$',
+      '^.git$',
+      '^.idea$',
     },
     exclude = {},
   },

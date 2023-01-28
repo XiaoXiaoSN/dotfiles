@@ -121,6 +121,18 @@ Commonly used mappings in nvim-tree
 
 </details>
 
+<details>
+<summary> <b>🐱 Other Stuff</b> </summary>
+
+| Mode | ShortCut    | Description       |
+| :--: | ----------- | ----------------- |
+|  n   | `<leader>tb` | Git toggle line blame |
+|  n   | `<leader>hd` | Git diff for current file |
+|  n   | `<leader>hp` | Preview hunk (a block of changes?) |
+|  n   | `<leader>hr` | Reset hunk |
+
+</details>
+
 ## Language Servers
 
 ### Automatically Install

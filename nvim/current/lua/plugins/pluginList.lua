@@ -86,9 +86,13 @@ local plugins = function(use)
   use('easymotion/vim-easymotion')
 
   -- Git support
-  use('tpope/vim-fugitive')
   use('airblade/vim-gitgutter')
-  use('lewis6991/gitsigns.nvim')
+  use({
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('plugins.configs.gitsigns')
+    end,
+  })
 
   -- Comment
   use({
