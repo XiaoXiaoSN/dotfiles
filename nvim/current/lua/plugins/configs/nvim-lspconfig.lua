@@ -101,12 +101,6 @@ lspconfig.gopls.setup({
   },
 })
 
-lspconfig.golangcilsp.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-})
-
 lspconfig.golangci_lint_ls.setup({
   on_attach = on_attach,
   flags = lsp_flags,

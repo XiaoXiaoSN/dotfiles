@@ -124,12 +124,15 @@ Commonly used mappings in nvim-tree
 ## Language Servers
 
 ### Automatically Install
-We can use `Mason` to help us install them. Or, install them manually
+We can use `:Mason` to help us install them.
 ```
 nvim +MasonInstallAll
 ```
 
 ### Manually Install
+
+Or, install them manually
+
 Rust
 
 ```
