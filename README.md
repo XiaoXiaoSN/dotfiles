@@ -5,7 +5,7 @@
 
 ### Editor
 
-- `make neovim` or `make neovim.nvchad`
+- `make neovim`
 - `make vim`
 
 ### Shell
