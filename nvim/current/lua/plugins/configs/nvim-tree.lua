@@ -7,8 +7,13 @@ end
 local options = {
   sort_by = 'case_sensitive', -- *name, case_sensitive, modification_time, extension
   filters = {
-    dotfiles = true,
-    custom = {},
+    dotfiles = false, -- show hidden files
+    custom = {
+      '.DS_Store',
+      '.direnv',
+      '.git',
+      '.idea',
+    },
     exclude = {},
   },
   disable_netrw = true,

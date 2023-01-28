@@ -20,8 +20,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
   signs = true,
   update_in_insert = true,
@@ -66,7 +65,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set('n', '<space>f', function()
+    vim.lsp.buf.format({ async = true })
+  end, bufopts)
 end
 
 local lsp_flags = {
@@ -82,7 +83,7 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 local util = require('lspconfig/util')
 
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#custom-configuration
-lspconfig.gopls.setup {
+lspconfig.gopls.setup({
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -94,12 +95,25 @@ lspconfig.gopls.setup {
       analyses = {
         unusedparams = true,
       },
+      gofumpt = true,
       staticcheck = true,
     },
   },
-}
+})
 
-lspconfig.tsserver.setup {
+lspconfig.golangcilsp.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+})
+
+lspconfig.golangci_lint_ls.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+})
+
+lspconfig.tsserver.setup({
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -110,15 +124,15 @@ lspconfig.tsserver.setup {
     'javascript.jsx',
     'typescript',
     'typescriptreact',
-    'typescript.tsx'
+    'typescript.tsx',
   },
   init_options = {
-    hostInfo = 'neovim'
+    hostInfo = 'neovim',
   },
   root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
-}
+})
 
-lspconfig.rust_analyzer.setup {
+lspconfig.rust_analyzer.setup({
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -126,11 +140,11 @@ lspconfig.rust_analyzer.setup {
   settings = {
     ['rust-analyzer'] = {
       cargo = {
-        loadOutDirsFromCheck = true
+        loadOutDirsFromCheck = true,
       },
       procMacro = {
-        enable = true
+        enable = true,
       },
-    }
-  }
-}
+    },
+  },
+})

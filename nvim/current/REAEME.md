@@ -123,7 +123,13 @@ Commonly used mappings in nvim-tree
 
 ## Language Servers
 
-### Installation
+### Automatically Install
+We can use `Mason` to help us install them. Or, install them manually
+```
+nvim +MasonInstallAll
+```
+
+### Manually Install
 Rust
 
 ```
@@ -133,10 +139,19 @@ rustup +nightly component add rust-analyzer-preview
 Go
 ```
 go install golang.org/x/tools/gopls@latest
+go install mvdan.cc/gofumpt@latest
+go install github.com/nametake/golangci-lint-langserver@latest
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 ```
 
 TypeScript
 
 ```
 npm install -g typescript-language-server typescript
+```
+
+Lua
+```
+# formatting
+cargo install stylua
 ```

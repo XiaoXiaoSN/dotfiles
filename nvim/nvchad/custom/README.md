@@ -1,3 +1,5 @@
+> This configuration file is no longer maintained and will be deleted in the near future.
+
 ## TODO:
 - 我想要空格點點 `blankline` https://github.com/lukas-reineke/indent-blankline.nvim
 - 還沒針對個別的 LSP 設定
