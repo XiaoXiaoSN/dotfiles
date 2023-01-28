@@ -44,6 +44,7 @@ brew install --cask \
 echo "🟢 Install other useful binaries"
 brew install \
   awscli \
+  direnv \
   git-delta \
   gnupg \
   helm \

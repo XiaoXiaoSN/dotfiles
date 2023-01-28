@@ -13,7 +13,7 @@
 brew analytics off
 ```
 
-2. Run `init.sh` to setup your macOS enviroment
+2. Run `init.sh` to setup your macOS environment
 
 There is a optional line that clean all apps on Dock
 ```bash
