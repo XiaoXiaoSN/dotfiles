@@ -27,24 +27,22 @@ end
 local fresh_install = packer_ensure_install()
 
 -- Load packer.nvim
-vim.cmd 'packadd packer.nvim'
+vim.cmd('packadd packer.nvim')
 local packer = require('packer')
 local packer_util = require('packer.util')
 
 packer.init({
   auto_clean = true,
   compile_on_sync = true,
-  git = { clone_timeout = 6000 }
+  git = { clone_timeout = 6000 },
 })
-packer.startup {
+packer.startup({
   require('plugins.pluginList'),
   config = {
     max_jobs = 16,
-    compile_path = packer_util.join_paths(
-      vim.fn.stdpath('data'), 'site', 'lua', 'packer_compiled.lua'
-    ),
+    compile_path = packer_util.join_paths(vim.fn.stdpath('data'), 'site', 'lua', 'packer_compiled.lua'),
   },
-}
+})
 
 -- For fresh install, we need to install plugins. Otherwise, we just need to require `packer_compiled.lua`.
 if fresh_install then
