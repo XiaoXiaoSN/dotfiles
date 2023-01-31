@@ -51,6 +51,27 @@ local plugins = function(use)
     end,
   })
 
+  -- Show LSP progress
+  use({
+    'j-hui/fidget.nvim',
+    requires = {
+      'nvim-lua/lsp-status.nvim', -- optional, for file icons
+    },
+    config = function()
+      require('fidget').setup({})
+    end,
+  })
+
+  -- Show scroll bar for file progress
+  use({
+    'dstein64/nvim-scrollview',
+    config = function()
+      require('scrollview').setup({
+        current_only = true,
+      })
+    end,
+  })
+
   -- Force mode
   use({
     'folke/zen-mode.nvim',
@@ -83,6 +104,7 @@ local plugins = function(use)
   })
 
   -- Move your cursor fast
+  -- TODO: replace easymotion with `phaazon/hop.nvim`
   use('easymotion/vim-easymotion')
 
   -- Git support
@@ -131,12 +153,23 @@ local plugins = function(use)
       require('plugins.configs.mason')
     end,
   })
+
   use({
     'neovim/nvim-lspconfig',
     config = function()
       require('plugins.configs.nvim-lspconfig')
     end,
   })
+  -- use({
+  --   'glepnir/lspsaga.nvim',
+  --   branch = 'main',
+  --   config = function()
+  --     require('lspsaga').setup({})
+  --   end,
+  --   requires = { { 'nvim-tree/nvim-web-devicons' } },
+  -- })
+
+  -- Inject LSP diagnostics, code actions, and more via Lua
   use({
     'jose-elias-alvarez/null-ls.nvim',
     config = function()
@@ -156,7 +189,15 @@ local plugins = function(use)
 
   -- Rust
   use('rust-lang/rust.vim')
-  use('simrat39/rust-tools.nvim')
+  use({
+    'simrat39/rust-tools.nvim',
+    requires = {
+      'neovim/nvim-lspconfig',
+    },
+    config = function()
+      require('rust-tools').setup({})
+    end,
+  })
   use('mattn/webapi-vim') -- for RustPlay command
 
   -- JavaScript & TypeScript
