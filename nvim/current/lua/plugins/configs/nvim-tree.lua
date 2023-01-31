@@ -13,6 +13,7 @@ local options = {
       '^.direnv$',
       '^.git$',
       '^.idea$',
+      '^.null-ls_',
     },
     exclude = {},
   },
