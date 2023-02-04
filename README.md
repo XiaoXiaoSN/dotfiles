@@ -50,11 +50,11 @@ Also, we have [Prettier](https://prettier.io/) to further ensure the code format
 run below command to check format
 
 ```
-npx prettier --check .
+npx prettier --check **/*.{js,ts,md,json,yaml}
 ```
 
 or use `--write` to directly re-write it
 
 ```
-npx prettier --write .
+npx prettier --write **/*.{js,ts,md,json,yaml}
 ```

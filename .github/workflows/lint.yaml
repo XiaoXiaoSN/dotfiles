@@ -5,8 +5,15 @@ on:
     branches: [main]
 
 jobs:
-  editor-config:
+  format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
       - uses: editorconfig-checker/action-editorconfig-checker@v1
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.2
+        with:
+          dry: true
+          prettier_options: --check **/*.{js,ts,md,json,yaml}
