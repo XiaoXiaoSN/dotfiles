@@ -36,6 +36,7 @@ brew install --cask \
   lens \
   itsycal \
   notion \
+  raycast \
   slack \
   openvpn-connect \ # or tunnelblick
   visual-studio-code
