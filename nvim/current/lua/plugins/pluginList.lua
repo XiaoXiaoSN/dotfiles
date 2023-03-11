@@ -84,6 +84,9 @@ local plugins = function(use)
   -- Editor support
   ----------------------------------------
 
+  -- GitHub Copilot
+  use('github/copilot.vim')
+
   -- Finder
   use({
     'nvim-telescope/telescope.nvim',
