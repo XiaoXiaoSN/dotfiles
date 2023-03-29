@@ -5,11 +5,24 @@ local present, lspconfig = pcall(require, 'lspconfig')
 if not present then
   return
 end
--- https://github.com/hrsh7th/cmp-nvim-lsp
-local present2, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+-- reference: https://github.com/hrsh7th/nvim-cmp
+local present2, cmp = pcall(require, 'cmp')
 if not present2 then
   return
 end
+-- reference: https://github.com/hrsh7th/cmp-nvim-lsp
+local present3, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if not present3 then
+  return
+end
+
+-- Enable complation
+cmp.setup({
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'path' },
+  },
+})
 
 -- Enable diagnostics
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

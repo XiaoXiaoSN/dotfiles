@@ -159,6 +159,11 @@ local plugins = function(use)
 
   use({
     'neovim/nvim-lspconfig',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+      'hrsh7th/nvim-cmp',
+    },
     config = function()
       require('plugins.configs.nvim-lspconfig')
     end,
@@ -212,8 +217,9 @@ local plugins = function(use)
   -- Completion
   ----------------------------------------
 
-  use('hrsh7th/nvim-cmp')
   use('hrsh7th/cmp-nvim-lsp')
+  use('hrsh7th/cmp-path')
+  use('hrsh7th/nvim-cmp')
 end
 
 return plugins
