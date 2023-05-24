@@ -65,13 +65,13 @@ case $SUB_RES in
         # same as q=is:open is:pr author:${GITHUB_USER}
         GITHUB_URL="${GITHUB_URL}/${GITHUB_USER}" ;;
 
-      closeMe|meClose)
+      closeMe|meClose|closedMe|meClosed|closedMy|myClosed)
         GITHUB_URL="${GITHUB_URL}?q=is%3Apr+is%3Aclosed+author%3A${GITHUB_USER}" ;;
 
       open)
         GITHUB_URL="${GITHUB_URL}?q=is:open is:pr" ;;
 
-      close)
+      close|closed)
         GITHUB_URL="${GITHUB_URL}?q=is:close is:pr" ;;
     esac
   ;;
