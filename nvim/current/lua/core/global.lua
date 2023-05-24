@@ -11,4 +11,9 @@ vim.g.mapleader = ','
 vim.cmd [[language en_US.UTF-8]]
 
 -- colorscheme
-vim.cmd.colorscheme 'catppuccin-macchiato'
+local success, error = pcall(function()
+  vim.cmd.colorscheme('catppuccin-macchiato')
+end)
+if not success then
+  print('The specified theme is not installed' .. error)
+end
