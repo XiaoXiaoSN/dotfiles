@@ -10,10 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: editorconfig-checker/action-editorconfig-checker@v1
+      - uses: editorconfig-checker/action-editorconfig-checker@main
 
       - name: Prettify code
-        uses: creyD/prettier_action@v4.2
+        uses: creyD/prettier_action@v4.3
         with:
           dry: true
           prettier_options: --check **/*.{js,ts,md,json,yaml}
