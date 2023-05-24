@@ -11,6 +11,16 @@ local plugins = function(use)
   -- Lua functions
   use('nvim-lua/plenary.nvim')
 
+  -- Authomatically highlightling(under_score) other uses of the word
+  use({
+    'RRethy/vim-illuminate',
+    config = function()
+      require('illuminate').configure({
+        delay = 200,
+      })
+    end,
+  })
+
   -- Defaults everyone can agree on
   use('tpope/vim-sleuth')
 
