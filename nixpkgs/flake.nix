@@ -52,6 +52,23 @@
           ./users/outside.nix
         ];
       };
+
+      # TODO: need to check
+      "renhao@chianti" = home-manager.lib.homeManagerConfiguration {
+        homeDirectory = "/home/renhao";
+        username = "renhao";
+
+        pkgs = import nixpkgs {
+          # inherit system;
+          config = {
+            allowUnfree = true;
+          };
+        };
+
+        configuration.imports = [
+          ./users/chianti.nix
+        ];
+      };
     };
   };
 }
