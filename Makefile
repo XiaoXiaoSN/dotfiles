@@ -1,3 +1,6 @@
+.PHONY: all
+all: neovim fish starship git tmux util-scripts
+
 ##############################
 # Editor
 ##############################
