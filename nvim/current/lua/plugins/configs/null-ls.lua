@@ -15,7 +15,7 @@ local diagnostics = null_ls.builtins.diagnostics
 local sources = {
   -- Common
   formatting.prettier,
-  formatting.codespell,
+  diagnostics.codespell.with({ extra_args = { '-L crate' } }), -- TODO: use a file as white list
 
   -- Go
   formatting.goimports,
@@ -31,7 +31,7 @@ local sources = {
   formatting.stylua,
 
   -- Shell
-  formatting.shfmt,
+  -- diagnostics.shfmt,
   diagnostics.shellcheck.with({ diagnostics_format = '#{m} [#{c}]' }),
 
   -- C-family
