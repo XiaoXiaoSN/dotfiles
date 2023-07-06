@@ -37,6 +37,9 @@ case $RES in
   vanilla)
     GITHUB_URL+="/fstnetwork/vanilla" ;;
 
+  pr|pull*)
+    GITHUB_URL+="/pulls" ;;
+
   notification*)
     GITHUB_URL+="/notifications" ;;
 
