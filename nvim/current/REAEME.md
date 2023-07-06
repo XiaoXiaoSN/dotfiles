@@ -12,6 +12,8 @@ ln -sh ./nvim/current $HOME/.config/nvim
 nvim +PackerSync +MasonInstallAll
 ```
 
+There is a [Vim tips](nvim/current/vim-tips.md) to record some basic commands.
+
 ## Key Mappings
 
 First at all. The `<leader>` key is `,` and it is set in `core.global`.
