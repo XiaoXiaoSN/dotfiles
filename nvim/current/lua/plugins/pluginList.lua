@@ -90,6 +90,14 @@ local plugins = function(use)
     end,
   })
 
+  use({
+    'akinsho/toggleterm.nvim',
+    tag = '*',
+    config = function()
+      require('toggleterm').setup()
+    end,
+  })
+
   ----------------------------------------
   -- Editor support
   ----------------------------------------
