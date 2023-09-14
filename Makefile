@@ -97,5 +97,5 @@ nix:
 
 nix.home-manager:
 	# Need to run `git add` after updating configs
-	ln -sh $(CURDIR)/nixpkgs $(HOME)/.config/nixpkgs
+	ln -sh $(CURDIR)/nixpkgs $(HOME)/.config/home-manager
 	home-manager switch
