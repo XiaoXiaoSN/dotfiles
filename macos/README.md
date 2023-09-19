@@ -1,20 +1,22 @@
-# macOS Install
+# Setup macOS
 
-## macOS setting
+## Install Useful Staff and Setup System
 
-### Install useful staff
+### Install [Homebrew](https://docs.brew.sh/)
 
-1. Install [Homebrew](https://docs.brew.sh/)
+Check `brew.sh` and select which tools you want to install or don't want to install
 
 ```bash
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Turn off analytics Thttps://docs.brew.sh/Analytics
-brew analytics off
+# Install tools and applications
+./brew.sh
 ```
 
-2. Run `init.sh` to setup your macOS environment
+### Setup macOS System
+
+Run `init.sh` to setup your macOS environment.
 
 There is a optional line that clean all apps on Dock
 
@@ -24,8 +26,6 @@ There is a optional line that clean all apps on Dock
 # the Dock to launch apps.
 defaults write com.apple.dock persistent-apps -array
 ```
-
-3. Check `brew.sh` to select what you want to install
 
 ## Setup iTerm2
 
@@ -45,4 +45,5 @@ brew install font-noto-nerd
 ## Ref
 
 [awesome macOS setting](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
-[Mosky Preferences in macOS](https://paper.dropbox.com/doc/Moskys-Preferences-in-macOS--Bbfa5TyUBQ2SscGRgh6Q0KZeAg-dG5SIszlLEGT5DkFQv7yu)`
+[Mosky Preferences in macOS](https://paper.dropbox.com/doc/Moskys-Preferences-in-macOS--Bbfa5TyUBQ2SscGRgh6Q0KZeAg-dG5SIszlLEGT5DkFQv7yu)
+[David O'Trakoun dotfiles](https://github.com/davidosomething/dotfiles/blob/dev/mac/README.md)
