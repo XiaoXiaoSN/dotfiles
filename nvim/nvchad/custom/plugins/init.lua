@@ -2,7 +2,7 @@ return {
   -- Helpful editor support
   ["tpope/vim-surround"] = {},
   ["tpope/vim-abolish"] = {
-    -- defind some extended commands on `commands.lua`
+    -- defined some extended commands on `commands.lua`
   },
   ["ntpeters/vim-better-whitespace"] = {},
 

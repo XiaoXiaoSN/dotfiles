@@ -33,13 +33,14 @@ brew install --cask \
   go \
   google-chrome \
   google-cloud-sdk \ # for gcloud CLI
+  hiddenbar \
   lens \
   itsycal \
   notion \
   raycast \
   slack \
   openvpn-connect \ # or tunnelblick
-  visual-studio-code
+  visual-studio-code \
 
 # Install other useful binaries.
 echo "🟢 Install other useful binaries"

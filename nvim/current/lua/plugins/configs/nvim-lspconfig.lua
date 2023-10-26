@@ -16,7 +16,7 @@ if not present3 then
   return
 end
 
--- Enable complation
+-- Enable compilation
 cmp.setup({
   sources = {
     { name = 'nvim_lsp' },

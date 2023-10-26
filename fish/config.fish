@@ -4,7 +4,7 @@ set -x EDITOR nvim
 # Aliases
 source $HOME/.config/fish/aliases.fish
 
-# Run local setting (Do not need to use git managment)
+# Run local setting (Do not need to use git management)
 if test -e $HOME/fish-profile.fish
   source $HOME/fish-profile.fish
 end

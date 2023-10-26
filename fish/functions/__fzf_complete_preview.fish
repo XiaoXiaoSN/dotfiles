@@ -26,6 +26,6 @@ function __fzf_complete_preview -d 'generate preview for completion widget.
     # if fish knows about it, let it show info
     type -q "$path" 2>/dev/null; and type -a "$path"
 
-    # show aditional data
+    # show additional data
     echo $argv[2]
 end

@@ -19,7 +19,7 @@ set hlsearch " HighLight 所有匹配搜尋
 set mouse=n " 開啟 Normal Mode 部分的滑鼠功能
 
 " Specify to automatically use the system clipboard for copy and paste
-" You should check do your vim suports clipbord feature by
+" You should check do your vim supports clipbord feature by
 " ':echo has('clipboard')'
 " see more on https://vi.stackexchange.com/a/96
 set clipboard=unnamed
@@ -362,7 +362,7 @@ imap <silent> <C-l> <Right>
 imap <silent> <C-j> <Down>
 imap <silent> <C-k> <Up>
 
-" add some command for chnaging case of tpope/vim-abolish
+" add some command for changing case of tpope/vim-abolish
 command! Snake call feedkeys("crs")
 command! Pascal call feedkeys("crm")
 command! Camel call feedkeys("crc")

@@ -3,6 +3,7 @@ name: check formant
 on:
   push:
     branches: [main]
+  pull_request:
 
 jobs:
   format:
@@ -17,3 +18,14 @@ jobs:
         with:
           dry: true
           prettier_options: --check **/*.{js,ts,md,json,yaml}
+
+  codespell:
+    name: Codespell
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: codespell-project/codespell-problem-matcher@v1
+
+      - name: Codespell
+        uses: codespell-project/actions-codespell@master

@@ -39,7 +39,7 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'steelsojka/completion-buffers'
 " }}}
 
-" Enhance build-in LSP UI
+" Enhance built-in LSP UI
 " Plug 'glepnir/lspsaga.nvim'
 
 " GitHub Copilot is an AI pair programmer
@@ -162,7 +162,7 @@ Plug 'othree/html5.vim', {'for': 'html'}
 " Fast HTML
 Plug 'mattn/emmet-vim', {'for': 'html'}
 
-" EJS Hightlight
+" EJS Highlight
 Plug 'briancollins/vim-jst'
 
 " CSS
