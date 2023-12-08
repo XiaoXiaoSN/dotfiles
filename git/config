@@ -49,3 +49,5 @@
 	# delta --list-syntax-themes
 	syntax-theme = GitHub
 
+[fetch]
+	prune = true
