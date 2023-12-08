@@ -1,10 +1,6 @@
 local vim = vim
 
 local plugins = function(use)
-  -- Improve startup time for Neovim
-  -- It is recommended to put impatient.nvim before any other plugins
-  use('lewis6991/impatient.nvim')
-
   -- Packer can manage itself
   use('wbthomason/packer.nvim')
 
