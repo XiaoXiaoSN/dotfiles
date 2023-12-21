@@ -17,10 +17,6 @@ vim.g.mapleader = ','
 -- Use English as main language
 vim.cmd([[language en_US.UTF-8]])
 
--- colorscheme
-local success, error = pcall(function()
-  vim.cmd.colorscheme('catppuccin-macchiato')
-end)
-if not success then
-  print('The specified theme is not installed' .. error)
-end
+-- nvim-tree/nvim-tree.lua: disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

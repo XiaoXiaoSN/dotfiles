@@ -5,7 +5,10 @@ end
 
 -- reference: https://github.com/nvim-tree/nvim-tree.lua/blob/master/doc/nvim-tree-lua.txt
 local options = {
-  sort_by = 'case_sensitive', -- *name, case_sensitive, modification_time, extension
+  sort = {
+    -- Can be one of `"name"`, `"case_sensitive"`, `"modification_time"`, `"extension"`, `"suffix"`, `"filetype"` or a function.
+    sorter = 'case_sensitive',
+  },
   filters = {
     dotfiles = false, -- show hidden files
     custom = {
@@ -17,9 +20,9 @@ local options = {
     },
     exclude = {},
   },
+  auto_reload_on_write = true,
   disable_netrw = true,
   hijack_netrw = true,
-  open_on_setup = false,
   hijack_cursor = true,
   hijack_unnamed_buffer_when_opening = false,
   update_cwd = true,
@@ -27,18 +30,16 @@ local options = {
     enable = true,
     update_cwd = false,
   },
+  tab = {
+    sync = {
+      open = true,
+    },
+  },
   view = {
     adaptive_size = true,
     side = 'left',
     width = 30, -- default: 25
-    hide_root_folder = false,
     number = false,
-    mappings = {
-      custom_only = false,
-      list = {
-        -- user mappings go here
-      },
-    },
   },
   git = {
     enable = true,

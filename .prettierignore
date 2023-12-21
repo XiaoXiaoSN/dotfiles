@@ -4,4 +4,6 @@
 # Ignore home-manager build result
 nixpkgs/result
 
+nvim/current/lazy-lock.json
+
 zsh/zsh_config/zsh-autosuggestions
