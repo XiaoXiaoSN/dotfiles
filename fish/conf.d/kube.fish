@@ -11,3 +11,9 @@ end
 if test -d "$HOME/.krew/bin"
   fish_add_path $HOME/.krew/bin
 end
+
+# K9s is Kubernetes TUI tool
+if type -q k9s
+  export K9S_CONFIG_DIR=$HOME/.config/k9s
+end
+
