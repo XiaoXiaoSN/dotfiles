@@ -115,4 +115,3 @@ k9s:
         bgColor: *purple
         toggleOnColor: *green
         toggleOffColor: *cyan
-
