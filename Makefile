@@ -5,7 +5,7 @@ all: neovim fish starship git tmux util-scripts
 # Editor
 ##############################
 
-.PHONY: neovim neovim.NvChad vim
+.PHONY: neovim neovim.original vim
 
 neovim:
 	ln -sh $(CURDIR)/nvim/current $(HOME)/.config/nvim
@@ -13,11 +13,6 @@ neovim:
 neovim.original:
 	ln -sh $(CURDIR)/nvim/original $(HOME)/.config/nvim
 	$(HOME)/.config/nvim/setup.sh
-
-# neovim.NvChad:
-# 	git clone https://github.com/NvChad/NvChad $(HOME)/.config/nvim --depth 1
-# 	ln -sh $(CURDIR)/nvim/nvchad/custom $(HOME)/.config/nvim/lua/custom
-# 	nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 vim:
 	ln -sh $(CURDIR)/vim/vimrc $(HOME)/.vimrc
@@ -51,7 +46,7 @@ starship:
 # Useful tools
 ##############################
 
-.PHONY: git tmux util-scripts
+.PHONY: git tmux util-scripts k9s
 
 git:
 	ln -sh $(CURDIR)/git $(HOME)/.config/git
@@ -65,6 +60,8 @@ tmux:
 util-scripts:
 	ln -sh $(CURDIR)/bin $(HOME)/.bin
 
+k9s:
+	ln -sh $(CURDIR)/k9s $(HOME)/.config/k9s
 
 ##############################
 # Terminal emulator
