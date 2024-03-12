@@ -9,7 +9,7 @@
 ln -sh ./nvim/current $HOME/.config/nvim
 
 # Install plugins and langue servers
-nvim +PackerSync +MasonInstallAll
+nvim +MasonInstallAll
 ```
 
 There is a [Vim tips](nvim/current/vim-tips.md) to record some basic commands.

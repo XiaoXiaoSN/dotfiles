@@ -2,7 +2,7 @@ local vim = vim
 
 return {
   -- Lua functions
-  { 'nvim-lua/plenary.nvim', version = 'v0.1.4' },
+  { 'nvim-lua/plenary.nvim', version = 'v0.1.*' },
 
   -- Automatically highlighting other uses of the word
   {
@@ -44,7 +44,7 @@ return {
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    version = 'nightly',
+    version = 'v1.*',
     config = function()
       require('plugins.configs.nvim-tree')
     end,
@@ -107,7 +107,7 @@ return {
   -- Finder
   {
     'nvim-telescope/telescope.nvim',
-    version = '0.1.0',
+    version = '0.1.*',
     dependencies = 'nvim-lua/plenary.nvim',
     config = function()
       require('plugins.configs.telescope')
