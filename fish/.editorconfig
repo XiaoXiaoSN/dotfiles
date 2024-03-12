@@ -1,2 +1,11 @@
 [functions/fisher.fish]
 indent_size = 4
+
+# ignore files
+[{conf.d/00_fig_pre.fish,conf.d/99_fig_post.fish}]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset
