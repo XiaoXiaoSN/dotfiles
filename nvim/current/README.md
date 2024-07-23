@@ -5,18 +5,22 @@
 ### Getting Started
 
 ```bash
+# Install Neovim
+brew install neovim
+
 # Link the config to `$HOME/.config/nvim` (or just copy it!)
 ln -sh ./nvim/current $HOME/.config/nvim
 
 # Install plugins and langue servers
+nvim +Lazy
 nvim +MasonInstallAll
 ```
 
-There is a [Vim tips](nvim/current/vim-tips.md) to record some basic commands.
+A reference sheet for [Vim tips](nvim/current/vim-tips.md) to record some basic commands.
 
 ## Key Mappings
 
-First at all. The `<leader>` key is `,` and it is set in `core.global`.
+First of all. The `<leader>` key is `,` and it is customized in `core.global`.
 
 <details>
 <summary> <b>🐾 Common</b> </summary>
@@ -137,7 +141,7 @@ Commonly used mappings in nvim-tree
 
 ## Language Servers
 
-### Automatically Install
+### Installation with Mason
 
 We can use `:Mason` to help us install them.
 
@@ -145,7 +149,7 @@ We can use `:Mason` to help us install them.
 nvim +MasonInstallAll
 ```
 
-### Manually Install
+### Manual Installation
 
 Or, install them manually
 
