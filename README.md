@@ -1,20 +1,32 @@
-# dotfiles
+# ⚙️ dotfiles
 
 ![lint](https://github.com/XiaoXiaoSN/dotfiles/actions/workflows/lint.yaml/badge.svg)
 
 ## Getting Started
 
+See more configurations in the [Makefile](/Makefile).
+
 ```bash
 make all
 ```
 
-See more configurations in the [Makefile](/Makefile).
+- Fish Shell
+  ![images/fish-shell.png](images/fish-shell.png)
+
+- Neovim
+  ![images/neovim.png](images/neovim.png)
+
+- Zsh
+  ![images/z-shell.png](images/z-shell.png)
+
+- Vim
+  ![images/vim.png](images/vim.png)
 
 ## Writer Guide
 
 ### Git Hooks
 
-This repository use [pre-commit](https://github.com/pre-commit/pre-commit) to help developer keep the code quality.
+This repository use [pre-commit](https://github.com/pre-commit/pre-commit) to help developers keep the code quality.
 
 If you install hooks, pre-commit will styling and linting before code committing.
 
