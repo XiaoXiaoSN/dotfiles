@@ -1,4 +1,4 @@
-# setup cheat sheet function
+# Sets up the cheat sheet function
 cht.sh() {
   curl -s https://cht.sh/$argv[1]
 }
