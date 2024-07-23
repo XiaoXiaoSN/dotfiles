@@ -34,4 +34,3 @@ function hr --description "Print a horizontal line"
         _hrs $DEFAULT_SYMBOL
     end
 end
-

@@ -16,4 +16,3 @@
 # source ~/.config/fish/functions/zopen.fish
 
 zopen $argv[1]
-

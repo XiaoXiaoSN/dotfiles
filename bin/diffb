@@ -14,4 +14,3 @@ if [ "$#" -ne 2 ]; then
 fi
 
 diff -ur $1 $2 | bat -l diff
-

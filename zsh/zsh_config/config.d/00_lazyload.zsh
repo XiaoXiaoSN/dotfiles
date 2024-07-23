@@ -39,4 +39,3 @@ sukka_lazyload_add_completion() {
     }"
     compdef $comp_name $1
 }
-

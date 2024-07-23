@@ -4,6 +4,9 @@
 # Ignore home-manager build result
 nixpkgs/result
 
+# Ignore auto-created files
 nvim/current/lazy-lock.json
-
 zsh/zsh_config/zsh-autosuggestions
+
+# Ignore lua files
+**/*.lua

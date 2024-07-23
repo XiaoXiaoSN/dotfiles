@@ -67,4 +67,3 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 " https://superuser.com/a/370121
 command Bd bprevious | split | bnext | bdelete
 " }}}
-

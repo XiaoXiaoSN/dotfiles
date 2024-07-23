@@ -173,4 +173,3 @@ complete -c kind -e
 # The call to __kind_prepare_completions will setup __kind_comp_results
 # which provides the program's completion choices.
 complete -c kind -n '__kind_prepare_completions' -f -a '$__kind_comp_results'
-

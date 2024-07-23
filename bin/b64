@@ -15,4 +15,3 @@ esac
 
 echo "$@" | base64
 exit 0
-

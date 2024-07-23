@@ -134,4 +134,3 @@ complete -c op -n 'set --query __op_comp_do_file_comp'
 # The call to __op_prepare_completions will setup both __op_comp_results abd __op_comp_do_file_comp.
 # It provides the program's completion choices.
 complete -c op -n '__op_prepare_completions' -f -a '$__op_comp_results'
-

@@ -16,4 +16,3 @@
 # source ~/.config/fish/functions/zc.fish
 
 zc $argv[1]
-

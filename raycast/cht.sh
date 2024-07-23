@@ -16,4 +16,3 @@
 # source ~/.config/fish/functions/cht.fish
 
 cht $argv[1]
-

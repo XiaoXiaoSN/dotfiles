@@ -248,4 +248,3 @@ command! Kebab call feedkeys("cr-")
 command! DotCase call feedkeys("cr.")
 command! SpaceCase call feedkeys("cr<space>")
 " }}}
-
