@@ -1,5 +1,5 @@
 # Golnag configurations
-if type -q go
+if command -q go
   set -x GOPATH (go env GOPATH)
   set -x GOBIN $GOPATH/bin
   set -x GO111MODULE on

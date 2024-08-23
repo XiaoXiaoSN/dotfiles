@@ -1,9 +1,13 @@
 # Kubectl
-if type -q kubectl
+if command -q kubectl
     # Sets the KUBECONFIG environment variable to a dynamic concatenation of everything
     # under ~/.kube/configs/config or ~/.kube/configs/*.conf
     if test -d $HOME/.kube
-      export KUBECONFIG=$HOME/.kube/config(find $HOME/.kube -iname "*.config" -or -iname "*.conf" -type f 2>/dev/null | xargs -I % echo -n ":%")
+      if command -q fd
+        export KUBECONFIG=$HOME/.kube/config(fd . $HOME/.kube --type file --extension config --extension conf | xargs -P 8 -I % echo -n ":%")
+      else
+        export KUBECONFIG=$HOME/.kube/config(find $HOME/.kube -iname "*.config" -or -iname "*.conf" -type f 2>/dev/null | xargs -P 8 -I % echo -n ":%")
+      end
     end
 end
 
@@ -13,6 +17,6 @@ if test -d "$HOME/.krew/bin"
 end
 
 # K9s is Kubernetes TUI tool
-if type -q k9s
+if command -q k9s
   export K9S_CONFIG_DIR=$HOME/.config/k9s
 end

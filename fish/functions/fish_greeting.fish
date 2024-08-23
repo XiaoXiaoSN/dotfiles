@@ -28,7 +28,7 @@ end
 
 function fish_greeting
   # echo $USER | tr [a-z] [A-Z] | figlet | lolcat -F 0.7 -a -d 8 -s 80
-  if type -q lolcat
+  if command -q lolcat
     part1 | lolcat -F 0.13
   else
     part1

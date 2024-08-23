@@ -5,7 +5,7 @@ alias uuid=uuidgen
 alias uuid-zero='echo -n 00000000-0000-0000-0000-000000000000'
 
 # default ls is untouched, except coloring
-if type -q exa
+if command -q exa
   alias ls='exa --classify --sort name'
   alias ll='exa -l --classify --sort name'
   alias la='exa -la --classify --sort name'
@@ -18,23 +18,26 @@ else
 end
 
 # for K8s
-if type -q kubectl
+if command -q kubectl
   alias kc=kubectl
   alias kx=kubectx
   alias kn=kubens
 end
 
 # for terraform
-if type -q terraform
+if command -q terraform
   alias tf=terraform
   alias tfa=terraform apply
   alias tfp=terraform plan
 end
 
 # use NeoVim to replace Vim
-if type -q nvim
+if command -q nvim
   alias vim=nvim
+  alias vimdiff='nvim -d'
 end
 
 # for custom function
 alias sht=cht
+alias goo=search
+alias google=search

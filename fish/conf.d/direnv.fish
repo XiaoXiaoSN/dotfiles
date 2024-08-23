@@ -1,4 +1,4 @@
 # reference: https://direnv.net/docs/hook.html#fish
-if type -q direnv
+if command -q direnv
   direnv hook fish | source
 end

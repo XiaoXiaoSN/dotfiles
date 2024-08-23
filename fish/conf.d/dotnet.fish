@@ -1,4 +1,4 @@
-# Golnag configurations
-if type -q dotnet
+# .NET configurations
+if command -q dotnet
   fish_add_path $HOME/.dotnet/tools
 end
