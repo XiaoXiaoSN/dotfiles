@@ -117,6 +117,7 @@ Commonly used mappings in nvim-tree
 |  n   | `gr`        | go references     |
 |  n   | `<space>rn` | rename symbol     |
 |  n   | `F2`        | rename symbol     |
+|  n   | `<leader>a` | code action       |
 |  n   | `<space>ca` | code action       |
 |  n   | `<space>f`  | run format async  |
 
@@ -179,4 +180,5 @@ Lua
 ```
 # formatting
 cargo install stylua
+brew install luarocks
 ```

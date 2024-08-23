@@ -80,6 +80,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function()
@@ -143,19 +144,20 @@ lspconfig.tsserver.setup({
   root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
 })
 
-lspconfig.rust_analyzer.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-  cmd = { 'rustup', 'run', '--install', 'nightly', 'rust-analyzer' },
-  settings = {
-    ['rust-analyzer'] = {
-      cargo = {
-        loadOutDirsFromCheck = true,
-      },
-      procMacro = {
-        enable = true,
-      },
-    },
-  },
-})
+-- NOTE: We will use `rustaceanvim.mason` instead
+-- lspconfig.rust_analyzer.setup({
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+--   capabilities = capabilities,
+--   cmd = { 'rustup', 'run', '--install', 'nightly', 'rust-analyzer' },
+--   settings = {
+--     ['rust-analyzer'] = {
+--       cargo = {
+--         loadOutDirsFromCheck = true,
+--       },
+--       procMacro = {
+--         enable = true,
+--       },
+--     },
+--   },
+-- })

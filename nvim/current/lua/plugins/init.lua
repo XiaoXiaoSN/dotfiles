@@ -201,11 +201,9 @@ return {
   -- Rust
   'rust-lang/rust.vim',
   {
-    'simrat39/rust-tools.nvim',
-    dependencies = { 'neovim/nvim-lspconfig' },
-    config = function()
-      require('rust-tools').setup({})
-    end,
+    'mrcjkb/rustaceanvim',
+    version = '^5',
+    lazy = false, -- This plugin is already lazy
   },
   'mattn/webapi-vim',
 
