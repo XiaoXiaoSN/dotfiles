@@ -56,37 +56,7 @@ vim.g.completion_auto_change_source = 1
 
 -- Start to setup LSP Configurations
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <C-x><C-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function()
-    vim.lsp.buf.format({ async = true })
-  end, bufopts)
-end
+local on_attach = require('plugins.share.lsp-keymappings').on_attach
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
@@ -144,7 +114,7 @@ lspconfig.tsserver.setup({
   root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
 })
 
--- NOTE: We will use `rustaceanvim.mason` instead
+-- NOTE: We will use `rustaceanvim.mason` instead, see `:h rustaceanvim.mason`
 -- lspconfig.rust_analyzer.setup({
 --   on_attach = on_attach,
 --   flags = lsp_flags,

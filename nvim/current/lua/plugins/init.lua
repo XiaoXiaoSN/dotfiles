@@ -167,15 +167,28 @@ return {
   -- Language Server and Their Friends
   ----------------------------------------
 
+  -- Ordering: mason.nvim -> mason-lspconfig.nvim -> nvim-lspconfig
   {
     'williamboman/mason.nvim',
+    version = '1',
     config = function()
       require('plugins.configs.mason')
     end,
   },
   {
+    -- `mason-lspconfig` bridges `mason.nvim` with the `lspconfig` plugin
+    -- - making it easier to use both plugins together.
+    'williamboman/mason-lspconfig.nvim',
+    version = '1',
+  },
+  {
     'neovim/nvim-lspconfig',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/nvim-cmp' },
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+      'hrsh7th/nvim-cmp',
+      'williamboman/mason.nvim',
+    },
     config = function()
       require('plugins.configs.nvim-lspconfig')
     end,
@@ -204,6 +217,14 @@ return {
     'mrcjkb/rustaceanvim',
     version = '^5',
     lazy = false, -- This plugin is already lazy
+    config = function()
+      vim.g.rustaceanvim = {
+        -- LSP configuration
+        server = {
+          on_attach = require('plugins.share.lsp-keymappings').on_attach,
+        },
+      }
+    end,
   },
   'mattn/webapi-vim',
 
