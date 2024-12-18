@@ -1,47 +1,47 @@
-local present, null_ls = pcall(require, 'null-ls')
+local present, null_ls = pcall(require, "null-ls")
 if not present then
   return
 end
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+-- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+
+-- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/completion
+
+-- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/completion
 -- local completion = null_ls.builtins.completion
 
--- NOTE: the list of built-in sources
--- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
-local sources = {
-  -- Common
-  formatting.prettier,
-  diagnostics.codespell.with({ extra_args = { '-L crate' } }), -- TODO: use a file as white list
+local options = {
+  debug = true,
 
-  -- Go
-  formatting.goimports,
+  -- NOTE: the list of builtin sources
+  -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
+  sources = {
+    -- Common
+    formatting.prettier,
+    diagnostics.codespell.with({ extra_args = { "-L crate" } }), -- TODO: use a file as white list
 
-  -- Rust
-  formatting.rustfmt,
+    -- Go
+    formatting.goimports,
 
-  -- JavaScript
-  formatting.deno_fmt,
-  diagnostics.eslint,
+    -- JavaScript
+    -- formatting.deno_fmt,
+    -- diagnostics.eslint,
 
-  -- Lua
-  formatting.stylua,
+    -- Lua
+    formatting.stylua,
 
-  -- Shell
-  -- diagnostics.shfmt,
-  diagnostics.shellcheck.with({ diagnostics_format = '#{m} [#{c}]' }),
+    -- Shell
+    -- diagnostics.shfmt,
+    -- diagnostics.shellcheck.with({ diagnostics_format = '#{m} [#{c}]' }),
 
-  -- C-family
-  formatting.clang_format,
+    -- C-family
+    formatting.clang_format,
 
-  -- Python
-  formatting.black.with({ extra_args = { '--fast' } }),
+    -- Python
+    formatting.black.with({ extra_args = { "--fast" } }),
+  },
 }
 
-null_ls.setup({
-  debug = false,
-  sources = sources,
-})
+null_ls.setup(options)

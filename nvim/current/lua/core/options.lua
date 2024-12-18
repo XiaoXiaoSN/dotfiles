@@ -29,6 +29,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.termguicolors = true
 vim.opt.timeoutlen = 500
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 -- Numbers
@@ -38,3 +39,6 @@ vim.opt.ruler = false
 
 -- interval for writing swap file to disk, also used by gitsigns
 vim.opt.updatetime = 250
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = "menu,menuone,noselect"

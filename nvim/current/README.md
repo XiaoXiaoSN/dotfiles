@@ -36,12 +36,14 @@ First of all. The `<leader>` key is `,` and it is customized in `core.global`.
 <details>
 <summary> <b>📁 File Explorer (nvim-tree)</b> </summary>
 
-| Mode | ShortCut    | Description                    |
-| :--: | ----------- | ------------------------------ |
-| all  | `<leader>b` | Toggle file explorer           |
-| all  | `<C-b>`     | Toggle file explorer           |
-| all  | `<M-b>`     | Toggle file explorer           |
-| all  | `zz`        | Focus current file in explorer |
+| Mode | ShortCut    | Description                      |
+| :--: | ----------- | -------------------------------- |
+| all  | `<leader>b` | Toggle file explorer             |
+| all  | `<C-b>`     | Toggle file explorer             |
+| all  | `<M-b>`     | Toggle file explorer             |
+| all  | `zz`        | Focus current file in explorer   |
+| all  | `C`         | Toggle Git clean (changed files) |
+| all  | `I`         | Toggle Git ignore                |
 
 Commonly used mappings in nvim-tree
 
