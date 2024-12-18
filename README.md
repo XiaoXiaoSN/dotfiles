@@ -10,14 +10,15 @@ See more configurations in the [Makefile](/Makefile).
 make all
 ```
 
-- Fish Shell
-  ![images/fish-shell.png](images/fish-shell.png)
-
 - Neovim
   ![images/neovim.png](images/neovim.png)
+  ![images/neovim-finder.png](images/neovim-finder.png)
 
 - Zsh
   ![images/z-shell.png](images/z-shell.png)
+
+- Fish Shell
+  ![images/fish-shell.png](images/fish-shell.png)
 
 - Vim
   ![images/vim.png](images/vim.png)

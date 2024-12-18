@@ -1,6 +1,7 @@
 .PHONY: all
 all: neovim fish starship git tmux util-scripts
 
+
 ##############################
 # Editor
 ##############################
@@ -62,6 +63,7 @@ util-scripts:
 
 k9s:
 	ln -sh $(CURDIR)/k9s $(HOME)/.config/k9s
+
 
 ##############################
 # Terminal emulator
