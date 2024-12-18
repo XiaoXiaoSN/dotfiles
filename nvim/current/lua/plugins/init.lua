@@ -102,7 +102,8 @@ return {
   ----------------------------------------
 
   -- GitHub Copilot
-  'github/copilot.vim',
+  { 'github/copilot.vim', enabled = false },
+
   -- Finder
   {
     'nvim-telescope/telescope.nvim',
@@ -185,9 +186,8 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'hrsh7th/nvim-cmp',
       'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
     },
     config = function()
       require('plugins.configs.nvim-lspconfig')
@@ -195,9 +195,9 @@ return {
   },
   -- Inject LSP diagnostics, code actions, and more via Lua
   {
-    'jose-elias-alvarez/null-ls.nvim',
+    'nvimtools/none-ls.nvim',
     config = function()
-      require('plugins.configs.null-ls')
+      require('plugins.configs.null-ls') -- NOTE: keep the name
     end,
   },
 
@@ -247,7 +247,20 @@ return {
   -- Completion
   ----------------------------------------
 
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-path',
-  'hrsh7th/nvim-cmp',
+  {
+    'hrsh7th/nvim-cmp',
+    event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/vim-vsnip',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-emoji',
+      'onsails/lspkind.nvim', -- icons
+    },
+    config = function()
+      require('plugins.configs.nvim-cmp')
+    end,
+  },
 }

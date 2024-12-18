@@ -93,7 +93,7 @@ local lsp_options = {
     'lua_ls',
     'pyright',
     'rust_analyzer',
-    'tsserver',
+    'ts_ls',
     'vimls',
     'yamlls',
     'autotools_ls', -- Makefile

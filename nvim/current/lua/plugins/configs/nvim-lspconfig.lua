@@ -5,24 +5,11 @@ local present, lspconfig = pcall(require, 'lspconfig')
 if not present then
   return
 end
--- reference: https://github.com/hrsh7th/nvim-cmp
-local present2, cmp = pcall(require, 'cmp')
+-- reference: https://github.com/hrsh7th/cmp-nvim-lsp
+local present2, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if not present2 then
   return
 end
--- reference: https://github.com/hrsh7th/cmp-nvim-lsp
-local present3, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not present3 then
-  return
-end
-
--- Enable compilation
-cmp.setup({
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'path' },
-  },
-})
 
 -- Enable diagnostics
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -43,19 +30,7 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = 'rounded',
 })
 
--- completion
-vim.g.completion_chain_complete_list = {
-  default = {
-    { complete_items = { 'lsp' } },
-    { complete_items = { 'buffers' } },
-    { mode = { '<C-p>' } },
-    { mode = { '<C-n>' } },
-  },
-}
-vim.g.completion_auto_change_source = 1
-
 -- Start to setup LSP Configurations
-
 local on_attach = require('plugins.share.lsp-keymappings').on_attach
 
 local lsp_flags = {
@@ -95,7 +70,7 @@ lspconfig.golangci_lint_ls.setup({
   capabilities = capabilities,
 })
 
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
