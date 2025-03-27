@@ -26,25 +26,114 @@ RES=$1
 SUB_RES=$2
 OPTION=$3
 
+# Handling Repository Sub Resources
+# Example:
+#     gh magic-box pr close
+#     gh dotfiles issue
+handle_repository_sub_resources() {
+  local GITHUB_URL=$1
+  local SUB_RES=$2
+  local OPTION=$3
+
+  case $SUB_RES in
+    pr*|pull*)
+      GITHUB_URL+="/pulls"
+      # Matching Option for Pull Request
+      case $OPTION in
+        me|my|openMe|meOpen)
+          # same as q=is:open is:pr author:${DEFAULT_GITHUB_USER}
+          GITHUB_URL+=${DEFAULT_GITHUB_USER}
+        ;;
+
+        closeMe|meClose|closedMe|meClosed|closedMy|myClosed)
+          GITHUB_URL+="?q=is:pr is:closed author:${DEFAULT_GITHUB_USER}"
+        ;;
+
+        open)
+          GITHUB_URL+="?is:pr q=is:open"
+        ;;
+
+        close|closed)
+          GITHUB_URL+="?is:pr q=is:close"
+        ;;
+      esac
+    ;;
+
+    issue*)
+      GITHUB_URL+="/issues"
+    ;;
+
+    action*)
+      GITHUB_URL+="/actions"
+    ;;
+
+    setting*)
+      GITHUB_URL+="/settings"
+    ;;
+  esac
+
+  echo "$GITHUB_URL"
+}
+
+
+# Handling PR and Issue Sub Resources
+# Example:
+#     gh pr close
+#     gh issue close
+handle_pr_issue_sub_resources() {
+  local GITHUB_URL=$1
+  local SUB_RES=$2
+  local OPTION=$3
+
+  case $SUB_RES in
+    open)
+      # Default setting; Do nothing
+    ;;
+
+    close|closed)
+      GITHUB_URL+="?q=is:closed author:${DEFAULT_GITHUB_USER}"
+    ;;
+
+    assign|assigned)
+      GITHUB_URL+="?q=assignee:${DEFAULT_GITHUB_USER}"
+      case $OPTION in
+        close|closed)
+          GITHUB_URL+=" is:closed"
+        ;;
+      esac
+    ;;
+
+    my|me)
+      # same as q=is:open is:pr author:${DEFAULT_GITHUB_USER}
+      GITHUB_URL+="?q=is:open author:${DEFAULT_GITHUB_USER}"
+    ;;
+
+    rr|review|review-requested)
+      GITHUB_URL+="?q=is:open review-requested:${DEFAULT_GITHUB_USER}"
+    ;;
+  esac
+
+  echo "$GITHUB_URL"
+}
+
 # Matching Resource (Repo)
 case $RES in
-  saffron|core)
-    GITHUB_URL+="/fstnetwork/saffron"
-  ;;
-
-  plankton)
-    GITHUB_URL+="/fstnetwork/plankton"
-  ;;
-
-  vanilla)
-    GITHUB_URL+="/fstnetwork/vanilla"
+  # Shortcut for GitHub function pages
+  search)
+    open "$GITHUB_URL/search?q=$SUB_RES"
   ;;
 
   pr|pull|pulls)
     GITHUB_URL+="/pulls"
+    GITHUB_URL=$(handle_pr_issue_sub_resources $GITHUB_URL $SUB_RES $OPTION)
   ;;
 
-  notification*)
+  issue|issues)
+    GITHUB_URL+="/issues"
+    GITHUB_URL=$(handle_pr_issue_sub_resources $GITHUB_URL $SUB_RES $OPTION)
+  ;;
+
+  notify|notification|notifications)
     GITHUB_URL+="/notifications"
   ;;
 
@@ -58,48 +147,21 @@ case $RES in
     # Pass! Just open the GitHub home page
   ;;
 
+  # Shortcut for GitHub Repositories
+  mb|magicbox|magic-box)
+    GITHUB_URL+="/XiaoXiaoSN/magic-box"
+    GITHUB_URL=$(handle_repository_sub_resources $GITHUB_URL $SUB_RES $OPTION)
+  ;;
+
+  .|dotfile|dotfiles)
+    GITHUB_URL+="/XiaoXiaoSN/dotfiles"
+    GITHUB_URL=$(handle_repository_sub_resources $GITHUB_URL $SUB_RES $OPTION)
+  ;;
+
   *)
     open "$GITHUB_URL/search?q=$RES"
     echo "No matches \"$RES\". Search it on GitHub..."
     exit 0
-  ;;
-esac
-
-# Matching Sub Resource
-case $SUB_RES in
-  pr*|pull*)
-    GITHUB_URL="${GITHUB_URL}/pulls"
-    # Matching Option for Pull Request
-    case $OPTION in
-      me|my|openMe|meOpen)
-        # same as q=is:open is:pr author:${DEFAULT_GITHUB_USER}
-        GITHUB_URL="${GITHUB_URL}/${DEFAULT_GITHUB_USER}"
-      ;;
-
-      closeMe|meClose|closedMe|meClosed|closedMy|myClosed)
-        GITHUB_URL="${GITHUB_URL}?q=is%3Apr+is%3Aclosed+author%3A${DEFAULT_GITHUB_USER}"
-      ;;
-
-      open)
-        GITHUB_URL="${GITHUB_URL}?q=is:open is:pr"
-      ;;
-
-      close|closed)
-        GITHUB_URL="${GITHUB_URL}?q=is:close is:pr"
-      ;;
-    esac
-  ;;
-
-  issue*)
-    GITHUB_URL="${GITHUB_URL}/issues"
-  ;;
-
-  action*)
-    GITHUB_URL="${GITHUB_URL}/actions"
-  ;;
-
-  setting*)
-    GITHUB_URL="${GITHUB_URL}/settings"
   ;;
 esac
 
