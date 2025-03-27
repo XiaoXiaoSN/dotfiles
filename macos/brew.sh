@@ -74,6 +74,7 @@ brew install --cask \
   discord \
   postman \
   telegram \
+  obsidian \
   wireshark
 
 # Install more recent versions of some macOS tools.

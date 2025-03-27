@@ -27,6 +27,21 @@ There is a optional line that clean all apps on Dock
 defaults write com.apple.dock persistent-apps -array
 ```
 
+### Adjust `init.sh`
+
+You can check the names of settings by the script
+
+```bash
+defaults read > origin
+
+# Adjust MacOS settings...
+
+defaults read | diff origin -
+
+# You found a key showed on the diff, for instance, `mru-spaces` has been changed.
+defaults find mru-spaces
+```
+
 ## Setup iTerm2
 
 https://stackoverflow.com/a/23356086/6695274
