@@ -76,7 +76,7 @@ local options = {
   },
 }
 
-local lsp_options = {
+local lspconfig_options = {
   -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
   -- This setting has no relation with the `automatic_installation` setting.
   ---@type string[]
@@ -88,6 +88,7 @@ local lsp_options = {
     'docker_compose_language_service',
     'golangci_lint_ls',
     'gopls',
+    'helm_ls',
     'html',
     'jsonls',
     'lua_ls',
@@ -112,7 +113,7 @@ local lsp_options = {
 }
 
 mason.setup(options)
-mason_lspconfig.setup(lsp_options)
+mason_lspconfig.setup(lspconfig_options)
 
 ----------------------------------------
 -- Key Mappings

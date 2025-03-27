@@ -1,5 +1,5 @@
 [codespell]
 skip = .git,.vscode,node_modules,
-ignore-words-list = chekcout,enew,iterm,ue,crate
+ignore-words-list = chekcout,enew,iterm,ue,crate,abd
 check-filenames =
 check-hidden =

@@ -123,9 +123,9 @@ sudo chflags nohidden /Volumes
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
-# Wipe all (default) app icons from the Dock
-# This is only really useful when setting up a new Mac, or if you don’t use
-# the Dock to launch apps.
+# # Wipe all default app icons from the Dock
+# # ⚠️  WARN: This is only really useful when setting up a new Mac, or if you don't use
+# # the Dock to launch apps.
 # defaults write com.apple.dock persistent-apps -array
 
 # Automatically hide and show the Dock
@@ -133,6 +133,12 @@ defaults write com.apple.dock autohide -bool true
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
+
+# Desktop & Dock > Mission Control > Automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# Desktop & Dock > Desktop & Stage Manager > Show Items > [check box] In Stage Manager
+defaults com.apple.WindowManager HideDesktop -bool false
 
 
 ###############################################################################

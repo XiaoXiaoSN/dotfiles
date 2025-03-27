@@ -249,7 +249,7 @@ return {
 
   {
     'hrsh7th/nvim-cmp',
-    event = { "InsertEnter", "CmdlineEnter" },
+    event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-vsnip',
@@ -258,6 +258,8 @@ return {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-emoji',
       'onsails/lspkind.nvim', -- icons
+      'XiaoXiaoSN/cmp-kaomoji',
+      -- { dir = '~/projects/lua/cmp-kaomoji' },
     },
     config = function()
       require('plugins.configs.nvim-cmp')
