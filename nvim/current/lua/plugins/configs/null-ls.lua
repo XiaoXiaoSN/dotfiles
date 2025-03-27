@@ -1,4 +1,4 @@
-local present, null_ls = pcall(require, "null-ls")
+local present, null_ls = pcall(require, 'null-ls')
 if not present then
   return
 end
@@ -20,7 +20,7 @@ local options = {
   sources = {
     -- Common
     formatting.prettier,
-    diagnostics.codespell.with({ extra_args = { "-L crate" } }), -- TODO: use a file as white list
+    diagnostics.codespell.with({ extra_args = { '-L crate' } }), -- TODO: use a file as white list
 
     -- Go
     formatting.goimports,
@@ -40,7 +40,7 @@ local options = {
     formatting.clang_format,
 
     -- Python
-    formatting.black.with({ extra_args = { "--fast" } }),
+    formatting.black.with({ extra_args = { '--fast' } }),
   },
 }
 
