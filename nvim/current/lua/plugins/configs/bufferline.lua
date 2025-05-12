@@ -85,3 +85,6 @@ vim.keymap.set('n', 'gb', '<cmd> BufferLinePick<CR>') -- quick jump to picked bu
 
 -- Close buffer
 vim.keymap.set('n', '<leader>x', '<cmd> Bd<CR>') -- delete current buffer
+
+-- Command alias
+vim.cmd("command! CloseOtherTabs BufferLineCloseOthers")
