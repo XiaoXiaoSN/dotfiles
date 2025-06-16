@@ -14,7 +14,7 @@ jobs:
       - uses: editorconfig-checker/action-editorconfig-checker@main
 
       - name: Prettify code
-        uses: creyD/prettier_action@v4.5
+        uses: creyD/prettier_action@v4.6
         with:
           dry: true
           prettier_options: --check **/*.{js,ts,md,json,yaml}
