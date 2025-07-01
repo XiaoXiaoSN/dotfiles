@@ -116,6 +116,17 @@ handle_pr_issue_sub_resources() {
   echo "$GITHUB_URL"
 }
 
+# load local settings
+#
+# example
+# ```shell
+# PRIVATE_REPOS["foo"]="https://github.com/XiaoXiaoSN"
+# ```
+PRIVATE_REPO_CONFIG="$HOME/.gh_private_repos"
+if [[ -f "$PRIVATE_REPO_CONFIG" ]]; then
+  source "$PRIVATE_REPO_CONFIG"
+fi
+
 # Matching Resource (Repo)
 case $RES in
   # Shortcut for GitHub function pages
@@ -159,9 +170,13 @@ case $RES in
   ;;
 
   *)
-    open "$GITHUB_URL/search?q=$RES"
-    echo "No matches \"$RES\". Search it on GitHub..."
-    exit 0
+    if [[ -n "${PRIVATE_REPOS[$RES]}" ]]; then
+      GITHUB_URL="${PRIVATE_REPOS[$RES]}"
+    else
+      open "$GITHUB_URL/search?q=$RES"
+      echo "No matches \"$RES\". Search it on GitHub..."
+      exit 0
+    fi
   ;;
 esac
 
