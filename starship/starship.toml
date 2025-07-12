@@ -4,6 +4,7 @@
 # ref: https://starship.rs/config/#prompt
 # schema: https://starship.rs/config-schema.json
 format = """
+$python\
 $directory\
 $git_branch\
 $git_commit\
@@ -31,3 +32,7 @@ disabled = false
 style = "red"
 symbol = ""
 pipestatus = false
+
+[python]
+format = ' [${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "bold green"
