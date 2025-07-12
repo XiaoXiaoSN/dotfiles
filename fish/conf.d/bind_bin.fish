@@ -1,5 +1,5 @@
 # add brew executables in fish path
-fish_add_path -v /opt/homebrew/bin
+fish_add_path /opt/homebrew/bin
 
 # add custom executables in fish path
 if test -d $HOME/.bin
