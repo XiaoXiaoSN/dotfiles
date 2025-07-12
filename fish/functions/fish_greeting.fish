@@ -27,12 +27,22 @@ function part2
 end
 
 function fish_greeting
-  # echo $USER | tr [a-z] [A-Z] | figlet | lolcat -F 0.7 -a -d 8 -s 80
-  if command -q lolcat
-    part1 | lolcat -F 0.13
-  else
-    part1
+  # try to choose the faster lolcat
+  set lolcat_cmd
+  if command -q $HOME/.cargo/bin/lolcat
+      # cargo lolcat is faster than the original ruby lolcat 100x times
+      # installation: cargo install lolcat
+      set lolcat_cmd $HOME/.cargo/bin/lolcat --frequency 0.13
+  else if command -q lolcat
+      set lolcat_cmd lolcat --freq 0.13
   end
 
+  # use `lolcat` to display the moon in part1
+  if test -n "$lolcat_cmd"
+      part1 | $lolcat_cmd --frequency 0.13
+  else
+      part1
+  end
+  # display the cats in part2
   part2
 end

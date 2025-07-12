@@ -29,26 +29,32 @@ function nvm --description "Node version manager"
 
     switch "$cmd"
         case -v --version
-            echo "nvm, version 2.2.11"
+            echo "nvm, version 2.2.18"
         case "" -h --help
             echo "Usage: nvm install <version>    Download and activate the specified Node version"
-            echo "       nvm install              Install version from nearest .nvmrc file"
-            echo "       nvm use <version>        Activate a version in the current shell"
-            echo "       nvm use                  Activate version from nearest .nvmrc file"
-            echo "       nvm list                 List installed versions"
-            echo "       nvm list-remote          List versions available to install"
-            echo "       nvm list-remote <regex>  List versions matching a given regular expression"
-            echo "       nvm current              Print the currently-active version"
-            echo "       nvm uninstall <version>  Uninstall a version"
+            echo "       nvm install              Install the version specified in the nearest .nvmrc file"
+            echo "       nvm use <version>        Activate the specified Node version in the current shell"
+            echo "       nvm use                  Activate the version specified in the nearest .nvmrc file"
+            echo "       nvm list                 List installed Node versions"
+            echo "       nvm list-remote          List available Node versions to install"
+            echo "       nvm list-remote <regex>  List Node versions matching a given regex pattern"
+            echo "       nvm current              Print the currently-active Node version"
+            echo "       nvm uninstall <version>  Uninstall the specified Node version"
             echo "Options:"
-            echo "       -s or --silent           Suppress standard output"
-            echo "       -v or --version          Print version"
-            echo "       -h or --help             Print this help message"
+            echo "       -s, --silent             Suppress standard output"
+            echo "       -v, --version            Print the version of nvm"
+            echo "       -h, --help               Print this help message"
             echo "Variables:"
             echo "       nvm_arch                 Override architecture, e.g. x64-musl"
-            echo "       nvm_mirror               Use a mirror of the Node binaries"
+            echo "       nvm_mirror               Use a mirror for downloading Node binaries"
             echo "       nvm_default_version      Set the default version for new shells"
-            echo "       nvm_default_packages     Install a list of packages every time you install a Node version"
+            echo "       nvm_default_packages     Install a list of packages every time a Node version is installed"
+            echo "       nvm_data                 Set a custom directory for storing nvm data"
+            echo "Examples:"
+            echo "       nvm install latest       Install the latest version of Node"
+            echo "       nvm use 14.15.1          Use Node version 14.15.1"
+            echo "       nvm use system           Activate the system's Node version"
+
         case install
             _nvm_index_update
 
@@ -63,6 +69,7 @@ function nvm --description "Node version manager"
                 set --local os (command uname -s | string lower)
                 set --local ext tar.gz
                 set --local arch (command uname -m)
+                set --local tarcmd tar
 
                 switch $os
                     case aix
@@ -70,9 +77,10 @@ function nvm --description "Node version manager"
                     case sunos
                     case linux
                     case darwin
-                    case {MSYS_NT,MINGW\*_NT}\*
+                    case {msys_nt,mingw\*_nt}\*
                         set os win
                         set ext zip
+                        set tarcmd bsdtar
                     case \*
                         echo "nvm: Unsupported operating system: \"$os\"" >&2
                         return 1
@@ -108,8 +116,8 @@ function nvm --description "Node version manager"
                     echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
                 end
 
-                if ! command curl $silent --progress-bar --location $url |
-                        command tar --extract --gzip --directory $nvm_data/$ver 2>/dev/null
+                if ! command curl -q $silent --progress-bar --location $url |
+                        command $tarcmd --extract --gzip --directory $nvm_data/$ver 2>/dev/null
                     command rm -rf $nvm_data/$ver
                     echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
                     return 1
@@ -195,8 +203,7 @@ end
 function _nvm_version_match --argument-names ver
     string replace --regex -- '^v?(\d+|\d+\.\d+)$' 'v$1.' $ver |
         string replace --filter --regex -- '^v?(\d+)' 'v$1' |
-        string escape --style=regex ||
-        string lower '\b'$ver'(?:/\w+)?$'
+        string escape --style=regex || string lower '\b'$ver'(?:/\w+)?$'
 end
 
 function _nvm_list_format --argument-names current regex
@@ -225,6 +232,6 @@ function _nvm_node_info
     command node --eval "
         console.log(process.version)
         console.log('$npm_version_default' ? '$npm_version_default': require('$npm_path/package.json').version)
-        console.log(process.execPath.replace(require('os').homedir(), '~'))
-    "
+        console.log(process.execPath)
+    " | string replace -- ~ \~
 end

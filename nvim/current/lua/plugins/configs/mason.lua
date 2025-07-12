@@ -120,7 +120,7 @@ mason_lspconfig.setup(lspconfig_options)
 ----------------------------------------
 vim.api.nvim_create_user_command('MasonInstallAll', function()
   print('Mason Install...')
-  vim.cmd('MasonInstall ' .. table.concat(options.ensure_installed, ' '))
+  vim.cmd('MasonInstall ' .. table.concat(options.install_list, ' '))
 end, { desc = 'Install all registered plugins' })
 
 return options

@@ -15,8 +15,14 @@ set fish_color_command brcyan
 set fish_color_error '#ff6c6b'
 
 # initial the Starship prompt
+# reference: https://github.com/starship/starship/blob/v1.23.0/docs/advanced-config/README.md#transientprompt-and-transientrightprompt-in-fish
+function starship_transient_prompt_func
+  starship module directory
+  starship module character
+end
 if command -q starship
   starship init fish | source
+  enable_transience
 end
 
 # # >>> conda initialize >>>
