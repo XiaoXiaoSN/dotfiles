@@ -48,38 +48,8 @@ local options = {
   -- Limit for the maximum amount of packages to be installed at the same time. Once this limit is reached, any further
   -- packages that are requested to be installed will be put in a queue.
   max_concurrent_installers = 10,
-
-  -- install_list is not a option for mason, it will be used in `MasonInstallAll` command
-  install_list = {
-    'bash-language-server',
-    'clangd',
-    'codespell',
-    'css-lsp',
-    'dockerfile-language-server',
-    'gofumpt',
-    'golangci-lint',
-    'golangci-lint-langserver',
-    'gopls',
-    'html-lsp',
-    'json-lsp',
-    'lua-language-server',
-    'pyright',
-    'rust-analyzer',
-    'stylua',
-    'typescript-language-server',
-    'vim-language-server',
-    'yaml-language-server',
-  },
 }
 
 mason.setup(options)
-
-----------------------------------------
--- Key Mappings
-----------------------------------------
-vim.api.nvim_create_user_command('MasonInstallAll', function()
-  print('Mason Install...')
-  vim.cmd('MasonInstall ' .. table.concat(options.install_list, ' '))
-end, { desc = 'Install all registered plugins' })
 
 return options
