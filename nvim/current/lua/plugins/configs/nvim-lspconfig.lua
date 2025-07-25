@@ -89,20 +89,30 @@ lspconfig.ts_ls.setup({
   root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
 })
 
--- NOTE: We will use `rustaceanvim.mason` instead, see `:h rustaceanvim.mason`
--- lspconfig.rust_analyzer.setup({
---   on_attach = on_attach,
---   flags = lsp_flags,
---   capabilities = capabilities,
---   cmd = { 'rustup', 'run', '--install', 'nightly', 'rust-analyzer' },
---   settings = {
---     ['rust-analyzer'] = {
---       cargo = {
---         loadOutDirsFromCheck = true,
---       },
---       procMacro = {
---         enable = true,
---       },
---     },
---   },
--- })
+lspconfig.lua_ls.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        library = {
+          vim.env.VIMRUNTIME,
+          '${3rd}/luv/library',
+          '${3rd}/vim/library',
+          vim.api.nvim_get_runtime_file('', true),
+        },
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})

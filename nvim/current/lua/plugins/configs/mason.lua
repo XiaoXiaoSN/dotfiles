@@ -4,10 +4,6 @@ local present, mason = pcall(require, 'mason')
 if not present then
   return
 end
-local present2, mason_lspconfig = pcall(require, 'mason-lspconfig')
-if not present2 then
-  return
-end
 
 local options = {
   -- Where Mason should put its bin location in your PATH. Can be one of:
@@ -15,7 +11,7 @@ local options = {
   -- - 'append' (Mason's bin location is put at the end of PATH)
   -- - 'skip' (doesn't modify PATH)
   ---@type ''prepend'' | ''append'' | ''skip''
-  PATH = 'skip',
+  PATH = 'prepend',
 
   ui = {
     icons = {
@@ -76,44 +72,7 @@ local options = {
   },
 }
 
-local lspconfig_options = {
-  -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
-  -- This setting has no relation with the `automatic_installation` setting.
-  ---@type string[]
-  ensure_installed = {
-    'bashls',
-    'clangd',
-    'cssls',
-    'dockerls',
-    'docker_compose_language_service',
-    'golangci_lint_ls',
-    'gopls',
-    'helm_ls',
-    'html',
-    'jsonls',
-    'lua_ls',
-    'pyright',
-    'rust_analyzer',
-    'ts_ls',
-    'vimls',
-    'yamlls',
-    'autotools_ls', -- Makefile
-    'typos_lsp',
-  },
-
-  -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
-  -- This setting has no relation with the `ensure_installed` setting.
-  -- Can either be:
-  --   - false: Servers are not automatically installed.
-  --   - true: All servers set up via lspconfig are automatically installed.
-  --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
-  --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
-  ---@type boolean
-  automatic_installation = true,
-}
-
 mason.setup(options)
-mason_lspconfig.setup(lspconfig_options)
 
 ----------------------------------------
 -- Key Mappings

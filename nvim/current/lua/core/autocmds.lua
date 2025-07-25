@@ -52,20 +52,21 @@ vim.api.nvim_create_autocmd({ 'VimEnter' }, {
 -- format while saving
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = {
-    '*.rs',
     '*.c',
     '*.cpp',
+    '*.css',
     '*.cxx',
-    '*.java',
     -- '*.go', -- it's provided by `go-vim`
+    '*.htm',
+    '*.html',
+    '*.java',
+    '*.js',
+    '*.json',
     '*.lua',
     '*.py',
+    '*.rs',
     '*.ts',
-    '*.js',
-    '*.css',
-    '*.html',
-    '*.htm',
-    '*.json',
+    '*.toml',
     '*.vim',
   },
   callback = function()
@@ -75,9 +76,10 @@ vim.api.nvim_create_autocmd('BufWritePre', {
       '/opt/homebrew/Cellar/go',
       home .. '/.rustup/toolchains/',
     }
+
     local filepath = vim.fn.expand('%:p')
     for _, pattern in ipairs(excluded_patterns) do
-      if string.find(filepath, pattern) then
+      if filepath:find(pattern, 1, true) then
         return
       end
     end

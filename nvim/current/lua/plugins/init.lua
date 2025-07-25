@@ -93,7 +93,9 @@ return {
     'akinsho/toggleterm.nvim',
     version = '*',
     config = function()
-      require('toggleterm').setup()
+      require('toggleterm').setup({
+        open_mapping = [[<c-t>]],
+      })
     end,
   },
 
@@ -130,7 +132,7 @@ return {
     end,
   },
   -- Git support
-  'airblade/vim-gitgutter',
+  -- 'airblade/vim-gitgutter',
   {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -170,8 +172,9 @@ return {
 
   -- Ordering: mason.nvim -> mason-lspconfig.nvim -> nvim-lspconfig
   {
-    'williamboman/mason.nvim',
-    version = '1',
+    'mason-org/mason.nvim',
+    version = '2',
+    opts = {},
     config = function()
       require('plugins.configs.mason')
     end,
@@ -179,15 +182,41 @@ return {
   {
     -- `mason-lspconfig` bridges `mason.nvim` with the `lspconfig` plugin
     -- - making it easier to use both plugins together.
-    'williamboman/mason-lspconfig.nvim',
-    version = '1',
+    'mason-org/mason-lspconfig.nvim',
+    version = '2',
+    opts = {
+      ensure_installed = {
+        'bashls',
+        'clangd',
+        'cssls',
+        'dockerls',
+        'docker_compose_language_service',
+        'golangci_lint_ls',
+        'gopls',
+        'helm_ls',
+        'html',
+        'jsonls',
+        'lua_ls',
+        'pyright',
+        'rust_analyzer',
+        'ts_ls',
+        'vimls',
+        'yamlls',
+        'autotools_ls', -- Makefile
+        'typos_lsp',
+      },
+    },
+    dependencies = {
+      { 'mason-org/mason.nvim', opts = {} },
+      'neovim/nvim-lspconfig',
+    },
   },
   {
     'neovim/nvim-lspconfig',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
     },
     config = function()
       require('plugins.configs.nvim-lspconfig')
@@ -258,8 +287,8 @@ return {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-emoji',
       'onsails/lspkind.nvim', -- icons
-      'XiaoXiaoSN/cmp-kaomoji',
-      -- { dir = '~/projects/lua/cmp-kaomoji' },
+      -- 'XiaoXiaoSN/cmp-kaomoji',
+      { dir = '~/projects/lua/cmp-kaomoji' },
     },
     config = function()
       require('plugins.configs.nvim-cmp')
