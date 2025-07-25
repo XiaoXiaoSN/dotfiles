@@ -39,7 +39,7 @@ function fish_greeting
 
   # use `lolcat` to display the moon in part1
   if test -n "$lolcat_cmd"
-      part1 | $lolcat_cmd --frequency 0.13
+      part1 | $lolcat_cmd
   else
       part1
   end
