@@ -1,5 +1,3 @@
-local vim = vim
-
 return {
   -- Lua functions
   { 'nvim-lua/plenary.nvim', version = 'v0.1.*' },

@@ -1,6 +1,4 @@
-local vim = vim
-
--- https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close
+-- reference: https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close
 vim.api.nvim_create_autocmd('QuitPre', {
   callback = function()
     local tree_wins = {}

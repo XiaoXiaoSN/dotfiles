@@ -1,5 +1,3 @@
-local vim = vim
-
 ------------------------------
 -- Vim Abbreviations
 ------------------------------
@@ -39,3 +37,6 @@ vim.keymap.set('i', '<C-h>', '<Left>')
 vim.keymap.set('i', '<C-l>', '<Right>')
 vim.keymap.set('i', '<C-j>', '<Down>')
 vim.keymap.set('i', '<C-k>', '<Up>')
+
+-- exit terminal
+vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
