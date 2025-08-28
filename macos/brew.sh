@@ -13,69 +13,80 @@ brew upgrade
 
 # Install necessary casks (GUI Applications)
 echo "🟢 Install necessary casks (GUI Applications)"
-brew install --cask \
-  1password \
-  brave-browser \
+casks=(
+  1password
+  brave-browser
   iterm2
+)
+brew install --cask "${casks[@]}"
 
 # Install necessary packages binaries
 echo "🟢 Install necessary packages binaries"
-brew install \
-  fish \
-  htop \
-  neovim \
+pkgs=(
+  fish
+  htop
+  neovim
   tmux
+)
+brew install "${pkgs[@]}"
 
 # Install other important GUI Applications
 echo "🟢 Install other important GUI Applications"
-brew install --cask \
-  docker \
-  go \
-  google-chrome \
-  google-cloud-sdk \ # for gcloud CLI
-  hiddenbar \
-  lens \
-  itsycal \
-  notion \
-  raycast \
-  slack \
-  openvpn-connect \ # or tunnelblick
-  visual-studio-code \
+casks=(
+  docker
+  go
+  google-chrome
+  google-cloud-sdk  # for gcloud CLI
+  hiddenbar
+  lens
+  itsycal
+  notion
+  raycast
+  slack
+  openvpn-connect  # or tunnelblick
+  visual-studio-code
+)
+brew install --cask "${casks[@]}"
 
 # Install other useful binaries.
 echo "🟢 Install other useful binaries"
-brew install \
-  awscli \
-  direnv \
-  git-delta \
-  gnupg \
-  helm \
-  httpie \
-  iproute2mac \
-  jq \
-  kind \
-  kubectx \
-  kustomize \
-  mtr \
-  ngrok/ngrok/ngrok \
-  nmap \
-  nvm \
-  protobuf \
-  ripgrep \
-  starship \
-  tree \
+pkgs=(
+  awscli
+  direnv
+  fx  # Terminal JSON viewer
+  git-delta
+  gnupg
+  helm
+  httpie
+  iproute2mac
+  jq
+  kind
+  kubectx
+  kustomize
+  mtr
+  ngrok
+  nmap
+  nvm
+  protobuf
+  ripgrep
+  starship
+  tree
   yq
+)
+brew install "${pkgs[@]}"
 
 # Install some optional funny tools
 echo "🟢 Install other useful Applications"
-brew install --cask \
+optional_casks=(
   # unsafe app: https://github.com/qishibo/AnotherRedisDesktopManager/issues/820#issuecomment-1069757505
-  another-redis-desktop-manager \
-  discord \
-  postman \
-  telegram \
-  obsidian \
+  another-redis-desktop-manager
+  discord
+  postman
+  telegram
+  obsidian
   wireshark
+)
+brew install --cask "${optional_casks[@]}"
 
 # Install more recent versions of some macOS tools.
 echo "🟢 Install more recent versions of some macOS tools"
@@ -84,7 +95,7 @@ brew install \
   git
 
 # Install font tools.
-echo "🟢 Install font tools"
+echo "🟢 Install font"
 brew tap xiaoxiaosn/xiaoxiao
 brew install font-noto-nerd
 
