@@ -1,8 +1,5 @@
-local present, zen = pcall(require, 'zen-mode')
-if not present then
-  return
-end
-
+local utils = require('core.utils')
+local zen = utils.require('zen-mode')
 local options = {
   window = {
     backdrop = 0.98,

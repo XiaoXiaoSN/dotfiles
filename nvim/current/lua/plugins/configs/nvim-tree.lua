@@ -1,10 +1,8 @@
-local present, nvimtree = pcall(require, 'nvim-tree')
-if not present then
-  return
-end
+local utils = require('core.utils')
+local nvimtree = utils.require('nvim-tree')
 
 -- reference: https://github.com/nvim-tree/nvim-tree.lua/blob/master/doc/nvim-tree-lua.txt
-local options = {
+nvimtree.setup({
   sort = {
     -- Can be one of `"name"`, `"case_sensitive"`, `"modification_time"`, `"extension"`, `"suffix"`, `"filetype"` or a function.
     sorter = 'case_sensitive',
@@ -95,15 +93,11 @@ local options = {
       },
     },
   },
-}
-
-nvimtree.setup(options)
+})
 
 ----------------------------------------
 -- Key Mappings
 ----------------------------------------
-local vim = vim
-
 vim.keymap.set('', '<C-b>', '<cmd>NvimTreeToggle<CR>')
 vim.keymap.set('', '<M-b>', '<cmd>NvimTreeToggle<CR>')
 vim.keymap.set('', '<leader>e', '<cmd>NvimTreeToggle<CR>')

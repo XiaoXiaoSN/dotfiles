@@ -1,8 +1,5 @@
-local present, hop = pcall(require, 'hop')
-if not present then
-  print('Missing plugin `smoka7/hop.nvim`')
-  return
-end
+local utils = require('core.utils')
+local hop = utils.require('hop')
 
 hop.setup({
   keys = 'abcdefghijklmnopqrstuvwxyz',

@@ -1,9 +1,5 @@
-local vim = vim
-
-local present, bufferline = pcall(require, 'bufferline')
-if not present then
-  return
-end
+local utils = require('core.utils')
+local bufferline = utils.require('bufferline')
 
 local options = {
   options = {
@@ -87,4 +83,4 @@ vim.keymap.set('n', 'gb', '<cmd> BufferLinePick<CR>') -- quick jump to picked bu
 vim.keymap.set('n', '<leader>x', '<cmd> Bd<CR>') -- delete current buffer
 
 -- Command alias
-vim.cmd("command! CloseOtherTabs BufferLineCloseOthers")
+vim.cmd('command! CloseOtherTabs BufferLineCloseOthers')

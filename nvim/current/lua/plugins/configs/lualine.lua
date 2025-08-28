@@ -1,8 +1,5 @@
-local present, lualine = pcall(require, 'lualine')
-if not present then
-  print('Missing plugin `nvim-lualine/lualine.nvim`')
-  return
-end
+local utils = require('core.utils')
+local lualine = utils.require('lualine')
 
 lualine.setup({
   options = {

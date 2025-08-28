@@ -1,9 +1,7 @@
-local present, gitsigns = pcall(require, 'gitsigns')
-if not present then
-  return
-end
+local utils = require('core.utils')
+local gitsigns = utils.require('gitsigns')
 
-local options = {
+gitsigns.setup({
   signs = {
     add = { text = '│' },
     change = { text = '│' },
@@ -85,15 +83,11 @@ local options = {
     end)
     map('n', '<leader>td', gs.toggle_deleted)
   end,
-}
-
-gitsigns.setup(options)
+})
 
 ----------------------------------------
 -- Key Mappings
 ----------------------------------------
-local vim = vim
-
 vim.api.nvim_create_user_command('GitToggleLineBlame', function()
   vim.cmd('Gitsigns toggle_current_line_blame')
 end, { desc = 'Git Toggle Line Blame' })

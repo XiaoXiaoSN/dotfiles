@@ -1,11 +1,7 @@
-local vim = vim
+local utils = require('core.utils')
+local mason = utils.require('mason')
 
-local present, mason = pcall(require, 'mason')
-if not present then
-  return
-end
-
-local options = {
+mason.setup({
   -- Where Mason should put its bin location in your PATH. Can be one of:
   -- - 'prepend' (default, Mason's bin location is put first in PATH)
   -- - 'append' (Mason's bin location is put at the end of PATH)
@@ -16,7 +12,7 @@ local options = {
   ui = {
     icons = {
       -- The list icon to use for packages that are installing, or queued for installation.
-      package_pending = ' ',
+      package_pending = ' ',
       -- The list icon to use for installed packages.
       package_installed = '✓',
       -- The list icon to use for packages that are not installed.
@@ -48,8 +44,4 @@ local options = {
   -- Limit for the maximum amount of packages to be installed at the same time. Once this limit is reached, any further
   -- packages that are requested to be installed will be put in a queue.
   max_concurrent_installers = 10,
-}
-
-mason.setup(options)
-
-return options
+})

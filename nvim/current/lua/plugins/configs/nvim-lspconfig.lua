@@ -1,15 +1,9 @@
-local vim = vim
-
+-- nvim-lspconfig configuration
 -- reference: https://github.com/neovim/nvim-lspconfig
-local present, lspconfig = pcall(require, 'lspconfig')
-if not present then
-  return
-end
--- reference: https://github.com/hrsh7th/cmp-nvim-lsp
-local present2, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not present2 then
-  return
-end
+
+local utils = require('core.utils')
+local lspconfig = utils.require('lspconfig')
+local cmp_nvim_lsp = utils.require('cmp_nvim_lsp')
 
 -- Enable diagnostics
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
