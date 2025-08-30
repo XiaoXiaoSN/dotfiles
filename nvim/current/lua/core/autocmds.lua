@@ -89,3 +89,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     })
   end,
 })
+
+-- Auto-reload files when focus is gained or cursor is idle
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  command = "checktime",
+})
