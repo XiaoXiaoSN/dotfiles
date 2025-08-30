@@ -6,7 +6,7 @@ mason.setup({
   -- - 'prepend' (default, Mason's bin location is put first in PATH)
   -- - 'append' (Mason's bin location is put at the end of PATH)
   -- - 'skip' (doesn't modify PATH)
-  ---@type ''prepend'' | ''append'' | ''skip''
+  ---@type 'prepend' | 'append' | 'skip'
   PATH = 'prepend',
 
   ui = {

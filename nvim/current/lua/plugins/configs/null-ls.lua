@@ -18,7 +18,6 @@ null_ls.setup({
   sources = {
     -- Common
     formatting.prettier,
-    diagnostics.codespell.with({ extra_args = { '-L crate' } }), -- TODO: use a file as white list
 
     -- Go
     formatting.goimports,

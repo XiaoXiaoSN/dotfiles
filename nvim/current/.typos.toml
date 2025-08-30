@@ -1,0 +1,12 @@
+# ref: https://github.com/crate-ci/typos
+# Neovim `typos-lsp` provides by Mason
+
+# Setting:
+# Supports config fields in `typos.toml`, `_typos.toml`, or `.typos.toml`
+# ln -sh $PWD/.typos.toml $HOME/.config/typos/.typos.toml
+
+[default]
+extend-ignore-words-re = ["iterm"]
+
+# [default.extend-words]
+# typo = "replacement"

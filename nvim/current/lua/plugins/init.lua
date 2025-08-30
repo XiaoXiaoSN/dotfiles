@@ -11,7 +11,7 @@ return {
   },
 
   -- Defaults everyone can agree on
-  'tpope/vim-sleuth',
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   ----------------------------------------
   -- User Interface
@@ -28,15 +28,15 @@ return {
       vim.cmd([[colorscheme catppuccin-macchiato]])
     end,
   },
-  {
-    'folke/tokyonight.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- load the colorscheme here
-      vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     -- load the colorscheme here
+  --     vim.cmd([[colorscheme tokyonight]])
+  --   end,
+  -- },
 
   -- File explorer tree
   {
@@ -102,7 +102,7 @@ return {
   ----------------------------------------
 
   -- GitHub Copilot
-  { 'github/copilot.vim', enabled = false },
+  { 'github/copilot.vim', enabled = true },
 
   -- Finder
   {
@@ -130,7 +130,7 @@ return {
     end,
   },
   -- Git support
-  -- 'airblade/vim-gitgutter',
+  'airblade/vim-gitgutter',
   {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -184,11 +184,12 @@ return {
     version = '2',
     opts = {
       ensure_installed = {
+        'autotools_ls', -- Makefile
         'bashls',
         'clangd',
         'cssls',
-        'dockerls',
         'docker_compose_language_service',
+        'dockerls',
         'golangci_lint_ls',
         'gopls',
         'helm_ls',
@@ -196,12 +197,10 @@ return {
         'jsonls',
         'lua_ls',
         'pyright',
-        'rust_analyzer',
         'ts_ls',
         'vimls',
         'yamlls',
-        'autotools_ls', -- Makefile
-        'typos_lsp',
+        'typos_lsp'
       },
     },
     dependencies = {

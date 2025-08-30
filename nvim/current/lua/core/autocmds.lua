@@ -50,20 +50,20 @@ vim.api.nvim_create_autocmd({ 'VimEnter' }, {
 -- format while saving
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = {
-    '*.c',
-    '*.cpp',
+    -- '*.c', -- handled by null-ls clang_format to avoid conflicts
+    -- '*.cpp', -- handled by null-ls clang_format to avoid conflicts
     '*.css',
-    '*.cxx',
+    -- '*.cxx', -- handled by null-ls clang_format to avoid conflicts
     -- '*.go', -- it's provided by `go-vim`
     '*.htm',
     '*.html',
     '*.java',
-    '*.js',
+    -- '*.js', -- handled by null-ls prettier to avoid conflicts
     '*.json',
-    '*.lua',
-    '*.py',
-    '*.rs',
-    '*.ts',
+    -- '*.lua', -- handled by null-ls stylua to avoid conflicts
+    -- '*.py', -- handled by null-ls black to avoid conflicts
+    -- '*.rs', -- handled by rustaceanvim to avoid conflicts
+    -- '*.ts', -- handled by null-ls prettier to avoid conflicts
     '*.toml',
     '*.vim',
   },
