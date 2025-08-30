@@ -131,6 +131,16 @@ Commonly used mappings in nvim-tree
 </details>
 
 <details>
+<summary> <b>🖥️ Terminal</b> </summary>
+
+| Mode | ShortCut     | Description           |
+| :--: | ------------ | --------------------- |
+|  n   | `<C-t`       | create a new terminal |
+|  x   | `<Esc><Esc>` | exit terminal mode    |
+
+</details>
+
+<details>
 <summary> <b>🐱 Other Stuff</b> </summary>
 
 | Mode | ShortCut     | Description                        |
