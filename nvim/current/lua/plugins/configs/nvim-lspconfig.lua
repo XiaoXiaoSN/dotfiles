@@ -10,19 +10,30 @@ local cmp_nvim_lsp = utils.require('cmp_nvim_lsp')
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '<leader>f', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.E })
+end, opts)
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.E })
+end, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = true,
+-- Configure diagnostic display to show LSP source
+vim.diagnostic.config({
+  virtual_text = {
+    source = true,  -- Show LSP source in virtual text
+    format = function(diagnostic)
+      return string.format("%s [%s]", diagnostic.message, diagnostic.source or "unknown")
+    end,
+  },
   signs = true,
   update_in_insert = true,
+  float = {
+    source = true,  -- Show LSP source in floating window
+    border = "rounded",
+  },
 })
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = 'rounded',
-})
 
 -- Start to setup LSP Configurations
 local on_attach = require('plugins.share.lsp-keymappings').on_attach
