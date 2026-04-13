@@ -13,7 +13,7 @@ ln -sh ./nvim/current $HOME/.config/nvim
 
 # Install plugins and langue servers
 nvim +Lazy
-nvim +MasonInstallAll
+nvim +Mason
 ```
 
 A reference sheet for [Vim tips](nvim/current/vim-tips.md) to record some basic commands.
@@ -131,6 +131,16 @@ Commonly used mappings in nvim-tree
 </details>
 
 <details>
+<summary> <b>🖥️ Terminal</b> </summary>
+
+| Mode | ShortCut     | Description           |
+| :--: | ------------ | --------------------- |
+|  n   | `<C-t`       | create a new terminal |
+|  x   | `<Esc><Esc>` | exit terminal mode    |
+
+</details>
+
+<details>
 <summary> <b>🐱 Other Stuff</b> </summary>
 
 | Mode | ShortCut     | Description                        |
@@ -149,7 +159,7 @@ Commonly used mappings in nvim-tree
 We can use `:Mason` to help us install them.
 
 ```
-nvim +MasonInstallAll
+nvim +Mason
 ```
 
 ### Manual Installation

@@ -1,8 +1,5 @@
-local present, treesitter = pcall(require, 'nvim-treesitter.configs')
-if not present then
-  return
-end
-
+local utils = require('core.utils')
+local treesitter = utils.require('nvim-treesitter.configs')
 local options = {
   -- A list of parser names, or 'all'
   -- supported languages:
@@ -13,13 +10,14 @@ local options = {
     'fish',
     'go',
     'html',
-    'lua',
     'javascript',
     'json',
+    'lua',
+    'markdown',
     'nix',
     'rust',
+    'swift',
     'toml',
-    'markdown',
     'typescript',
     'vim',
     'yaml',

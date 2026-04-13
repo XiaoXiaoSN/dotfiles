@@ -1,34 +1,39 @@
-local vim = vim
-
+-- nvim-lspconfig configuration
 -- reference: https://github.com/neovim/nvim-lspconfig
-local present, lspconfig = pcall(require, 'lspconfig')
-if not present then
-  return
-end
--- reference: https://github.com/hrsh7th/cmp-nvim-lsp
-local present2, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not present2 then
-  return
-end
+
+local utils = require('core.utils')
+local lspconfig = utils.require('lspconfig')
+local cmp_nvim_lsp = utils.require('cmp_nvim_lsp')
 
 -- Enable diagnostics
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '<leader>f', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.E })
+end, opts)
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.E })
+end, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = true,
+-- Configure diagnostic display to show LSP source
+vim.diagnostic.config({
+  virtual_text = {
+    source = true,  -- Show LSP source in virtual text
+    format = function(diagnostic)
+      return string.format("%s [%s]", diagnostic.message, diagnostic.source or "unknown")
+    end,
+  },
   signs = true,
   update_in_insert = true,
+  float = {
+    source = true,  -- Show LSP source in floating window
+    border = "rounded",
+  },
 })
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = 'rounded',
-})
 
 -- Start to setup LSP Configurations
 local on_attach = require('plugins.share.lsp-keymappings').on_attach
@@ -89,20 +94,30 @@ lspconfig.ts_ls.setup({
   root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
 })
 
--- NOTE: We will use `rustaceanvim.mason` instead, see `:h rustaceanvim.mason`
--- lspconfig.rust_analyzer.setup({
---   on_attach = on_attach,
---   flags = lsp_flags,
---   capabilities = capabilities,
---   cmd = { 'rustup', 'run', '--install', 'nightly', 'rust-analyzer' },
---   settings = {
---     ['rust-analyzer'] = {
---       cargo = {
---         loadOutDirsFromCheck = true,
---       },
---       procMacro = {
---         enable = true,
---       },
---     },
---   },
--- })
+lspconfig.lua_ls.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        library = {
+          vim.env.VIMRUNTIME,
+          '${3rd}/luv/library',
+          '${3rd}/vim/library',
+          vim.api.nvim_get_runtime_file('', true),
+        },
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})

@@ -1,6 +1,4 @@
-local vim = vim
-
--- https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close
+-- reference: https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close
 vim.api.nvim_create_autocmd('QuitPre', {
   callback = function()
     local tree_wins = {}
@@ -52,20 +50,21 @@ vim.api.nvim_create_autocmd({ 'VimEnter' }, {
 -- format while saving
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = {
-    '*.rs',
-    '*.c',
-    '*.cpp',
-    '*.cxx',
-    '*.java',
-    -- '*.go', -- it's provided by `go-vim`
-    '*.lua',
-    '*.py',
-    '*.ts',
-    '*.js',
+    -- '*.c', -- handled by null-ls clang_format to avoid conflicts
+    -- '*.cpp', -- handled by null-ls clang_format to avoid conflicts
     '*.css',
-    '*.html',
+    -- '*.cxx', -- handled by null-ls clang_format to avoid conflicts
+    -- '*.go', -- it's provided by `go-vim`
     '*.htm',
+    '*.html',
+    '*.java',
+    -- '*.js', -- handled by null-ls prettier to avoid conflicts
     '*.json',
+    -- '*.lua', -- handled by null-ls stylua to avoid conflicts
+    -- '*.py', -- handled by null-ls black to avoid conflicts
+    -- '*.rs', -- handled by rustaceanvim to avoid conflicts
+    -- '*.ts', -- handled by null-ls prettier to avoid conflicts
+    '*.toml',
     '*.vim',
   },
   callback = function()
@@ -75,9 +74,10 @@ vim.api.nvim_create_autocmd('BufWritePre', {
       '/opt/homebrew/Cellar/go',
       home .. '/.rustup/toolchains/',
     }
+
     local filepath = vim.fn.expand('%:p')
     for _, pattern in ipairs(excluded_patterns) do
-      if string.find(filepath, pattern) then
+      if filepath:find(pattern, 1, true) then
         return
       end
     end
@@ -88,4 +88,9 @@ vim.api.nvim_create_autocmd('BufWritePre', {
       async = true,
     })
   end,
+})
+
+-- Auto-reload files when focus is gained or cursor is idle
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  command = "checktime",
 })

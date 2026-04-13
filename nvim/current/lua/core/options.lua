@@ -1,5 +1,3 @@
-local vim = vim
-
 ------------------------------
 -- Vim Options
 ------------------------------
@@ -42,3 +40,6 @@ vim.opt.updatetime = 250
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menu,menuone,noselect"
+
+-- Auto-reload files when they change externally
+vim.o.autoread = true

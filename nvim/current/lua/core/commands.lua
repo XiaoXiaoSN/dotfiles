@@ -1,4 +1,3 @@
-local vim = vim
 local user_cmd = vim.api.nvim_create_user_command
 
 -- Power from tpope/vim-abolish

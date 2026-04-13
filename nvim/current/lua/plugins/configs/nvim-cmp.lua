@@ -1,13 +1,15 @@
--- reference: https://github.com/hrsh7th/nvim-cmp
-local present, cmp = pcall(require, 'cmp')
-if not present then
-  return
-end
-local lspkind = require('lspkind')
+local utils = require('core.utils')
+local cmp = utils.require('cmp')
+local lspkind = utils.require('lspkind')
 
 -- Enable compilation
 -- reference: https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance
 cmp.setup({
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol_text',

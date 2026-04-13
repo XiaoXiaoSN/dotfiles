@@ -1,7 +1,5 @@
-local present, null_ls = pcall(require, 'null-ls')
-if not present then
-  return
-end
+local utils = require('core.utils')
+local null_ls = utils.require('null-ls')
 
 -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
@@ -12,7 +10,7 @@ local diagnostics = null_ls.builtins.diagnostics
 -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/completion
 -- local completion = null_ls.builtins.completion
 
-local options = {
+null_ls.setup({
   debug = true,
 
   -- NOTE: the list of builtin sources
@@ -20,7 +18,6 @@ local options = {
   sources = {
     -- Common
     formatting.prettier,
-    diagnostics.codespell.with({ extra_args = { '-L crate' } }), -- TODO: use a file as white list
 
     -- Go
     formatting.goimports,
@@ -42,6 +39,4 @@ local options = {
     -- Python
     formatting.black.with({ extra_args = { '--fast' } }),
   },
-}
-
-null_ls.setup(options)
+})

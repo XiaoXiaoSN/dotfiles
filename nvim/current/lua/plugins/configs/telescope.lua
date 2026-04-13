@@ -1,7 +1,7 @@
-local present, telescope = pcall(require, 'telescope')
-if not present then
-  return
-end
+local utils = require('core.utils')
+local telescope = utils.require('telescope')
+local actions = require('telescope.actions')
+local previewers = require('telescope.previewers')
 
 vim.g.theme_switcher_loaded = true
 
@@ -17,7 +17,7 @@ local options = {
       '--column',
       '--smart-case',
     },
-    prompt_prefix = '   ',
+    prompt_prefix = '  ',
     selection_caret = '  ',
     entry_prefix = '  ',
     initial_mode = 'insert',
@@ -46,13 +46,34 @@ local options = {
     borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
     color_devicons = true,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-    file_previewer = require('telescope.previewers').vim_buffer_cat.new,
-    grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
-    qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+    file_previewer = previewers.vim_buffer_cat.new,
+    grep_previewer = previewers.vim_buffer_vimgrep.new,
+    qflist_previewer = previewers.vim_buffer_qflist.new,
     -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker,
+    buffer_previewer_maker = previewers.buffer_previewer_maker,
+    preview = {
+      ls_number = true,
+    },
     mappings = {
-      n = { ['q'] = require('telescope.actions').close },
+      i = {
+        -- left side, result page
+        ['<ScrollWheelUp>'] = actions.move_selection_previous,
+        ['<ScrollWheelDown>'] = actions.move_selection_next,
+        -- right side, preview page
+        ['<C-ScrollWheelUp>'] = actions.preview_scrolling_up,
+        ['<C-ScrollWheelDown>'] = actions.preview_scrolling_down,
+      },
+      n = {
+        -- left side, result page
+        ['<ScrollWheelUp>'] = actions.move_selection_previous,
+        ['<ScrollWheelDown>'] = actions.move_selection_next,
+        -- right side, preview page
+        ['<C-ScrollWheelUp>'] = actions.preview_scrolling_up,
+        ['<C-ScrollWheelDown>'] = actions.preview_scrolling_down,
+
+        -- close float window
+        ['q'] = actions.close,
+      },
     },
   },
 
@@ -70,9 +91,19 @@ pcall(function()
 end)
 
 ----------------------------------------
+-- AutoCmd
+----------------------------------------
+-- show line number in the previewer
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'TelescopePreviewerLoaded',
+  callback = function()
+    vim.wo.number = true
+  end,
+})
+
+----------------------------------------
 -- Key Mappings
 ----------------------------------------
-local vim = vim
 local builtin = require('telescope.builtin')
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -81,5 +112,6 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>tk', builtin.keymaps, {})
+vim.keymap.set('n', '<leader>km', builtin.keymaps, {})
 vim.keymap.set('n', '<leader>cm', builtin.git_commits, {})
 vim.keymap.set('n', '<leader>gs', builtin.git_status, {})

@@ -1,5 +1,3 @@
-local vim = vim
-
 return {
   -- Lua functions
   { 'nvim-lua/plenary.nvim', version = 'v0.1.*' },
@@ -13,7 +11,7 @@ return {
   },
 
   -- Defaults everyone can agree on
-  'tpope/vim-sleuth',
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   ----------------------------------------
   -- User Interface
@@ -30,15 +28,15 @@ return {
       vim.cmd([[colorscheme catppuccin-macchiato]])
     end,
   },
-  {
-    'folke/tokyonight.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- load the colorscheme here
-      vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     -- load the colorscheme here
+  --     vim.cmd([[colorscheme tokyonight]])
+  --   end,
+  -- },
 
   -- File explorer tree
   {
@@ -93,7 +91,9 @@ return {
     'akinsho/toggleterm.nvim',
     version = '*',
     config = function()
-      require('toggleterm').setup()
+      require('toggleterm').setup({
+        open_mapping = [[<c-t>]],
+      })
     end,
   },
 
@@ -102,7 +102,7 @@ return {
   ----------------------------------------
 
   -- GitHub Copilot
-  { 'github/copilot.vim', enabled = false },
+  { 'github/copilot.vim', enabled = true },
 
   -- Finder
   {
@@ -170,8 +170,9 @@ return {
 
   -- Ordering: mason.nvim -> mason-lspconfig.nvim -> nvim-lspconfig
   {
-    'williamboman/mason.nvim',
-    version = '1',
+    'mason-org/mason.nvim',
+    version = '2',
+    opts = {},
     config = function()
       require('plugins.configs.mason')
     end,
@@ -179,15 +180,40 @@ return {
   {
     -- `mason-lspconfig` bridges `mason.nvim` with the `lspconfig` plugin
     -- - making it easier to use both plugins together.
-    'williamboman/mason-lspconfig.nvim',
-    version = '1',
+    'mason-org/mason-lspconfig.nvim',
+    version = '2',
+    opts = {
+      ensure_installed = {
+        'autotools_ls', -- Makefile
+        'bashls',
+        'clangd',
+        'cssls',
+        'docker_compose_language_service',
+        'dockerls',
+        'golangci_lint_ls',
+        'gopls',
+        'helm_ls',
+        'html',
+        'jsonls',
+        'lua_ls',
+        'pyright',
+        'ts_ls',
+        'vimls',
+        'yamlls',
+        'typos_lsp'
+      },
+    },
+    dependencies = {
+      { 'mason-org/mason.nvim', opts = {} },
+      'neovim/nvim-lspconfig',
+    },
   },
   {
     'neovim/nvim-lspconfig',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
     },
     config = function()
       require('plugins.configs.nvim-lspconfig')
@@ -258,8 +284,8 @@ return {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-emoji',
       'onsails/lspkind.nvim', -- icons
-      'XiaoXiaoSN/cmp-kaomoji',
-      -- { dir = '~/projects/lua/cmp-kaomoji' },
+      -- 'XiaoXiaoSN/cmp-kaomoji',
+      { dir = '~/projects/lua/cmp-kaomoji' },
     },
     config = function()
       require('plugins.configs.nvim-cmp')
