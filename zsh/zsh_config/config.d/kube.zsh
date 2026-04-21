@@ -1,8 +1,12 @@
 if type "kubectl" >/dev/null 2>&1; then
   autoload add-zsh-hook
 
-  # Prepare auto complete
-  source <(kubectl completion zsh)
+  # Cache kubectl completion to speed up startup
+  local KUBECTL_COMPLETION="$ZSH_CACHE/kubectl_completion.zsh"
+  if [[ ! -f "$KUBECTL_COMPLETION" ]]; then
+    kubectl completion zsh > "$KUBECTL_COMPLETION" 2>/dev/null
+  fi
+  source "$KUBECTL_COMPLETION"
 
   # If you have an alias for kubectl, you can extend shell completion to work with that alias
   compdef __start_kubectl k
