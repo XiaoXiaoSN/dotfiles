@@ -1,3 +1,8 @@
+# path and shell options setup
+
+# make the path entries unique
+typeset -U path
+
 # binding `bin` folder if it exist
 if [ -d "${HOME}/.bin" ]; then
   path+=(${HOME}/.bin)
