@@ -21,7 +21,7 @@ mkdir -p $ZSH_CACHE
 typeset -U config_files
 config_files=(
   # setup form bash script source
-  $([ -d "${HOME}/.bin/setup" ] && ls -1 -d "${HOME}/.bin/setup/"*.sh)
+  $([ ! -x "$(command -v zoxide)" ] && [ -d "${HOME}/.bin/setup" ] && ls -1 -d "${HOME}/.bin/setup/"*.sh)
 
   # config
   $(ls -1 -d "$ZSH_CONFIG/config.d/"*.zsh)
