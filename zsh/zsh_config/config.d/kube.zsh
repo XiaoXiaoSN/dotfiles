@@ -1,7 +1,5 @@
 if type "kubectl" >/dev/null 2>&1; then
   autoload add-zsh-hook
-  autoload -Uz compinit
-  compinit
 
   # Prepare auto complete
   source <(kubectl completion zsh)
