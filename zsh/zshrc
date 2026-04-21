@@ -20,20 +20,20 @@ mkdir -p $ZSH_CACHE
 # prepare zsh configurations
 typeset -U config_files
 config_files=(
-  # setup form bash script source
-  $([ ! -x "$(command -v zoxide)" ] && [ -d "${HOME}/.bin/setup" ] && ls -1 -d "${HOME}/.bin/setup/"*.sh)
+  # setup from bash script source (only if zoxide is not installed)
+  $([ ! -x "$(command -v zoxide)" ] && echo ${HOME}/.bin/setup/*.sh(N))
 
   # config
-  $(ls -1 -d "$ZSH_CONFIG/config.d/"*.zsh)
+  $ZSH_CONFIG/config.d/*.zsh(N)
 
   # aliases
-  $(ls -1 -d "$ZSH_CONFIG/aliases.d/"*.zsh)
+  $ZSH_CONFIG/aliases.d/*.zsh(N)
 
   # functions
-  $(ls -1 -d "$ZSH_CONFIG/functions.d/"*.zsh)
+  $ZSH_CONFIG/functions.d/*.zsh(N)
 
   # prompt
-  "$ZSH_CONFIG/prompt.d/$ZSH_DEFAULT_PROMPT.zsh"
+  $ZSH_CONFIG/prompt.d/$ZSH_DEFAULT_PROMPT.zsh(N)
 )
 # load the configuration files
 for config_file in $config_files; do
