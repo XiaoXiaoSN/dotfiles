@@ -1,5 +1,10 @@
 # default ls is untouched, except coloring
-if type exa >/dev/null 2>&1; then
+if type eza >/dev/null 2>&1; then
+  alias ls='eza --classify --sort name'
+  alias ll='eza -l --classify --sort name'
+  alias la='eza -la --classify --sort name'
+  alias l='ls'
+elif type exa >/dev/null 2>&1; then
   alias ls='exa --classify --sort name'
   alias ll='exa -l --classify --sort name'
   alias la='exa -la --classify --sort name'
