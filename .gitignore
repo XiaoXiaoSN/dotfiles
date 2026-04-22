@@ -7,3 +7,8 @@ fish/fish_variables
 
 # nixpkgs: ignore home-manager build result
 nixpkgs/result
+
+# vim swap and backup files
+*.swp
+*.swo
+*~

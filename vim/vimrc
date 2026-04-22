@@ -1,32 +1,28 @@
-" 好文推推：https://learnku.com/articles/24924
-
 "==============================================================================
-" vim 內置配置
+" built-in settings
 "==============================================================================
 
-" 設置 vimrc 修改保存後立刻生效，不用在重新打開
-" 建議配置完成後將這個關閉，否則配置多了之後會很卡
+" reload vimrc on save (disabled by default — slows down large configs)
 " autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
-" 關閉兼容模式
+" disable vi compatibility mode
 set nocompatible
 
-set nu " 設置行號
-set cursorline " 突出顯示當前行
-set showmatch " 顯示括號匹配
-set hlsearch " HighLight 所有匹配搜尋
+set nu          " show line numbers
+set cursorline  " highlight current line
+set showmatch   " highlight matching brackets
+set hlsearch    " highlight all search matches
 
-set mouse=n " 開啟 Normal Mode 部分的滑鼠功能
+set mouse=n     " enable mouse in normal mode
 
-" Specify to automatically use the system clipboard for copy and paste
-" You should check do your vim supports clipbord feature by
-" ':echo has('clipboard')'
-" see more on https://vi.stackexchange.com/a/96
+" use system clipboard for copy/paste
+" check support with: :echo has('clipboard')
+" see: https://vi.stackexchange.com/a/96
 set clipboard=unnamed
 
-" WSL yank support
+" WSL clipboard support
 if filereadable("/mnt/c/Windows/System32/clip.exe")
-  let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+  let s:clip = '/mnt/c/Windows/System32/clip.exe'
   if executable(s:clip)
     augroup WSLYank
       autocmd!
@@ -35,299 +31,190 @@ if filereadable("/mnt/c/Windows/System32/clip.exe")
   endif
 endif
 
-" tab 縮進
-set tabstop=4 " 設置 Tab 長度為 4 空格
-set shiftwidth=4 " 設置自動縮進長度為 4 空格
-set autoindent " 繼承前一行的縮進方式，適用於多行註釋
+" indentation
+set tabstop=4     " tab width
+set shiftwidth=4  " auto-indent width
+set autoindent    " inherit indentation from previous line
 
-" 定義快捷鍵的前綴，即<Leader>
 let mapleader=","
 
-" 貼上後重新複製剪貼板的內容
+" re-yank selection after paste so the clipboard is not replaced
 xnoremap p pgvy
 
-" ==== 系統剪切板複製粘貼 ====
-" v 模式下複製內容到系統剪切板
+" system clipboard mappings
 vmap <Leader>c "+yy
-" n 模式下複製一行到系統剪切板
 nmap <Leader>c "+yy
-" n 模式下粘貼系統剪切板的內容
 nmap <Leader>v "+p
 
-" 開啟實時搜索
-set incsearch
-" 搜索時大小寫不敏感
-set ignorecase
-syntax enable
-syntax on                    " 開啟文件類型偵測
-filetype plugin indent on    " 啟用自動補全
+set smartcase   " case-sensitive when search pattern contains uppercase
 
-" 退出插入模式指定類型的文件自動保存
+set hidden      " allow switching buffers without saving
+
+set splitright  " vertical split opens to the right
+set splitbelow  " horizontal split opens below
+
+set scrolloff=5 " keep 5 lines of context above/below cursor when scrolling
+
+set wildmenu    " show completion menu in command mode
+
+set backspace=indent,eol,start  " allow backspace across lines in insert mode
+
+set belloff=all " disable all bells (Vim 8+)
+
+set encoding=utf-8  " default to UTF-8 (important on some Ubuntu setups)
+
+" persistent undo across sessions
+set undofile
+set undodir=~/.vim/undodir
+
+set signcolumn=yes  " always show sign column to avoid layout shifts (gitgutter)
+
+set incsearch   " incremental search
+set ignorecase  " case-insensitive search
+syntax on
+filetype plugin indent on
+
+" auto-save on leaving insert mode for common file types
 au InsertLeave *.go,*.sh,*.php,*.rs write
 
 "==============================================================================
-" 插件配置
+" plugins (vim-plug)
+" install: https://github.com/junegunn/vim-plug
 "==============================================================================
 
-" 插件開始的位置
 call plug#begin('~/.vim/plugged')
 
-" Quick edit
+" editing helpers
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
-" Plug 'tpope/vim-commentary'
 Plug 'tomtom/tcomment_vim'
-
-" EditorConfig
-Plug 'editorconfig/editorconfig-vim'
-
-" Better whitespace
-Plug 'ntpeters/vim-better-whitespace'
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-" 可以快速對齊的插件
+Plug 'jiangmiao/auto-pairs'
+Plug 'mg979/vim-visual-multi'
 Plug 'junegunn/vim-easy-align'
 
-" 用來提供一個導航目錄的側邊欄
-Plug 'scrooloose/nerdtree'
+" editorconfig support (built-in in Vim 9.0+; plugin needed for older versions)
+Plug 'editorconfig/editorconfig-vim'
 
-" 可以使 nerdtree Tab 標籤的名稱更友好些
-Plug 'jistr/vim-nerdtree-tabs'
+" highlight trailing whitespace
+Plug 'ntpeters/vim-better-whitespace'
 
-" 可以在導航目錄中看到 git 版本信息
+" file explorer with git status icons
+Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" 支援更多 git 的功能
+" git integration
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'shumphrey/fugitive-gitlab.vim'
-
-" 可以在文檔中顯示 git 信息
 Plug 'airblade/vim-gitgutter'
 
-" 查看當前代碼文件中的變量和函數列表的插件，
-" 可以切換和跳轉到代碼中對應的變量和函數的位置
-" 大綱式導航, Go 需要 https://github.com/jstemmer/gotags 支持
-Plug 'majutsushi/tagbar'
-
-" 自動補全括號的插件，包括小括號，中括號，以及花括號
-Plug 'jiangmiao/auto-pairs'
-
-" Vim狀態欄插件，包括顯示行號，列號，文件類型，文件名，以及 Git 狀態
-Plug 'vim-airline/vim-airline'
-
-" 代碼自動完成，安裝完插件還需要額外配置才可以使用
-"Plug 'Valloric/YouCompleteMe'
-
-" 下面兩個插件要配合使用，可以自動生成代碼塊
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-" 配色方案
-Plug 'fatih/molokai'
-
-" go 主要插件
-Plug 'fatih/vim-go', { 'tag': '*' }
-
-" markdown 插件
-Plug 'iamcco/mathjax-support-for-mkdp'
-Plug 'iamcco/markdown-preview.vim'
-
-" 模糊搜尋
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+" fuzzy finder — uses system fzf if installed, otherwise installs it
+" :Rg requires ripgrep (rg) to be available on PATH
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" 多行編輯
-Plug 'mg979/vim-visual-multi'
+" Go support — only loaded when `go` is available on PATH
+if executable('go')
+  Plug 'fatih/vim-go', { 'tag': '*' }
+endif
 
-" 搜尋
-Plug 'mileszs/ack.vim'
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" Support Rust
-Plug 'rust-lang/rust.vim'
-
-" Move cursor fast!
+" fast cursor movement
 Plug 'easymotion/vim-easymotion'
 
-" Themes
-Plug 'XiaoXiaoSN/vim-sublime-monokai'
-" Plug 'dracula/vim', { 'as': 'dracula'  }
+" status bar
+Plug 'vim-airline/vim-airline'
 
-" 插件結束的位置，插件全部放在此行上面
+" Rust syntax and formatting
+Plug 'rust-lang/rust.vim'
+
+" color scheme
+Plug 'XiaoXiaoSN/vim-sublime-monokai'
+
 call plug#end()
 
 
 "==============================================================================
-" 主題配色
+" color scheme
 "==============================================================================
 
 colorscheme sublimemonokai
-" colorscheme dracula
+
 
 "==============================================================================
-" EditorConfig setting
+" editorconfig
 "==============================================================================
-" To ensure that this plugin works well with Tim Pope's fugitive,
-" use the following patterns array:
+
+" prevent editorconfig from conflicting with fugitive buffers
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 
 "==============================================================================
-" vim-go 插件
+" vim-go (only when `go` is on PATH)
 "==============================================================================
-let g:go_fmt_command = "goimports" " 格式化將默認的 gofmt 替換
-let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
 
-let g:go_version_warning = 1
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_generate_tags = 1
-
-let g:go_highlight_format_strings = 1
-let g:go_highlight_function_arguments = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_variable_declarations = 1
-
-let g:godef_split=2
+if executable('go')
+  let g:go_fmt_command             = 'goimports'
+  let g:go_autodetect_gopath       = 1
+  let g:go_list_type               = 'quickfix'
+  let g:go_highlight_types         = 1
+  let g:go_highlight_fields        = 1
+  let g:go_highlight_functions     = 1
+  let g:go_highlight_function_calls = 1
+  let g:go_highlight_operators     = 1
+  let g:go_highlight_extra_types   = 1
+  let g:go_highlight_methods       = 1
+  let g:go_highlight_generate_tags = 1
+endif
 
 
 "==============================================================================
-" NERDTree 插件
+" NERDTree
 "==============================================================================
 
-" 打開和關閉 NERDTree 快捷鍵
 map <F10> :NERDTreeToggle<CR>
-" 顯示行號
-let NERDTreeShowLineNumbers=1
-" 打開文件時是否顯示目錄
-let NERDTreeAutoCenter=1
-" 是否顯示隱藏文件
-let NERDTreeShowHidden=1
-" 設置寬度
-" let NERDTreeWinSize=31
-" 忽略一下文件的顯示
-let NERDTreeIgnore=['\.pyc', '\~$', '\.swp', '.git']
-" 打開 vim 文件及顯示書籤列表
-let NERDTreeShowBookmarks=2
+noremap <silent> <C-b>      :NERDTreeToggle<CR>
+noremap <silent> <M-b>      :NERDTreeToggle<CR>
+noremap <silent> <leader>nf :NERDTreeFind<CR>
+noremap <silent> <leader>e  :NERDTreeFind<CR>
 
-" 在終端啟動 vim 時，共享 NERDTree (1: 共用)
-let g:nerdtree_tabs_open_on_console_startup=1
-
-
-"==============================================================================
-"  majutsushi/tagbar 插件
-"==============================================================================
-
-" majutsushi/tagbar 插件打開關閉快捷鍵
-nmap <F9> :TagbarToggle<CR>
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-
-
-"==============================================================================
-"  nerdtree-git-plugin 插件
-"==============================================================================
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
+let NERDTreeShowLineNumbers = 1
+let NERDTreeAutoCenter      = 1
+let NERDTreeShowHidden      = 1
+let NERDTreeShowBookmarks   = 2
+let NERDTreeIgnore          = ['\.pyc', '\~$', '\.swp', '.git']
 
 let g:NERDTreeGitStatusShowIgnored = 1
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ 'Modified'  : '✹',
+    \ 'Staged'    : '✚',
+    \ 'Untracked' : '✭',
+    \ 'Renamed'   : '➜',
+    \ 'Unmerged'  : '═',
+    \ 'Deleted'   : '✖',
+    \ 'Dirty'     : '✗',
+    \ 'Clean'     : '✔︎',
+    \ 'Ignored'   : '☒',
+    \ 'Unknown'   : '?'
+    \ }
 
-noremap <silent> <C-b> :NERDTreeToggle<CR>
-noremap <silent> <M-b> :NERDTreeToggle<CR>
-noremap <silent> <leader>nf :NERDTreeFind<CR>
-noremap <silent> <leader>e :NERDTreeFind<CR>
 
 "==============================================================================
-"  nerdtree-git-plugin 插件
+" fzf
 "==============================================================================
-" [Buffers] Jump to the existing window if possible
+
+" jump to existing window when opening a buffer that is already open
 let g:fzf_buffers_jump = 1
 
-nnoremap <leader>fl :Lines<CR>
+nnoremap <leader>fl  :Lines<CR>
 nnoremap <leader>fbl :BLines<CR>
-nnoremap <leader>ff :Files<CR>
+nnoremap <leader>ff  :Files<CR>
+nnoremap <leader>fr  :Rg<CR>
 
 
 "==============================================================================
-"  Valloric/YouCompleteMe 插件
+" other mappings and commands
 "==============================================================================
 
-"" make YCM compatible with UltiSnips (using supertab)
-"let g:ycm_key_list_select_completion = ['<C-n>', '<space>']
-"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-"let g:SuperTabDefaultCompletionType = '<C-n>'
-"
-"" better key bindings for UltiSnipsExpandTrigger
-"let g:UltiSnipsExpandTrigger = "<tab>"
-"let g:UltiSnipsJumpForwardTrigger = "<tab>"
-"let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-"
-"
-"" 待確認其可行性
-"" https://zhuanlan.zhihu.com/p/158986188
-"nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-"==============================================================================
-"  支援更多 git
-"==============================================================================
-" GBrower gitlab
-let g:fugitive_gitlab_domains = ['https://gitlab.silkrode.com.tw']
-let g:gitlab_api_keys = {'gitlab.silkrode.com.tw': '********'}
-
-
-"==============================================================================
-"  其他插件配置
-"==============================================================================
-
-" markdwon 的快捷鍵
-map <silent> <F5> <Plug>MarkdownPreview
-map <silent> <F6> <Plug>StopMarkdownPreview
-
-" tab 標籤頁切換快捷鍵
+" tab page switching
 :nn <Leader>1 1gt
 :nn <Leader>2 2gt
 :nn <Leader>3 3gt
@@ -336,16 +223,15 @@ map <silent> <F6> <Plug>StopMarkdownPreview
 :nn <Leader>6 6gt
 :nn <Leader>7 7gt
 :nn <Leader>8 8gt
-:nn <Leader>9 8gt
+:nn <Leader>9 9gt
 :nn <Leader>0 :tablast<CR>
 
-
-" adds to statusline
+" show highlight group under cursor in the status line
 set laststatus=2
 set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}
 
-" a little more informative version of the above
 nmap <Leader>gn :call <SID>SynStack()<CR>
+map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
 function! <SID>SynStack()
     if !exists("*synstack")
@@ -354,33 +240,29 @@ function! <SID>SynStack()
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
-
-" navigate within insert mode
+" navigate in insert mode with ctrl+hjkl
 imap <silent> <C-h> <Left>
 imap <silent> <C-l> <Right>
 imap <silent> <C-j> <Down>
 imap <silent> <C-k> <Up>
 
-" add some command for changing case of tpope/vim-abolish
-command! Snake call feedkeys("crs")
-command! Pascal call feedkeys("crm")
-command! Camel call feedkeys("crc")
-command! Upper call feedkeys("cru")
-command! Kebab call feedkeys("cr-")
-command! DotCase call feedkeys("cr.")
+" case coercion commands (via vim-abolish)
+command! Snake     call feedkeys("crs")
+command! Pascal    call feedkeys("crm")
+command! Camel     call feedkeys("crc")
+command! Upper     call feedkeys("cru")
+command! Kebab     call feedkeys("cr-")
+command! DotCase   call feedkeys("cr.")
 command! SpaceCase call feedkeys("cr<space>")
 
-" Abbreviations {{{
-"" no one is really happy until you have this shortcuts
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
+" command-mode typo abbreviations
+cnoreabbrev W!    w!
+cnoreabbrev Q!    q!
 cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
-" }}}
+cnoreabbrev Wq    wq
+cnoreabbrev Wa    wa
+cnoreabbrev wQ    wq
+cnoreabbrev WQ    wq
+cnoreabbrev W     w
+cnoreabbrev Q     q
+cnoreabbrev Qall  qall
