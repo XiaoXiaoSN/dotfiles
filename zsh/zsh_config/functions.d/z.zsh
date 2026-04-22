@@ -1,20 +1,42 @@
+if type zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
 zc() {
-  z -e $argv[1]
-  if [ $status -eq 0 ]; then
-    code $(z -e $argv[1])
+  local target
+  if type zoxide >/dev/null 2>&1; then
+    target=$(zoxide query "$1")
+  else
+    target=$(z -e "$1")
+  fi
+
+  if [ -n "$target" ]; then
+    code "$target"
   fi
 }
 
 zv() {
-  z -e $argv[1]
-  if [ $status -eq 0 ]; then
-    vim $(z -e $argv[1])
+  local target
+  if type zoxide >/dev/null 2>&1; then
+    target=$(zoxide query "$1")
+  else
+    target=$(z -e "$1")
+  fi
+
+  if [ -n "$target" ]; then
+    ${EDITOR:-vim} "$target"
   fi
 }
 
 zopen() {
-  z -e $argv[1]
-  if [ $status -eq 0 ]; then
-    open $(z -e $argv[1])
+  local target
+  if type zoxide >/dev/null 2>&1; then
+    target=$(zoxide query "$1")
+  else
+    target=$(z -e "$1")
+  fi
+
+  if [ -n "$target" ]; then
+    open "$target"
   fi
 }

@@ -1,3 +1,8 @@
+# path and shell options setup
+
+# make the path entries unique
+typeset -U path
+
 # binding `bin` folder if it exist
 if [ -d "${HOME}/.bin" ]; then
   path+=(${HOME}/.bin)
@@ -25,6 +30,17 @@ setopt NO_BEEP
 
 # allowing the `#` sign comments in interactive zsh commands
 setopt interactive_comments
+
+# if the command is a directory, cd into it
+setopt AUTO_CD
+
+# automatically push directories to stack on cd
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+
+# use extended globbing
+setopt EXTENDED_GLOB
 
 # If a pattern for filename generation has no matches, print an error,
 # instead of leaving it unchanged in the argument list.

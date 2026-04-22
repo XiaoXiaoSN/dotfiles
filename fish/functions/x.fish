@@ -1,25 +1,35 @@
 # Taken from: https://github.com/dideler/dotfiles/blob/master/functions/extract.fish
 
 function x --description "Expand or extract bundled & compressed files"
-  set --local ext (echo $argv[1] | awk -F. '{print $NF}')
-  switch $ext
-    case tar  # non-compressed, just bundled
-      tar -xvf $argv[1]
-    case gz
-      if test (echo $argv[1] | awk -F. '{print $(NF-1)}') = tar  # tar bundle compressed with gzip
-        tar -zxvf $argv[1]
-      else  # single gzip
-        gunzip $argv[1]
-      end
-    case tgz  # same as tar.gz
-      tar -zxvf $argv[1]
-    case bz2  # tar compressed with bzip2
-      tar -jxvf $argv[1]
-    case rar
-      unrar x $argv[1]
-    case zip
-      unzip $argv[1]
+  set -l file $argv[1]
+  if not test -f "$file"
+    echo "'$file' is not a valid file"
+    return 1
+  end
+
+  switch "$file"
+    case '*.tar'
+      tar --extract --verbose --file "$file"
+    case '*.tar.gz' '*.tgz'
+      tar --extract --gzip --verbose --file "$file"
+    case '*.tar.bz2' '*.tbz2'
+      tar --extract --bzip2 --verbose --file "$file"
+    case '*.tar.xz' '*.txz'
+      tar --extract --xz --verbose --file "$file"
+    case '*.gz'
+      gunzip "$file"
+    case '*.bz2'
+      bunzip2 "$file"
+    case '*.xz'
+      unxz "$file"
+    case '*.zip'
+      unzip "$file"
+    case '*.rar'
+      unrar x "$file"
+    case '*.7z'
+      7z x "$file"
     case '*'
-      echo "unknown extension"
+      echo "unknown extension for '$file'"
+      return 1
   end
 end

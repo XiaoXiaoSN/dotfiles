@@ -8,11 +8,11 @@ export ZSH_CACHE="$XDG_CACHE_HOME/zsh"
 export ZSH_COMPDUMP="$ZSH_CACHE/zcompdump-$ZSH_VERSION"
 
 if [[ ! $ZSH_DEFAULT_PROMPT ]]; then
-  local ZSH_DEFAULT_PROMPT="godfather"
+  ZSH_DEFAULT_PROMPT="godfather"
 fi
 # https://twitter.com/minatoaqua/status/1529308438307540992
-local THEME_GODFATHER_PROMPT_SIGN="^ ̳ . ̫ . ̳ ^ ฅ "
-local THEME_GODFATHER_PROMPT_RETURN_CODE_LEFT=1
+THEME_GODFATHER_PROMPT_SIGN="^ ̳ . ̫ . ̳ ^ ฅ "
+THEME_GODFATHER_PROMPT_RETURN_CODE_LEFT=1
 
 # create zsh cache if not exist
 mkdir -p $ZSH_CACHE
@@ -20,20 +20,20 @@ mkdir -p $ZSH_CACHE
 # prepare zsh configurations
 typeset -U config_files
 config_files=(
-  # setup form bash script source
-  $([ -d "${HOME}/.bin/setup" ] && ls -1 -d "${HOME}/.bin/setup/"*.sh)
+  # setup from bash script source (only if zoxide is not installed)
+  $([ ! -x "$(command -v zoxide)" ] && echo ${HOME}/.bin/setup/*.sh(N))
 
   # config
-  $(ls -1 -d "$ZSH_CONFIG/config.d/"*.zsh)
+  $ZSH_CONFIG/config.d/*.zsh(N)
 
   # aliases
-  $(ls -1 -d "$ZSH_CONFIG/aliases.d/"*.zsh)
+  $ZSH_CONFIG/aliases.d/*.zsh(N)
 
   # functions
-  $(ls -1 -d "$ZSH_CONFIG/functions.d/"*.zsh)
+  $ZSH_CONFIG/functions.d/*.zsh(N)
 
   # prompt
-  "$ZSH_CONFIG/prompt.d/$ZSH_DEFAULT_PROMPT.zsh"
+  $ZSH_CONFIG/prompt.d/$ZSH_DEFAULT_PROMPT.zsh(N)
 )
 # load the configuration files
 for config_file in $config_files; do
@@ -45,6 +45,12 @@ unset config_files
 # Apply `zsh-autosuggestions` if it installed
 if [ -f "$ZSH_CONFIG/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
   source $ZSH_CONFIG/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+# Apply `zsh-syntax-highlighting` if it installed
+# NOTE: This must be the last plugin sourced
+if [ -f "$ZSH_CONFIG/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+  source "$ZSH_CONFIG/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
 # Run local setting (Do not need to use git management)

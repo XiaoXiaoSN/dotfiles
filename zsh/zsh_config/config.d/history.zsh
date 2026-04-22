@@ -15,12 +15,10 @@ HISTSIZE=10000000 # the default value is 2000
 
 # If this is set, zsh sessions will append their history list to the history
 # file, rather than replace it.
-# Thus, multiple parallel zsh sessions will all have the new entries from their
-# history lists added to the history file, in the order that they exit.
-# The file will still be periodically re-written to trim it when the number of
-# lines grows 20% beyond the value specified by $SAVEHIST
-# (see also the HIST_SAVE_BY_COPY option).
 setopt APPEND_HISTORY
+
+# share history between sessions
+setopt SHARE_HISTORY
 
 # If a new command line being added to the history list duplicates an older one,
 # the older command is removed from the list (even if it is not the previous event).

@@ -1,14 +1,26 @@
 # default ls is untouched, except coloring
-if type exa >/dev/null 2>&1; then
+if type eza >/dev/null 2>&1; then
+  alias ls='eza --classify --sort name'
+  alias ll='eza -l --classify --sort name'
+  alias la='eza -la --classify --sort name'
+  alias l='ls'
+elif type exa >/dev/null 2>&1; then
   alias ls='exa --classify --sort name'
   alias ll='exa -l --classify --sort name'
   alias la='exa -la --classify --sort name'
   alias l='ls'
 else
-  alias ls='ls --color=auto'
-  alias ll='ls -l --time-style=long-iso'
-  alias la='ls -lA --time-style=long-iso'
-  alias l='ls --color=auto'
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias ls='ls -G'
+    alias ll='ls -lhG'
+    alias la='ls -lahG'
+    alias l='ls'
+  else
+    alias ls='ls --color=auto'
+    alias ll='ls -l --time-style=long-iso'
+    alias la='ls -lA --time-style=long-iso'
+    alias l='ls --color=auto'
+  fi
 fi
 
 # Easier navigation: .., ..., ...., ....., ~ and -

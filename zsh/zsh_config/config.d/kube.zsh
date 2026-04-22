@@ -1,23 +1,40 @@
 if type "kubectl" >/dev/null 2>&1; then
   autoload add-zsh-hook
-  autoload -Uz compinit
-  compinit
 
-  _sukka_lazyload_completion_kubectl() {
-    # Prepare auto complete
-    source <(kubectl completion zsh)
+  # Cache kubectl completion to speed up startup
+  local KUBECTL_COMPLETION="$ZSH_CACHE/kubectl_completion.zsh"
+  if [[ ! -f "$KUBECTL_COMPLETION" ]]; then
+    kubectl completion zsh > "$KUBECTL_COMPLETION" 2>/dev/null
+  fi
+  source "$KUBECTL_COMPLETION"
 
-    # If you have an alias for kubectl, you can extend shell completion to work with that alias
-    compdef __start_kubectl k
-    compdef __start_kubectl kc
-  }
-  sukka_lazyload_add_completion kubectl
+  # If you have an alias for kubectl, you can extend shell completion to work with that alias
+  compdef __start_kubectl k
+  compdef __start_kubectl kc
+
+  # Cache for kubeconfig path to avoid frequent disk scans
+  LAST_KUBE_MTIME=0
 
   function set-kubeconfig {
-    # Sets the KUBECONFIG environment variable to a dynamic concatenation of everything
-    # under ~/.kube/configs/config or ~/.kube/configs/*.conf
-    if [ -d ~/.kube ]; then
-      export KUBECONFIG=~/.kube/config$(find ~/.kube -iname "*.config" -or -iname "*.conf" -type f 2>/dev/null | xargs -I % echo -n ":%")
+    local kube_dir="$HOME/.kube"
+    [ -d "$kube_dir" ] || return
+
+    # Only rescan if the directory modification time has changed
+    local current_mtime
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      current_mtime=$(stat -f %m "$kube_dir" 2>/dev/null)
+    else
+      current_mtime=$(stat -c %Y "$kube_dir" 2>/dev/null)
+    fi
+
+    if [[ "$current_mtime" != "$LAST_KUBE_MTIME" ]]; then
+      local config_files=($(find "$kube_dir" \( -iname "*.config" -or -iname "*.conf" \) -type f 2>/dev/null))
+      if [[ ${#config_files} -gt 0 ]]; then
+        export KUBECONFIG="$kube_dir/config:$(paste -sd ":" - <<< "${config_files[@]}")"
+      else
+        export KUBECONFIG="$kube_dir/config"
+      fi
+      LAST_KUBE_MTIME="$current_mtime"
     fi
   }
   add-zsh-hook precmd set-kubeconfig
