@@ -37,3 +37,6 @@ end
 #     end
 # end
 # # <<< conda initialize <<<
+
+# fzf.fish key bindings
+fzf_configure_bindings --directory=\ct

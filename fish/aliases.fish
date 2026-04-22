@@ -16,10 +16,19 @@ else if command -q exa
   alias la='exa -la --classify --sort name'
   alias l='ls'
 else
-  alias ls='ls --color=auto'
-  alias ll='ls -l --time-style=long-iso'
-  alias la='ls -lA --time-style=long-iso'
-  alias l='ls --color=auto'
+  if ls --color=auto >/dev/null 2>&1
+    # GNU ls
+    alias ls='ls --color=auto'
+    alias ll='ls -l --time-style=long-iso'
+    alias la='ls -lA --time-style=long-iso'
+    alias l='ls --color=auto'
+  else
+    # BSD ls (macOS)
+    alias ls='ls -G'
+    alias ll='ls -lG'
+    alias la='ls -lAG'
+    alias l='ls -G'
+  end
 end
 
 # for K8s
