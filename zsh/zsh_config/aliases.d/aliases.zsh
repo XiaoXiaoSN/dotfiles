@@ -10,10 +10,17 @@ elif type exa >/dev/null 2>&1; then
   alias la='exa -la --classify --sort name'
   alias l='ls'
 else
-  alias ls='ls --color=auto'
-  alias ll='ls -l --time-style=long-iso'
-  alias la='ls -lA --time-style=long-iso'
-  alias l='ls --color=auto'
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias ls='ls -G'
+    alias ll='ls -lhG'
+    alias la='ls -lahG'
+    alias l='ls'
+  else
+    alias ls='ls --color=auto'
+    alias ll='ls -l --time-style=long-iso'
+    alias la='ls -lA --time-style=long-iso'
+    alias l='ls --color=auto'
+  fi
 fi
 
 # Easier navigation: .., ..., ...., ....., ~ and -
