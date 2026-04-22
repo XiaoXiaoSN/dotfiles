@@ -1,8 +1,8 @@
-set -x LANG en_US.UTF-8
-set -x EDITOR nvim
+set -gx LANG en_US.UTF-8
+set -gx EDITOR nvim
 
 # Aliases
-source $HOME/.config/fish/aliases.fish
+source $__fish_config_dir/aliases.fish
 
 # Run local setting (Do not need to use git management)
 if test -e $HOME/fish-profile.fish

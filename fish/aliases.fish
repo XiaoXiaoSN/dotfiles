@@ -5,7 +5,12 @@ alias uuid=uuidgen
 alias uuid-zero='echo -n 00000000-0000-0000-0000-000000000000'
 
 # default ls is untouched, except coloring
-if command -q exa
+if command -q eza
+  alias ls='eza --classify --sort name'
+  alias ll='eza -l --classify --sort name --git'
+  alias la='eza -la --classify --sort name --git'
+  alias l='ls'
+else if command -q exa
   alias ls='exa --classify --sort name'
   alias ll='exa -l --classify --sort name'
   alias la='exa -la --classify --sort name'
