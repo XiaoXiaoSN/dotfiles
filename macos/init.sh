@@ -138,7 +138,7 @@ defaults write com.apple.dock showhidden -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Desktop & Dock > Desktop & Stage Manager > Show Items > [check box] In Stage Manager
-defaults com.apple.WindowManager HideDesktop -bool false
+defaults write com.apple.WindowManager HideDesktop -bool false
 
 
 ###############################################################################
