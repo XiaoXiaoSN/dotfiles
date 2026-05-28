@@ -2,12 +2,12 @@
 
 set -euo pipefail
 
-case "$1" in
-    '-d' | '--decode')
+case "${1:-}" in
+    '-d' | '-D' | '--decode')
         echo "${@:2}" | base64 -d
         exit 0
     ;;
-    '-e' | '-D' | '--encode')
+    '-e' | '--encode')
         echo "${@:2}" | base64
         exit 0
     ;;
