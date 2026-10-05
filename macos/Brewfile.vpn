@@ -1,0 +1,2 @@
+# Install only on machines that need this VPN client.
+cask "openvpn-connect"

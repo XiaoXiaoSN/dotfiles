@@ -1,0 +1,39 @@
+name: macOS bootstrap
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "macos/brew.sh"
+      - "macos/Brewfile*"
+      - "macos/tests/**"
+      - ".github/workflows/macos-bootstrap.yaml"
+  pull_request:
+    paths:
+      - "macos/brew.sh"
+      - "macos/Brewfile*"
+      - "macos/tests/**"
+      - ".github/workflows/macos-bootstrap.yaml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Test bootstrap without installing packages
+        run: python3 -m unittest discover -s macos/tests -v
+      - name: Validate with Homebrew Bundle
+        if: runner.os == 'macOS'
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+          HOMEBREW_NO_ANALYTICS: "1"
+        run: |
+          for file in macos/Brewfile macos/Brewfile.*; do
+            brew bundle list --file="$file" --all
+          done

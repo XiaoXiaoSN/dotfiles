@@ -1,104 +1,98 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Install command-line tools using Homebrew.
-# Install steps: https://brew.sh/
+usage() {
+  cat <<'USAGE'
+Usage: bash macos/brew.sh [install|upgrade|check] [options]
 
-# Turn off analytics https://docs.brew.sh/Analytics
-brew analytics off
+Install the core CLI tools by default, without upgrading installed packages.
+Actions apply to the core Brewfile and each explicitly selected profile.
 
-# Make sure we’re using the latest Homebrew.
-brew update
-# Upgrade any already-installed formulae.
-brew upgrade
+  --desktop   Desktop apps, Docker Desktop and fonts
+  --cloud     AWS, Google Cloud and ngrok
+  --vpn       OpenVPN Connect
+  --optional  Extra CLI tools, secondary apps and diagnostic GUIs
+  --all       Include every profile
+  -h, --help  Show this help without invoking Homebrew
 
-# Install necessary casks (GUI Applications)
-echo "🟢 Install necessary casks (GUI Applications)"
-casks=(
-  1password
-  brave-browser
-  iterm2
-)
-brew install --cask "${casks[@]}"
+Examples:
+  bash macos/brew.sh
+  bash macos/brew.sh --desktop --cloud
+  bash macos/brew.sh check --all
+  bash macos/brew.sh upgrade --desktop --cloud
+USAGE
+}
 
-# Install necessary packages binaries
-echo "🟢 Install necessary packages binaries"
-pkgs=(
-  fish
-  htop
-  neovim
-  tmux
-)
-brew install "${pkgs[@]}"
+fail() {
+  printf 'Error: %s\n' "$*" >&2
+  exit 1
+}
 
-# Install other important GUI Applications
-echo "🟢 Install other important GUI Applications"
-casks=(
-  docker
-  go
-  google-chrome
-  google-cloud-sdk  # for gcloud CLI
-  hiddenbar
-  lens
-  itsycal
-  notion
-  raycast
-  slack
-  openvpn-connect  # or tunnelblick
-  visual-studio-code
-)
-brew install --cask "${casks[@]}"
+action=install
+case "${1:-}" in
+  install|upgrade|check)
+    action=$1
+    shift
+    ;;
+esac
 
-# Install other useful binaries.
-echo "🟢 Install other useful binaries"
-pkgs=(
-  awscli
-  direnv
-  fx  # Terminal JSON viewer
-  git-delta
-  gnupg
-  helm
-  httpie
-  iproute2mac
-  jq
-  kind
-  kubectx
-  kustomize
-  mtr
-  ngrok
-  nmap
-  nvm
-  protobuf
-  ripgrep
-  starship
-  tree
-  yq
-)
-brew install "${pkgs[@]}"
+desktop=false
+cloud=false
+vpn=false
+optional=false
+for arg in "$@"; do
+  case "$arg" in
+    --desktop) desktop=true ;;
+    --cloud) cloud=true ;;
+    --vpn) vpn=true ;;
+    --optional) optional=true ;;
+    --all) desktop=true; cloud=true; vpn=true; optional=true ;;
+    -h|--help) usage; exit 0 ;;
+    *) fail "Unknown argument: $arg (use --help)" ;;
+  esac
+done
 
-# Install some optional funny tools
-echo "🟢 Install other useful Applications"
-optional_casks=(
-  # unsafe app: https://github.com/qishibo/AnotherRedisDesktopManager/issues/820#issuecomment-1069757505
-  another-redis-desktop-manager
-  discord
-  postman
-  telegram
-  obsidian
-  wireshark
-)
-brew install --cask "${optional_casks[@]}"
+[[ "$(uname -s)" == Darwin ]] || fail 'This installer is for macOS only.'
+command -v brew >/dev/null 2>&1 || fail 'Install Homebrew and add it to PATH first: https://brew.sh/'
 
-# Install more recent versions of some macOS tools.
-echo "🟢 Install more recent versions of some macOS tools"
-brew install \
-  curl \
-  git
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+brewfiles=("$script_dir/Brewfile")
+if "$desktop"; then brewfiles+=("$script_dir/Brewfile.desktop"); fi
+if "$cloud"; then brewfiles+=("$script_dir/Brewfile.cloud"); fi
+if "$vpn"; then brewfiles+=("$script_dir/Brewfile.vpn"); fi
+if "$optional"; then brewfiles+=("$script_dir/Brewfile.optional"); fi
+for brewfile in "${brewfiles[@]}"; do
+  [[ -r "$brewfile" ]] || fail "Cannot read $brewfile"
+done
 
-# Install font tools.
-echo "🟢 Install font"
-brew tap xiaoxiaosn/xiaoxiao
-brew install font-noto-nerd
+# Never let a partial profile trigger uninstall/cleanup through the environment.
+unset HOMEBREW_BUNDLE_INSTALL_CLEANUP
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+export HOMEBREW_NO_ANALYTICS=1
 
-# Remove outdated versions from the cellar.
-echo "🟢 Remove outdated versions from the cellar"
-brew cleanup
+case "$action" in
+  install|check)
+    export HOMEBREW_BUNDLE_NO_UPGRADE=1
+    export HOMEBREW_NO_INSTALL_UPGRADE=1
+    ;;
+  upgrade)
+    unset HOMEBREW_BUNDLE_NO_UPGRADE HOMEBREW_NO_INSTALL_UPGRADE
+    ;;
+esac
+if [[ "$action" == check ]]; then
+  export HOMEBREW_NO_AUTO_UPDATE=1
+else
+  brew analytics off
+  if [[ "$action" == upgrade ]]; then
+    brew update
+  fi
+fi
+
+for brewfile in "${brewfiles[@]}"; do
+  printf '%s: %s\n' "$action" "${brewfile##*/}"
+  case "$action" in
+    install) brew bundle install --file="$brewfile" --no-upgrade ;;
+    upgrade) brew bundle upgrade --file="$brewfile" ;;
+    check) brew bundle check --file="$brewfile" --no-upgrade --verbose ;;
+  esac
+done

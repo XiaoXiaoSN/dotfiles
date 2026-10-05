@@ -2,7 +2,9 @@
 
 with pkgs;
 {
-  home.packages = [
+  # macOS CLI packages live in macos/Brewfile. Install them before switching
+  # an existing Darwin Home Manager profile; Linux keeps its current packages.
+  home.packages = lib.optionals (!stdenv.isDarwin) [
     # useful tools
     bat
     direnv
