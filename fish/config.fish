@@ -19,7 +19,7 @@ set fish_color_command brcyan
 set fish_color_error '#ff6c6b'
 
 # initial the Starship prompt
-# reference: https://github.com/starship/starship/blob/v1.23.0/docs/advanced-config/README.md#transientprompt-and-transientrightprompt-in-fish
+# reference: https://starship.rs/advanced-config/#transientprompt-and-transientrightprompt-in-fish
 function starship_transient_prompt_func
   starship module directory
   starship module character
@@ -29,21 +29,14 @@ if command -q starship
   enable_transience
 end
 
-# # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# if test -f /opt/homebrew/Caskroom/miniconda/base/bin/conda
-#     eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-# else
-#     if test -f "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-#         . "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-#     else
-#         set -x PATH "/opt/homebrew/Caskroom/miniconda/base/bin" $PATH
-#     end
-# end
-# # <<< conda initialize <<<
-
 # fzf.fish key bindings
 fzf_configure_bindings --directory=\ct
 
 # Added by Antigravity IDE
 fish_add_path $HOME/.antigravity-ide/antigravity-ide/bin
+
+# >>> grok installer >>>
+fish_add_path $HOME/.grok/bin
+# <<< grok installer <<<
+
+test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish

@@ -55,3 +55,7 @@ end
 alias sht=cht
 alias goo=search
 alias google=search
+
+alias glm='CLAUDE_CONFIG_DIR="$HOME/.claude-glm" claude --permission-mode auto'
+
+alias h='herdr'
