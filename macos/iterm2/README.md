@@ -1,14 +1,29 @@
 # iTerm2
 
-## How to export/import setting
+## Files
 
-Open Settings page > General > Settings
+| File                      | Description                        |
+| ------------------------- | ---------------------------------- |
+| `XiaoXiaoSN.profile.json` | Profile (font, keybindings, shell) |
+| `default.itermcolors`     | Color theme                        |
 
-![iTerm2 Setting](https://i.imgur.com/Bv5UkYZ.png)
+## Export (update dotfiles)
+
+**Profile:**
+Settings → Profiles → Other Actions… (bottom-left) → Save Profile as JSON…
+
+**Color theme:**
+Settings → Profiles → Colors → Color Presets… (bottom-right) → Export…
+
+## Import (restore on new machine)
+
+**Profile:**
+Settings → Profiles → Other Actions… (bottom-left) → Import JSON Profiles…
+
+**Color theme:**
+Settings → Profiles → Colors → Color Presets… (bottom-right) → Import…
 
 ## Useful Shortcuts
-
-Cmd + Shift + h
 
 | ShortCut      | Description       |
 | ------------- | ----------------- |
