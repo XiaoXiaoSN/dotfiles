@@ -57,3 +57,9 @@ fi
 if [ -f "$HOME/zsh-profile.zsh" ]; then
   source "$HOME/zsh-profile.zsh"
 fi
+
+# MTPLX CLI
+case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) export PATH="$HOME/.local/bin:$PATH" ;;
+esac
