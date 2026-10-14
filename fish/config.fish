@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:$HOME/.docker/bin"
+# End of Docker Desktop section.
+
 set -gx LANG en_US.UTF-8
 set -gx EDITOR nvim
 
@@ -40,3 +44,6 @@ end
 
 # fzf.fish key bindings
 fzf_configure_bindings --directory=\ct
+
+# Added by Antigravity IDE
+fish_add_path $HOME/.antigravity-ide/antigravity-ide/bin
