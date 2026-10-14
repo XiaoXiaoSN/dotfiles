@@ -16,104 +16,109 @@
 # @raycast.author XiaoXiao
 # @raycast.authorURL https://github.com/xiaoxiaosn
 
-# no case match sensitive
+# case-insensitive matching
 shopt -s nocasematch
 
 GITHUB_URL="https://github.com"
 DEFAULT_GITHUB_USER="xiaoxiaosn"
 
-RES=$1
-SUB_RES=$2
-OPTION=$3
+trim() {
+  local s="$1"
+  s="${s#"${s%%[![:space:]]*}"}"
+  s="${s%"${s##*[![:space:]]}"}"
+  printf '%s\n' "$s"
+}
+
+RES=$(trim "$1")
+SUB_RES=$(trim "$2")
+OPTION=$(trim "$3")
 
 # Handling Repository Sub Resources
 # Example:
 #     gh magic-box pr close
 #     gh dotfiles issue
 handle_repository_sub_resources() {
-  local GITHUB_URL=$1
-  local SUB_RES=$2
-  local OPTION=$3
+  local url=$1
+  local sub=$2
+  local opt=$3
 
-  case $SUB_RES in
+  case $sub in
     pr*|pull*)
-      GITHUB_URL+="/pulls"
+      url+="/pulls"
       # Matching Option for Pull Request
-      case $OPTION in
+      case $opt in
         me|my|openMe|meOpen)
-          # same as q=is:open is:pr author:${DEFAULT_GITHUB_USER}
-          GITHUB_URL+=${DEFAULT_GITHUB_USER}
+          url+="?q=is:open+is:pr+author:${DEFAULT_GITHUB_USER}"
         ;;
 
         closeMe|meClose|closedMe|meClosed|closedMy|myClosed)
-          GITHUB_URL+="?q=is:pr is:closed author:${DEFAULT_GITHUB_USER}"
+          url+="?q=is:pr+is:closed+author:${DEFAULT_GITHUB_USER}"
         ;;
 
         open)
-          GITHUB_URL+="?is:pr q=is:open"
+          url+="?q=is:open+is:pr"
         ;;
 
         close|closed)
-          GITHUB_URL+="?is:pr q=is:close"
+          url+="?q=is:closed+is:pr"
         ;;
       esac
     ;;
 
     issue*)
-      GITHUB_URL+="/issues"
+      url+="/issues"
     ;;
 
     action*)
-      GITHUB_URL+="/actions"
+      url+="/actions"
     ;;
 
     setting*)
-      GITHUB_URL+="/settings"
+      url+="/settings"
     ;;
   esac
 
-  echo "$GITHUB_URL"
+  echo "$url"
 }
-
 
 # Handling PR and Issue Sub Resources
 # Example:
 #     gh pr close
 #     gh issue close
 handle_pr_issue_sub_resources() {
-  local GITHUB_URL=$1
-  local SUB_RES=$2
-  local OPTION=$3
+  local url=$1
+  local sub=$2
+  local opt=$3
 
-  case $SUB_RES in
+  case $sub in
     open)
       # Default setting; Do nothing
     ;;
 
     close|closed)
-      GITHUB_URL+="?q=is:closed author:${DEFAULT_GITHUB_USER}"
+      url+="?q=is:closed+author:${DEFAULT_GITHUB_USER}"
     ;;
 
     assign|assigned)
-      GITHUB_URL+="?q=assignee:${DEFAULT_GITHUB_USER}"
-      case $OPTION in
+      url+="?q=assignee:${DEFAULT_GITHUB_USER}"
+      case $opt in
         close|closed)
-          GITHUB_URL+=" is:closed"
+          url+="+is:closed"
         ;;
       esac
     ;;
 
     my|me)
       # same as q=is:open is:pr author:${DEFAULT_GITHUB_USER}
-      GITHUB_URL+="?q=is:open author:${DEFAULT_GITHUB_USER}"
+      url+="?q=is:open+author:${DEFAULT_GITHUB_USER}"
     ;;
 
     rr|review|review-requested)
-      GITHUB_URL+="?q=is:open review-requested:${DEFAULT_GITHUB_USER}"
+      url+="?q=is:open+review-requested:${DEFAULT_GITHUB_USER}"
     ;;
   esac
 
-  echo "$GITHUB_URL"
+  echo "$url"
 }
 
 # load local settings
@@ -123,7 +128,10 @@ handle_pr_issue_sub_resources() {
 # PRIVATE_REPOS["foo"]="XiaoXiaoSN/dotfiles"
 # ```
 PRIVATE_REPO_CONFIG="$HOME/.gh_private_repos"
+declare -A PRIVATE_REPOS || exit 1
+
 if [[ -f "$PRIVATE_REPO_CONFIG" ]]; then
+  # shellcheck source=/dev/null
   source "$PRIVATE_REPO_CONFIG"
 fi
 
@@ -132,16 +140,17 @@ case $RES in
   # Shortcut for GitHub function pages
   search)
     open "$GITHUB_URL/search?q=$SUB_RES"
+    exit 0
   ;;
 
   pr|pull|pulls)
     GITHUB_URL+="/pulls"
-    GITHUB_URL=$(handle_pr_issue_sub_resources $GITHUB_URL $SUB_RES $OPTION)
+    GITHUB_URL=$(handle_pr_issue_sub_resources "$GITHUB_URL" "$SUB_RES" "$OPTION")
   ;;
 
   issue|issues)
     GITHUB_URL+="/issues"
-    GITHUB_URL=$(handle_pr_issue_sub_resources $GITHUB_URL $SUB_RES $OPTION)
+    GITHUB_URL=$(handle_pr_issue_sub_resources "$GITHUB_URL" "$SUB_RES" "$OPTION")
   ;;
 
   notify|notification|notifications)
@@ -161,18 +170,18 @@ case $RES in
   # Shortcut for GitHub Repositories
   mb|magicbox|magic-box)
     GITHUB_URL+="/XiaoXiaoSN/magic-box"
-    GITHUB_URL=$(handle_repository_sub_resources $GITHUB_URL $SUB_RES $OPTION)
+    GITHUB_URL=$(handle_repository_sub_resources "$GITHUB_URL" "$SUB_RES" "$OPTION")
   ;;
 
   .|dotfile|dotfiles)
     GITHUB_URL+="/XiaoXiaoSN/dotfiles"
-    GITHUB_URL=$(handle_repository_sub_resources $GITHUB_URL $SUB_RES $OPTION)
+    GITHUB_URL=$(handle_repository_sub_resources "$GITHUB_URL" "$SUB_RES" "$OPTION")
   ;;
 
   *)
-    if [[ -n "${PRIVATE_REPOS[$RES]}" ]]; then
+    if [[ -n "${PRIVATE_REPOS[$RES]:-}" ]]; then
       GITHUB_URL+="/${PRIVATE_REPOS[$RES]}"
-      GITHUB_URL=$(handle_repository_sub_resources $GITHUB_URL $SUB_RES $OPTION)
+      GITHUB_URL=$(handle_repository_sub_resources "$GITHUB_URL" "$SUB_RES" "$OPTION")
     else
       open "$GITHUB_URL/search?q=$RES"
       echo "No matches \"$RES\". Search it on GitHub..."
@@ -181,6 +190,6 @@ case $RES in
   ;;
 esac
 
-# Open URL Encoded GitHub link in the default browser
+# open URL in the default browser
 open "$GITHUB_URL"
 echo "open $GITHUB_URL"
