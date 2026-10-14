@@ -36,7 +36,10 @@ nvimtree.setup({
   view = {
     adaptive_size = true,
     side = 'left',
-    width = 30, -- default: 25
+    width = {
+      min = 30,
+      max = 50, -- cap adaptive_size growth
+    },
     number = false,
   },
   git = {
