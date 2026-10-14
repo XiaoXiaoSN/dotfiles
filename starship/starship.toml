@@ -3,6 +3,7 @@
 
 # ref: https://starship.rs/config/#prompt
 # schema: https://starship.rs/config-schema.json
+"$schema" = "https://starship.rs/config-schema.json"
 format = """
 $python\
 $directory\
@@ -29,9 +30,11 @@ style = "gray"
 
 [status]
 disabled = false
-style = "red"
 symbol = ""
-pipestatus = false
+success_style = "green"
+failure_style = "red"
+pipestatus = true
+pipestatus_separator = "|"
 
 [python]
 format = ' [${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
