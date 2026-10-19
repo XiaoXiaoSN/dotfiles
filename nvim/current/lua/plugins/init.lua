@@ -1,3 +1,5 @@
+local kaomoji_path = vim.fn.expand('~/projects/lua/cmp-kaomoji')
+
 return {
   -- Lua functions
   { 'nvim-lua/plenary.nvim', version = 'v0.1.*' },
@@ -294,8 +296,12 @@ return {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-emoji',
       'onsails/lspkind.nvim', -- icons
-      -- 'XiaoXiaoSN/cmp-kaomoji',
-      { dir = '~/projects/lua/cmp-kaomoji', lazy = true },
+      {
+        'XiaoXiaoSN/cmp-kaomoji',
+        dir = vim.fn.isdirectory(kaomoji_path) == 1 and kaomoji_path or nil,
+        build = false, -- pure Lua; no LuaRocks build is needed
+        lazy = true,
+      },
     },
     config = function()
       require('plugins.configs.nvim-cmp')

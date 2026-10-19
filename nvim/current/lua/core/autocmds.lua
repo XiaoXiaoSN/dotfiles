@@ -54,6 +54,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+local go_source_root
+local rust_toolchains = (vim.env.RUSTUP_HOME or vim.fn.expand('~/.rustup')) .. '/toolchains'
+rust_toolchains = vim.uv.fs_realpath(rust_toolchains) or rust_toolchains
+
 -- finish formatting before writing the buffer to disk
 vim.api.nvim_create_autocmd('BufWritePre', {
   group = vim.api.nvim_create_augroup('UserFormatOnSave', { clear = true }),
@@ -61,18 +65,25 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     if vim.bo[data.buf].buftype ~= '' then
       return
     end
-    -- exclude some paths that don't need formatting
-    local home = os.getenv('HOME')
-    local excluded_patterns = {
-      '/opt/homebrew/Cellar/go',
-      home .. '/.rustup/toolchains/',
-    }
+    -- resolve Go's toolchain once, on the first Go save rather than at startup
+    if go_source_root == nil and vim.bo[data.buf].filetype:match('^go') then
+      go_source_root = ''
+      if vim.fn.executable('go') == 1 then
+        local result = vim.system({ 'go', 'env', 'GOROOT' }, { text = true }):wait(1000)
+        if result.code == 0 then
+          local source_path = vim.trim(result.stdout) .. '/src'
+          go_source_root = vim.uv.fs_realpath(source_path) or source_path
+        end
+      end
+    end
 
     local filepath = vim.api.nvim_buf_get_name(data.buf)
-    for _, pattern in ipairs(excluded_patterns) do
-      if filepath:find(pattern, 1, true) then
-        return
-      end
+    filepath = vim.uv.fs_realpath(filepath) or filepath
+    if
+      vim.startswith(filepath, rust_toolchains .. '/')
+      or (go_source_root and go_source_root ~= '' and vim.startswith(filepath, go_source_root .. '/'))
+    then
+      return
     end
 
     require('core.formatting').format(data.buf)

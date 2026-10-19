@@ -12,8 +12,8 @@ vim.loader.enable()
 -- Custom mapping <leader> (see `:h mapleader` for more info)
 vim.g.mapleader = ','
 
--- Use English as main language
-vim.cmd([[language en_US.UTF-8]])
+-- keep messages in English without requiring a generated locale
+vim.cmd('language messages C')
 
 -- nvim-tree/nvim-tree.lua: disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1

@@ -4,19 +4,66 @@
 
 ### Getting Started
 
-```bash
-# Install Neovim (0.11 or newer)
-brew install neovim
+macOS is the primary environment; Ubuntu uses the same configuration with the
+platform dependencies below.
 
-# Link the config to `$HOME/.config/nvim` (or just copy it!)
-ln -sh ./nvim/current $HOME/.config/nvim
+Requires Neovim **0.11.3 or newer** (tested with 0.11.5), Git, `curl`, `unzip`,
+`ripgrep`, a C compiler and Tree-sitter CLI for parsers, and Node.js **22 or newer** for
+Copilot and JavaScript-based language servers. Language tools must be on `PATH`.
 
-# Install plugins and langue servers
+On macOS:
+
+```sh
+brew install neovim git ripgrep fd node
+```
+
+On Ubuntu:
+
+```sh
+sudo apt update
+sudo apt install git curl unzip build-essential ripgrep fd-find python3-venv
+```
+
+Install a recent Neovim from the [official Linux archives](https://github.com/neovim/neovim/blob/master/INSTALL.md#linux)
+if Ubuntu's package is below 0.11.3. Choose the archive for your CPU (`x86_64` or
+`arm64`). Install Node.js separately and check `nvim --version` and `node --version`.
+Telescope supports Ubuntu's `fdfind` executable; no `fd` alias is required.
+
+Install the Tree-sitter CLI after Node.js (needed to generate the Swift parser):
+
+```sh
+npm install -g tree-sitter-cli@0.25.8
+```
+
+From the repository root, with no existing `nvim` directory at the destination:
+
+```sh
+mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}"
+ln -s "$PWD/nvim/current" "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
+
+# install plugins and language servers
 nvim +Lazy
 nvim +Mason
 ```
 
-A reference sheet for [Vim tips](nvim/current/vim-tips.md) to record some basic commands.
+The kaomoji source uses `~/projects/lua/cmp-kaomoji` when that development checkout
+exists, and otherwise installs the GitHub version pinned in `lazy-lock.json`.
+An existing `~/.vim/undodir` is retained so previous undo history remains available.
+New installations use Neovim's `stdpath('state')/undo` directory, which is created
+automatically. No additional locale needs to be generated.
+
+System clipboard integration is enabled when Neovim finds a provider: macOS uses
+`pbcopy`/`pbpaste`; Ubuntu desktops need `wl-clipboard` on Wayland or `xclip`/`xsel`
+on X11. A headless Ubuntu session can edit files without a clipboard provider.
+See [Neovim's clipboard providers](https://neovim.io/doc/user/provider.html#clipboard).
+Select a Nerd Font in your terminal for plugin icons; `guifont` only affects GUIs.
+
+Install Go for Go tooling, and Rust with `rust-analyzer` and `rustfmt` for Rust.
+The none-ls formatters also need their executables: `prettier`, `goimports`,
+`stylua`, `clang-format`, and `black`. Install them with Mason or their respective
+toolchains; missing tools can be diagnosed with `:checkhealth` and `:NullLsInfo`.
+
+A reference sheet for [Vim tips](vim-tips.md) records some basic commands.
 
 ## Key Mappings
 
@@ -164,8 +211,8 @@ prefers none-ls when it has an available formatter, otherwise it uses one attach
 language server that supports formatting. Buffers without a formatter are skipped.
 Manual formatting with `<space>f` uses the same selection and runs asynchronously.
 Go's separate vim-go format-on-save hook is disabled to avoid formatting twice.
-Files under the Homebrew Go installation and Rust toolchains are excluded from
-automatic formatting.
+Sources under `GOROOT/src` and Rust toolchains (`RUSTUP_HOME` is respected) are
+excluded from automatic formatting on both platforms.
 
 ### Installation with Mason
 
@@ -182,7 +229,7 @@ Or, install them manually
 Rust
 
 ```
-rustup +nightly component add rust-analyzer-preview
+rustup component add rust-analyzer rustfmt
 ```
 
 Go
@@ -196,8 +243,10 @@ go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 TypeScript
 
+The configured `ts_ls` uses the JavaScript `tsserver` supplied by TypeScript 5.x.
+
 ```
-npm install -g typescript-language-server typescript
+npm install -g typescript-language-server typescript@5
 ```
 
 Lua
@@ -205,5 +254,4 @@ Lua
 ```
 # formatting
 cargo install stylua
-brew install luarocks
 ```

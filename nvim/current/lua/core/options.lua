@@ -10,7 +10,9 @@ vim.opt.showmode = false
 vim.opt.showcmd = true
 vim.opt.cursorline = true
 vim.opt.laststatus = 3 -- global statusline
-vim.opt.clipboard = 'unnamedplus' -- Specify to automatically use the system clipboard for copy and paste
+if vim.fn.has('clipboard') == 1 then
+  vim.opt.clipboard = 'unnamedplus'
+end
 
 -- Indenting
 vim.opt.expandtab = true
@@ -27,7 +29,10 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.termguicolors = true
 vim.opt.timeoutlen = 500
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+local legacy_undodir = vim.fn.expand('~/.vim/undodir')
+local undodir = vim.fn.isdirectory(legacy_undodir) == 1 and legacy_undodir or vim.fn.stdpath('state') .. '/undo'
+vim.fn.mkdir(undodir, 'p')
+vim.opt.undodir = undodir
 vim.opt.undofile = true
 
 -- Numbers
@@ -39,7 +44,7 @@ vim.opt.ruler = false
 vim.opt.updatetime = 250
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = "menu,menuone,noselect"
+vim.o.completeopt = 'menu,menuone,noselect'
 
 -- Auto-reload files when they change externally
 vim.o.autoread = true
