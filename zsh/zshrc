@@ -7,6 +7,12 @@ export ZSH_CONFIG="$XDG_CONFIG_HOME/zsh"
 export ZSH_CACHE="$XDG_CACHE_HOME/zsh"
 export ZSH_COMPDUMP="$ZSH_CACHE/zcompdump-$ZSH_VERSION"
 
+# discard inherited Linux dotfile paths before macOS command lookups hit autofs
+typeset -U path
+if [[ "$OSTYPE" == darwin* && "$HOME" == /Users/* ]]; then
+  path=("${(@)path:#/home/$USER/(.cargo/bin|.bin)}")
+fi
+
 if [[ ! $ZSH_DEFAULT_PROMPT ]]; then
   ZSH_DEFAULT_PROMPT="godfather"
 fi
@@ -15,13 +21,16 @@ THEME_GODFATHER_PROMPT_SIGN="^ ̳ . ̫ . ̳ ^ ฅ "
 THEME_GODFATHER_PROMPT_RETURN_CODE_LEFT=1
 
 # create zsh cache if not exist
-mkdir -p $ZSH_CACHE
+[[ -d "$ZSH_CACHE" ]] || mkdir -p "$ZSH_CACHE"
 
 # prepare zsh configurations
-typeset -U config_files
-config_files=(
-  # setup from bash script source (only if zoxide is not installed)
-  $([ ! -x "$(command -v zoxide)" ] && echo ${HOME}/.bin/setup/*.sh(N))
+typeset -aU config_files
+config_files=()
+# setup from bash script source (only if zoxide is not installed)
+if (( ! $+commands[zoxide] )); then
+  config_files+=("$HOME"/.bin/setup/*.sh(N))
+fi
+config_files+=(
 
   # config
   $ZSH_CONFIG/config.d/*.zsh(N)

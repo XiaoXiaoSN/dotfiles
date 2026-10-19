@@ -23,7 +23,7 @@ fi
 
 # setup for gpg
 # https://stackoverflow.com/a/42265848/6695274
-export GPG_TTY=$(tty)
+[[ -n "$TTY" ]] && export GPG_TTY="$TTY"
 
 # no Beep on error in ZLE.
 setopt NO_BEEP
