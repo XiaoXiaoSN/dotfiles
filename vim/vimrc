@@ -15,10 +15,10 @@ set hlsearch    " highlight all search matches
 
 set mouse=n     " enable mouse in normal mode
 
-" use system clipboard for copy/paste
-" check support with: :echo has('clipboard')
-" see: https://vi.stackexchange.com/a/96
-set clipboard=unnamed
+" use the system clipboard when supported by the Vim build
+if has('clipboard')
+  set clipboard=unnamedplus
+endif
 
 " WSL clipboard support
 if filereadable("/mnt/c/Windows/System32/clip.exe")
@@ -41,10 +41,16 @@ let mapleader=","
 " re-yank selection after paste so the clipboard is not replaced
 xnoremap p pgvy
 
-" system clipboard mappings
-vmap <Leader>c "+yy
-nmap <Leader>c "+yy
-nmap <Leader>v "+p
+" fall back to Vim registers on terminal builds without clipboard support
+if has('clipboard')
+  xnoremap <Leader>c "+y
+  nnoremap <Leader>c "+yy
+  nnoremap <Leader>v "+p
+else
+  xnoremap <Leader>c y
+  nnoremap <Leader>c yy
+  nnoremap <Leader>v p
+endif
 
 set smartcase   " case-sensitive when search pattern contains uppercase
 
@@ -52,6 +58,16 @@ set hidden      " allow switching buffers without saving
 
 set splitright  " vertical split opens to the right
 set splitbelow  " horizontal split opens below
+set timeoutlen=500
+
+" share window navigation and save keys with the Neovim configuration
+nnoremap <silent> <C-h> <C-w>h
+nnoremap <silent> <C-j> <C-w>j
+nnoremap <silent> <C-k> <C-w>k
+nnoremap <silent> <C-l> <C-w>l
+nnoremap <silent> <Esc> <Cmd>nohlsearch<CR>
+nnoremap <silent> <C-s> <Cmd>write<CR>
+nnoremap <silent> <M-s> <Cmd>write<CR>
 
 set scrolloff=5 " keep 5 lines of context above/below cursor when scrolling
 
@@ -66,6 +82,7 @@ set encoding=utf-8  " default to UTF-8 (important on some Ubuntu setups)
 " persistent undo across sessions
 set undofile
 set undodir=~/.vim/undodir
+call mkdir(expand(&undodir), 'p', 0700)
 
 set signcolumn=yes  " always show sign column to avoid layout shifts (gitgutter)
 
@@ -74,8 +91,18 @@ set ignorecase  " case-insensitive search
 syntax on
 filetype plugin indent on
 
-" auto-save on leaving insert mode for common file types
-au InsertLeave *.go,*.sh,*.php,*.rs write
+" reload clean buffers on focus or buffer entry without an idle polling hook
+set autoread
+augroup UserCheckTime
+  autocmd!
+  autocmd FocusGained,BufEnter * checktime
+augroup END
+
+" preserve save hooks and avoid rewriting unchanged or read-only buffers
+augroup UserAutoSave
+  autocmd!
+  autocmd InsertLeave *.go,*.sh,*.php,*.rs ++nested if &buftype ==# '' && !&readonly | update | endif
+augroup END
 
 "==============================================================================
 " plugins (vim-plug)
@@ -136,7 +163,9 @@ call plug#end()
 " color scheme
 "==============================================================================
 
-colorscheme sublimemonokai
+if !empty(globpath(&runtimepath, 'colors/sublimemonokai.vim'))
+  colorscheme sublimemonokai
+endif
 
 
 "==============================================================================
@@ -152,7 +181,9 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 "==============================================================================
 
 if executable('go')
-  let g:go_fmt_command             = 'goimports'
+  let g:go_fmt_command             = executable('goimports') ? 'goimports' : 'gofmt'
+  " goimports already organizes imports; the gofmt fallback needs no extra tools
+  let g:go_imports_autosave        = 0
   let g:go_autodetect_gopath       = 1
   let g:go_list_type               = 'quickfix'
   let g:go_highlight_types         = 1
@@ -180,9 +211,9 @@ let NERDTreeShowLineNumbers = 1
 let NERDTreeAutoCenter      = 1
 let NERDTreeShowHidden      = 1
 let NERDTreeShowBookmarks   = 2
-let NERDTreeIgnore          = ['\.pyc', '\~$', '\.swp', '.git']
+let NERDTreeIgnore          = ['\.pyc$', '\~$', '\.swp$', '^\.DS_Store$', '^\.git$[[dir]]']
 
-let g:NERDTreeGitStatusShowIgnored = 1
+let g:NERDTreeGitStatusShowIgnored = 0
 let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ 'Modified'  : '✹',
     \ 'Staged'    : '✚',
@@ -208,6 +239,31 @@ nnoremap <leader>fl  :Lines<CR>
 nnoremap <leader>fbl :BLines<CR>
 nnoremap <leader>ff  :Files<CR>
 nnoremap <leader>fr  :Rg<CR>
+nnoremap <leader>fg  :Rg<CR>
+nnoremap <leader>fb  :Buffers<CR>
+nnoremap <leader>fh  :Helptags<CR>
+nnoremap <leader>tk  :Maps<CR>
+nnoremap <leader>km  :Maps<CR>
+nnoremap <leader>cm  :Commits<CR>
+
+
+"==============================================================================
+" editing and Git shortcuts shared with Neovim
+"==============================================================================
+
+nnoremap <silent> <leader>/ :TComment<CR>
+xnoremap <silent> <leader>/ :TComment<CR>
+
+nnoremap <silent> <leader>h :bprevious<CR>
+nnoremap <silent> <leader>j :bprevious<CR>
+nnoremap <silent> <leader>k :bnext<CR>
+nnoremap <silent> <leader>l :bnext<CR>
+
+nnoremap <silent> <leader>gs :Git<CR>
+nnoremap <silent> <leader>hp :GitGutterPreviewHunk<CR>
+nnoremap <silent> <leader>hr :GitGutterUndoHunk<CR>
+nnoremap <silent> <leader>hb :Git blame<CR>
+nnoremap <silent> <leader>hd :Gdiffsplit<CR>
 
 
 "==============================================================================
@@ -226,9 +282,9 @@ nnoremap <leader>fr  :Rg<CR>
 :nn <Leader>9 9gt
 :nn <Leader>0 :tablast<CR>
 
-" show highlight group under cursor in the status line
+" show the syntax group through airline's statusline
 set laststatus=2
-set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}
+let g:airline_section_x = '%{&filetype} %{synIDattr(synID(line("."),col("."),1),"name")}'
 
 nmap <Leader>gn :call <SID>SynStack()<CR>
 map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
@@ -255,14 +311,19 @@ command! Kebab     call feedkeys("cr-")
 command! DotCase   call feedkeys("cr.")
 command! SpaceCase call feedkeys("cr<space>")
 
-" command-mode typo abbreviations
-cnoreabbrev W!    w!
-cnoreabbrev Q!    q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq    wq
-cnoreabbrev Wa    wa
-cnoreabbrev wQ    wq
-cnoreabbrev WQ    wq
-cnoreabbrev W     w
-cnoreabbrev Q     q
-cnoreabbrev Qall  qall
+" restrict typo corrections to the Ex command, leaving searches and arguments intact
+function! s:CommandAbbrev(from, to) abort
+  return getcmdtype() ==# ':' && getcmdline() ==# a:from && getcmdpos() == strlen(a:from) + 1
+        \ ? a:to : a:from
+endfunction
+
+cnoreabbrev <expr> W!    <SID>CommandAbbrev('W!', 'w!')
+cnoreabbrev <expr> Q!    <SID>CommandAbbrev('Q!', 'q!')
+cnoreabbrev <expr> Qall! <SID>CommandAbbrev('Qall!', 'qall!')
+cnoreabbrev <expr> Wq    <SID>CommandAbbrev('Wq', 'wq')
+cnoreabbrev <expr> Wa    <SID>CommandAbbrev('Wa', 'wa')
+cnoreabbrev <expr> wQ    <SID>CommandAbbrev('wQ', 'wq')
+cnoreabbrev <expr> WQ    <SID>CommandAbbrev('WQ', 'wq')
+cnoreabbrev <expr> W     <SID>CommandAbbrev('W', 'w')
+cnoreabbrev <expr> Q     <SID>CommandAbbrev('Q', 'q')
+cnoreabbrev <expr> Qall  <SID>CommandAbbrev('Qall', 'qall')
