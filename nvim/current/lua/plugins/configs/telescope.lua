@@ -76,19 +76,10 @@ local options = {
       },
     },
   },
-
-  extensions_list = { 'themes', 'terms' },
 }
 
 -- check for any override
 telescope.setup(options)
-
--- load extensions
-pcall(function()
-  for _, ext in ipairs(options.extensions_list) do
-    telescope.load_extension(ext)
-  end
-end)
 
 ----------------------------------------
 -- AutoCmd

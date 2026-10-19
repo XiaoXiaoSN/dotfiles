@@ -2,7 +2,6 @@
 -- reference: https://github.com/neovim/nvim-lspconfig
 
 local utils = require('core.utils')
-local lspconfig = utils.require('lspconfig')
 local cmp_nvim_lsp = utils.require('cmp_nvim_lsp')
 
 -- Enable diagnostics
@@ -11,53 +10,33 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '<leader>f', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', function()
-  vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.E })
+  vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = true })
 end, opts)
 vim.keymap.set('n', ']d', function()
-  vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.E })
+  vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true })
 end, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Configure diagnostic display to show LSP source
 vim.diagnostic.config({
   virtual_text = {
-    source = true,  -- Show LSP source in virtual text
-    format = function(diagnostic)
-      return string.format("%s [%s]", diagnostic.message, diagnostic.source or "unknown")
-    end,
+    source = true,
   },
   signs = true,
   update_in_insert = true,
   float = {
-    source = true,  -- Show LSP source in floating window
-    border = "rounded",
+    source = true,
+    border = 'rounded',
   },
 })
 
-
--- Start to setup LSP Configurations
-local on_attach = require('plugins.share.lsp-keymappings').on_attach
-
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
-
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-local capabilities = cmp_nvim_lsp.default_capabilities()
-
--- Setup servers
--- reference: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
-local util = require('lspconfig/util')
+-- share completion capabilities across Mason-managed servers and local configurations
+vim.lsp.config('*', {
+  capabilities = cmp_nvim_lsp.default_capabilities(),
+})
 
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#custom-configuration
-lspconfig.gopls.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-  cmd = { 'gopls', 'serve' },
-  filetypes = { 'go', 'gomod' },
-  root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
+vim.lsp.config('gopls', {
   settings = {
     gopls = {
       analyses = {
@@ -69,35 +48,13 @@ lspconfig.gopls.setup({
   },
 })
 
-lspconfig.golangci_lint_ls.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
+vim.lsp.config('ts_ls', {
+  root_dir = function(bufnr, on_dir)
+    on_dir(vim.fs.root(bufnr, { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' }))
+  end,
 })
 
-lspconfig.ts_ls.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-  cmd = { 'typescript-language-server', '--stdio' },
-  filetypes = {
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx',
-  },
-  init_options = {
-    hostInfo = 'neovim',
-  },
-  root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
-})
-
-lspconfig.lua_ls.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
+vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
       runtime = {
@@ -111,7 +68,6 @@ lspconfig.lua_ls.setup({
           vim.env.VIMRUNTIME,
           '${3rd}/luv/library',
           '${3rd}/vim/library',
-          vim.api.nvim_get_runtime_file('', true),
         },
         checkThirdParty = false,
       },

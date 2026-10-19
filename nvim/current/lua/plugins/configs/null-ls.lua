@@ -11,7 +11,7 @@ local diagnostics = null_ls.builtins.diagnostics
 -- local completion = null_ls.builtins.completion
 
 null_ls.setup({
-  debug = true,
+  debug = false,
 
   -- NOTE: the list of builtin sources
   -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md

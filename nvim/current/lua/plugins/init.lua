@@ -57,7 +57,6 @@ return {
     end,
   },
   -- Status line
-  'arkav/lualine-lsp-progress',
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -68,7 +67,6 @@ return {
   -- Show LSP progress
   {
     'j-hui/fidget.nvim',
-    dependencies = { 'nvim-lua/lsp-status.nvim' },
     config = function()
       require('fidget').setup({})
     end,
@@ -83,6 +81,7 @@ return {
   -- Force mode
   {
     'folke/zen-mode.nvim',
+    cmd = 'ZenMode',
     config = function()
       require('plugins.configs.zen-mode')
     end,
@@ -90,6 +89,11 @@ return {
   {
     'akinsho/toggleterm.nvim',
     version = '*',
+    cmd = { 'ToggleTerm', 'TermExec', 'TermSelect', 'ToggleTermToggleAll' },
+    keys = {
+      { '<C-t>', '<cmd>execute v:count . "ToggleTerm"<CR>', desc = 'Toggle terminal' },
+      { '<C-t>', '<Esc><cmd>ToggleTerm<CR>', mode = 'i', desc = 'Toggle terminal' },
+    },
     config = function()
       require('toggleterm').setup({
         open_mapping = [[<c-t>]],
@@ -108,12 +112,23 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     version = '0.1.*',
-    dependencies = 'nvim-lua/plenary.nvim',
+    cmd = 'Telescope',
+    keys = {
+      '<leader>ff',
+      '<leader>fl',
+      '<leader>fg',
+      '<leader>fb',
+      '<leader>fh',
+      '<leader>tk',
+      '<leader>km',
+      '<leader>cm',
+      '<leader>gs',
+    },
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-media-files.nvim' },
     config = function()
       require('plugins.configs.telescope')
     end,
   },
-  'nvim-telescope/telescope-media-files.nvim',
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -130,7 +145,6 @@ return {
     end,
   },
   -- Git support
-  'airblade/vim-gitgutter',
   {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -168,7 +182,7 @@ return {
   -- Language Server and Their Friends
   ----------------------------------------
 
-  -- Ordering: mason.nvim -> mason-lspconfig.nvim -> nvim-lspconfig
+  -- configure servers before Mason enables them
   {
     'mason-org/mason.nvim',
     version = '2',
@@ -183,6 +197,7 @@ return {
     'mason-org/mason-lspconfig.nvim',
     version = '2',
     opts = {
+      automatic_enable = { exclude = { 'rust_analyzer' } },
       ensure_installed = {
         'autotools_ls', -- Makefile
         'bashls',
@@ -200,7 +215,7 @@ return {
         'ts_ls',
         'vimls',
         'yamlls',
-        'typos_lsp'
+        'typos_lsp',
       },
     },
     dependencies = {
@@ -212,8 +227,6 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      { 'mason-org/mason.nvim', opts = {} },
-      'mason-org/mason-lspconfig.nvim',
     },
     config = function()
       require('plugins.configs.nvim-lspconfig')
@@ -230,34 +243,31 @@ return {
   -- Go
   {
     'fatih/vim-go',
+    ft = { 'go', 'gomod', 'gosum', 'goasm' },
     build = ':GoUpdateBinaries',
-    config = function()
+    init = function()
+      -- formatting is owned by the shared save hook
+      vim.g.go_fmt_autosave = 0
+      vim.g.go_imports_autosave = 0
+      vim.g.go_mod_fmt_autosave = 0
       vim.g.go_def_mode = 'gopls'
       vim.g.go_info_mode = 'gopls'
     end,
   },
 
   -- Rust
-  'rust-lang/rust.vim',
+  { 'rust-lang/rust.vim', ft = 'rust' },
   {
     'mrcjkb/rustaceanvim',
     version = '^5',
     lazy = false, -- This plugin is already lazy
-    config = function()
-      vim.g.rustaceanvim = {
-        -- LSP configuration
-        server = {
-          on_attach = require('plugins.share.lsp-keymappings').on_attach,
-        },
-      }
-    end,
   },
   'mattn/webapi-vim',
 
   -- JavaScript & TypeScript
-  'pangloss/vim-javascript',
-  'leafgarland/typescript-vim',
-  'MaxMEllon/vim-jsx-pretty',
+  { 'pangloss/vim-javascript', ft = { 'javascript', 'javascriptreact' } },
+  { 'leafgarland/typescript-vim', ft = { 'typescript', 'typescriptreact' } },
+  { 'MaxMEllon/vim-jsx-pretty', ft = { 'javascriptreact', 'typescriptreact' } },
 
   -- Markdown Preview
   {
@@ -285,7 +295,7 @@ return {
       'hrsh7th/cmp-emoji',
       'onsails/lspkind.nvim', -- icons
       -- 'XiaoXiaoSN/cmp-kaomoji',
-      { dir = '~/projects/lua/cmp-kaomoji' },
+      { dir = '~/projects/lua/cmp-kaomoji', lazy = true },
     },
     config = function()
       require('plugins.configs.nvim-cmp')

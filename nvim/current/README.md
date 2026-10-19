@@ -5,7 +5,7 @@
 ### Getting Started
 
 ```bash
-# Install Neovim
+# Install Neovim (0.11 or newer)
 brew install neovim
 
 # Link the config to `$HOME/.config/nvim` (or just copy it!)
@@ -38,7 +38,7 @@ First of all. The `<leader>` key is `,` and it is customized in `core.global`.
 
 | Mode | ShortCut    | Description                      |
 | :--: | ----------- | -------------------------------- |
-| all  | `<leader>b` | Toggle file explorer             |
+| all  | `<leader>e` | Toggle file explorer             |
 | all  | `<C-b>`     | Toggle file explorer             |
 | all  | `<M-b>`     | Toggle file explorer             |
 | all  | `zz`        | Focus current file in explorer   |
@@ -96,7 +96,7 @@ Commonly used mappings in nvim-tree
 | Mode | ShortCut     | Description       |
 | :--: | ------------ | ----------------- |
 |  n   | `<leader>ff` | find files        |
-|  n   | `<leader>fl` | find line         |
+|  n   | `<leader>fl` | live grep (alias) |
 |  n   | `<leader>fg` | live grep         |
 |  n   | `<leader>fb` | find buffers      |
 |  n   | `<leader>fh` | find help tags    |
@@ -116,6 +116,7 @@ Commonly used mappings in nvim-tree
 |  n   | `gh`        | show hover hint   |
 |  n   | `K`         | show hover hint   |
 |  n   | `gi`        | go implementation |
+|  n   | `<space>k`  | signature help    |
 |  n   | `gr`        | go references     |
 |  n   | `<space>rn` | rename symbol     |
 |  n   | `F2`        | rename symbol     |
@@ -133,10 +134,10 @@ Commonly used mappings in nvim-tree
 <details>
 <summary> <b>🖥️ Terminal</b> </summary>
 
-| Mode | ShortCut     | Description           |
-| :--: | ------------ | --------------------- |
-|  n   | `<C-t`       | create a new terminal |
-|  x   | `<Esc><Esc>` | exit terminal mode    |
+| Mode | ShortCut     | Description        |
+| :--: | ------------ | ------------------ |
+| n, i | `<C-t>`      | toggle terminal    |
+|  t   | `<Esc><Esc>` | exit terminal mode |
 
 </details>
 
@@ -153,6 +154,18 @@ Commonly used mappings in nvim-tree
 </details>
 
 ## Language Servers
+
+Mason enables installed language servers through Neovim's native `vim.lsp.config()` /
+`vim.lsp.enable()` APIs. Rust is managed by rustaceanvim. Common LSP key mappings
+are installed on `LspAttach`; `<C-h/j/k/l>` always remain window navigation keys.
+
+Normal file buffers are formatted synchronously before saving. The shared formatter
+prefers none-ls when it has an available formatter, otherwise it uses one attached
+language server that supports formatting. Buffers without a formatter are skipped.
+Manual formatting with `<space>f` uses the same selection and runs asynchronously.
+Go's separate vim-go format-on-save hook is disabled to avoid formatting twice.
+Files under the Homebrew Go installation and Rust toolchains are excluded from
+automatic formatting.
 
 ### Installation with Mason
 

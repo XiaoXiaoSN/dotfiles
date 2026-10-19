@@ -23,15 +23,6 @@ local options = {
     themable = true,
     numbers = 'ordinal', -- *'none' | 'ordinal' | 'buffer_id' | 'both' | function({ ordinal, id, lower, raise }): string,
 
-    custom_areas = {
-      right = function()
-        return {
-          { text = '%@Toggle_theme@' .. vim.g.toggle_theme_icon .. '%X' },
-          { text = '%@Quit_vim@ %X' },
-        }
-      end,
-    },
-
     custom_filter = function(buf_number)
       -- Func to filter out our managed/persistent split terms
       local present_type, type = pcall(function()

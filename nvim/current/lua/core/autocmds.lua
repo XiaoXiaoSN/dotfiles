@@ -47,27 +47,20 @@ vim.api.nvim_create_autocmd({ 'VimEnter' }, {
   end,
 })
 
--- format while saving
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspMappings', { clear = true }),
+  callback = function(data)
+    require('plugins.share.lsp-keymappings').on_attach(vim.lsp.get_client_by_id(data.data.client_id), data.buf)
+  end,
+})
+
+-- finish formatting before writing the buffer to disk
 vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = {
-    -- '*.c', -- handled by null-ls clang_format to avoid conflicts
-    -- '*.cpp', -- handled by null-ls clang_format to avoid conflicts
-    '*.css',
-    -- '*.cxx', -- handled by null-ls clang_format to avoid conflicts
-    -- '*.go', -- it's provided by `go-vim`
-    '*.htm',
-    '*.html',
-    '*.java',
-    -- '*.js', -- handled by null-ls prettier to avoid conflicts
-    '*.json',
-    -- '*.lua', -- handled by null-ls stylua to avoid conflicts
-    -- '*.py', -- handled by null-ls black to avoid conflicts
-    -- '*.rs', -- handled by rustaceanvim to avoid conflicts
-    -- '*.ts', -- handled by null-ls prettier to avoid conflicts
-    '*.toml',
-    '*.vim',
-  },
-  callback = function()
+  group = vim.api.nvim_create_augroup('UserFormatOnSave', { clear = true }),
+  callback = function(data)
+    if vim.bo[data.buf].buftype ~= '' then
+      return
+    end
     -- exclude some paths that don't need formatting
     local home = os.getenv('HOME')
     local excluded_patterns = {
@@ -75,22 +68,18 @@ vim.api.nvim_create_autocmd('BufWritePre', {
       home .. '/.rustup/toolchains/',
     }
 
-    local filepath = vim.fn.expand('%:p')
+    local filepath = vim.api.nvim_buf_get_name(data.buf)
     for _, pattern in ipairs(excluded_patterns) do
       if filepath:find(pattern, 1, true) then
         return
       end
     end
 
-    -- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format()
-    vim.lsp.buf.format({
-      timeout_ms = 1000,
-      async = true,
-    })
+    require('core.formatting').format(data.buf)
   end,
 })
 
--- Auto-reload files when focus is gained or cursor is idle
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
-  command = "checktime",
+-- reload externally changed files when focus is gained or the cursor is idle
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, {
+  command = 'checktime',
 })
