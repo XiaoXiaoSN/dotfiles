@@ -1,0 +1,4 @@
+# Cloud providers and local development tunnels.
+brew "awscli"
+cask "gcloud-cli"
+cask "ngrok"

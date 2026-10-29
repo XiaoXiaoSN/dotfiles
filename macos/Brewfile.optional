@@ -1,0 +1,19 @@
+# Additional CLI tools; keep the default environment focused.
+brew "duckdb"
+brew "dust"
+brew "grpcurl"
+brew "hyperfine"
+brew "websocat"
+
+# Secondary apps and diagnostic GUIs. No automatic replacements or removals.
+# Historical quarantine workaround, not evidence that the app is malicious:
+# https://github.com/qishibo/AnotherRedisDesktopManager/issues/820#issuecomment-1069757505
+# Do not bypass Gatekeeper/quarantine checks in this installer.
+cask "another-redis-desktop-manager"
+cask "discord"
+cask "google-chrome"
+cask "lens"
+cask "obsidian"
+cask "postman"
+cask "telegram"
+cask "wireshark"

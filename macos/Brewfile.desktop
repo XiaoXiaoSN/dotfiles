@@ -1,0 +1,14 @@
+# Primary desktop environment. No GUI apps are installed by default.
+tap "xiaoxiaosn/xiaoxiao"
+cask "xiaoxiaosn/xiaoxiao/font-noto-nerd"
+
+cask "1password"
+cask "brave-browser"
+cask "docker-desktop"
+cask "hiddenbar"
+cask "iterm2"
+cask "itsycal"
+cask "notion"
+cask "raycast"
+cask "slack"
+cask "visual-studio-code"

@@ -1,0 +1,45 @@
+# Core macOS CLI environment. GUI apps and cloud/VPN tools are opt-in.
+# Node is managed by nvm.fish; Rust toolchains are managed by rustup.
+
+# Shell and navigation: keep in sync with fish/README.md.
+brew "bat"
+brew "direnv"
+brew "eza"
+brew "fd"
+brew "fish"
+brew "fzf"
+brew "htop"
+brew "neovim"
+brew "ranger"
+brew "ripgrep"
+brew "starship"
+brew "tmux"
+brew "tree"
+brew "watch"
+brew "zoxide"
+
+# Development and data tools.
+brew "curl"
+brew "fx"
+brew "gh"
+brew "git"
+brew "git-delta"
+brew "gnupg"
+brew "go"
+brew "httpie"
+brew "jq"
+brew "protobuf"
+brew "uv"
+brew "wget"
+brew "yq"
+
+# Kubernetes and network diagnostics.
+brew "helm"
+brew "iproute2mac"
+brew "k9s"
+brew "kind"
+brew "kubectx"
+brew "kubernetes-cli"
+brew "kustomize"
+brew "mtr"
+brew "nmap"
