@@ -9,6 +9,9 @@ try
   call assert_equal('', s:startup_error, 'startup')
   execute 'source ' . fnameescape(s:config)
   execute 'source ' . fnameescape(s:config)
+  if has('clipboard')
+    call assert_equal(has('unnamedplus') ? 'unnamedplus' : 'unnamed', &clipboard, 'system clipboard selection')
+  endif
   set clipboard=
 
   call feedkeys(":W \<C-B>\"\<CR>", 'xt')

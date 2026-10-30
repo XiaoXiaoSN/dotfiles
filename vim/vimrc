@@ -17,7 +17,11 @@ set mouse=n     " enable mouse in normal mode
 
 " use the system clipboard when supported by the Vim build
 if has('clipboard')
-  set clipboard=unnamedplus
+  if has('unnamedplus')
+    set clipboard=unnamedplus
+  else
+    set clipboard=unnamed
+  endif
 endif
 
 " WSL clipboard support
