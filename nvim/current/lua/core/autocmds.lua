@@ -1,6 +1,9 @@
 -- reference: https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close
 vim.api.nvim_create_autocmd('QuitPre', {
   callback = function()
+    if vim.bo.filetype == 'NvimTree' then
+      return
+    end
     local tree_wins = {}
     local floating_wins = {}
     local wins = vim.api.nvim_list_wins()
