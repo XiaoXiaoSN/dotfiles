@@ -44,6 +44,10 @@ handle_repository_sub_resources() {
 
   case $sub in
     pr*|pull*)
+      if [[ $opt =~ ^[0-9]+$ ]]; then
+        echo "$url/pull/$opt"
+        return
+      fi
       url+="/pulls"
       # Matching Option for Pull Request
       case $opt in
@@ -168,6 +172,11 @@ case $RES in
   ;;
 
   # Shortcut for GitHub Repositories
+  tf|trading-framework)
+    GITHUB_URL+="/algo-edge/trading-framework"
+    GITHUB_URL=$(handle_repository_sub_resources "$GITHUB_URL" "$SUB_RES" "$OPTION")
+  ;;
+
   mb|magicbox|magic-box)
     GITHUB_URL+="/XiaoXiaoSN/magic-box"
     GITHUB_URL=$(handle_repository_sub_resources "$GITHUB_URL" "$SUB_RES" "$OPTION")
