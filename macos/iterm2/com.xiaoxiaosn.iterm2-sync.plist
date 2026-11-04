@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.xiaoxiaosn.iterm2-sync</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>__REPO__/macos/iterm2/sync.sh</string>
+	</array>
+	<key>WatchPaths</key>
+	<array>
+		<string>__REPO__/macos/iterm2/com.googlecode.iterm2.plist</string>
+	</array>
+	<key>StartInterval</key>
+	<integer>3600</integer>
+	<key>ProcessType</key>
+	<string>Background</string>
+	<key>StandardErrorPath</key>
+	<string>/tmp/com.xiaoxiaosn.iterm2-sync.err</string>
+</dict>
+</plist>
