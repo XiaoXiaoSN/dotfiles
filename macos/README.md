@@ -124,11 +124,7 @@ defaults read | diff origin -
 defaults find mru-spaces
 ```
 
-## iTerm2
-
-In iTerm2, open Preferences > General > Preferences, enable
-`Load preferences from a custom folder or URL:`, and select this repository's
-`macos/iterm2` directory. See the [original setup reference](https://stackoverflow.com/a/23356086/6695274).
+## Install Fonts
 
 The custom font is installed by `--desktop`. To install only the font:
 
