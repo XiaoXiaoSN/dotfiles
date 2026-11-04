@@ -12,3 +12,6 @@ nixpkgs/result
 *.swp
 *.swo
 *~
+
+# iTerm2 live preferences (machine state; only the portable export is tracked)
+macos/iterm2/com.googlecode.iterm2.plist
