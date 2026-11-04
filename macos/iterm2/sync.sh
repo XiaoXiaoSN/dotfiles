@@ -30,7 +30,7 @@ python3 "$dir/export.py" "$plist" "$dir"
 
 # Keep the tracked JSON formatted the way the repo's pre-commit hook expects.
 if command -v prettier >/dev/null 2>&1; then
-  prettier --write --log-level warn "$dir"/*.json >/dev/null
+  prettier --write --loglevel warn "$dir"/*.json >/dev/null
 fi
 
 git -C "$repo" add -- macos/iterm2/*.json macos/iterm2/*.itermcolors

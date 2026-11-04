@@ -84,10 +84,8 @@ def main(argv: list[str]) -> int:
     colours = {key: profile[key] for key in COLOUR_KEYS if key in profile}
     itermcolors = plistlib.dumps(colours, fmt=plistlib.FMT_XML, sort_keys=True)
 
-    changed = write_if_changed(out_dir / f"{name}.json", profile_json.encode())
-    changed |= write_if_changed(out_dir / "default.itermcolors", itermcolors)
-
-    print("updated" if changed else "unchanged", f"{name}.json", "default.itermcolors")
+    write_if_changed(out_dir / f"{name}.json", profile_json.encode())
+    write_if_changed(out_dir / "default.itermcolors", itermcolors)
     return 0
 
 
